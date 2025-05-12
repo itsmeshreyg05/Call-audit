@@ -13,6 +13,15 @@ import soundfile as sf
 from sqlalchemy.orm import Session
 import platform
 import signal
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access environment variables
+
+
 
 # Local imports
 from src.database.database import get_db
@@ -30,7 +39,7 @@ UPLOAD_DIR = Path("./uploads")
 PROCESSED_DIR = Path("./processed")
 PREPROCESSED_DIR = Path("./preprocessed")
 ALLOWED_EXTENSIONS = {".opus", ".mp3", ".wav"}
-HF_TOKEN = "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"
+HF_TOKEN = os.getenv("HF_TOKEN")
 SAMPLE_RATE = 16000
 MIN_SEGMENT_LENGTH = 0.5  # seconds
 
