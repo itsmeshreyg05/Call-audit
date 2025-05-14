@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.routes import audio, call_analysis
+from src.routes import audio, call_analysis, auth , call_details
 from src.database.database import Base, engine
 
 # Create tables in the database
@@ -24,8 +24,11 @@ app.add_middleware(
 )
 
 # Include routers from different modules
+app.include_router(auth.router)
+app.include_router(call_details.router)
 app.include_router(audio.router)
 app.include_router(call_analysis.router)
+
 
 @app.get("/")
 async def root():

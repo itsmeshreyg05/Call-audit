@@ -15,6 +15,15 @@ import platform
 import signal
 from dotenv import load_dotenv
 import os
+from fastapi import APIRouter, HTTPException, Depends, Body
+from sqlalchemy.orm import Session
+import requests
+import uuid
+import shutil
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+from datetime import datetime
+from fastapi.security import HTTPBasic, HTTPBasicCredentials, HTTPBearer, HTTPAuthorizationCredentials
 
 # Load environment variables from .env file
 load_dotenv()
@@ -33,7 +42,7 @@ router = APIRouter(
     prefix="/audio",
     tags=["audio"],
 )
-
+security = HTTPBearer()
 # Configuration
 UPLOAD_DIR = Path("./uploads")
 PROCESSED_DIR = Path("./processed")
@@ -46,6 +55,7 @@ MIN_SEGMENT_LENGTH = 0.5  # seconds
 # Validate and create directories
 for directory in [UPLOAD_DIR, PROCESSED_DIR, PREPROCESSED_DIR]:
     directory.mkdir(exist_ok=True, parents=True)
+
 
 # Load Whisper model
 try:
@@ -83,53 +93,126 @@ def preprocess_audio(audio_path: str, output_path: str) -> str:
         # Fallback to original if preprocessing fails
         return audio_path
 
+# @router.post("/upload", response_model=AudioUploadResponse)
+# async def upload_audio(
+#     file: UploadFile = File(...),
+#     db: Session = Depends(get_db)
+# ):
+#     try:
+#         file_extension = Path(file.filename).suffix.lower()
+#         if file_extension not in ALLOWED_EXTENSIONS:
+#             raise HTTPException(
+#                 status_code=400, 
+#                 detail=f"Invalid file format. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}"
+#             )
+
+#         audio_id = str(uuid.uuid4())
+#         filename = f"{audio_id}{file_extension}"
+#         file_path = UPLOAD_DIR / filename
+        
+#         # Save uploaded file
+#         with open(file_path, "wb") as buffer:
+#             shutil.copyfileobj(file.file, buffer)
+        
+#         # Preprocess audio
+#         preprocessed_path = PREPROCESSED_DIR / f"{audio_id}_preprocessed.wav"
+#         processed_path = preprocess_audio(str(file_path), str(preprocessed_path))
+        
+#         # Save to database
+#         db_audio = Audio(
+#             id=audio_id,
+#             original_filename=file.filename,
+#             original_path=str(file_path),
+#             processed_path=processed_path,
+#             file_type=file_extension,
+#             processed=False
+#         )
+#         db.add(db_audio)
+#         db.commit()
+#         db.refresh(db_audio)
+        
+#         return AudioUploadResponse(
+#             audio_id=audio_id,
+#             file_path=processed_path,
+#             original_filename=file.filename,
+#             file_type=file_extension
+#         )
+#     except Exception as e:
+#         db.rollback()
+#         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+    
+
+
 @router.post("/upload", response_model=AudioUploadResponse)
 async def upload_audio(
-    file: UploadFile = File(...),
+    contentUri: str = Body(..., embed=True),
+    contentType: str = Body("audio/mpeg", embed=True),
+    token: HTTPAuthorizationCredentials = Depends(security),
     db: Session = Depends(get_db)
 ):
     try:
-        file_extension = Path(file.filename).suffix.lower()
+        # Download audio file
+        headers = {
+        "Authorization": f"Bearer {token.credentials}"
+    }
+        response = requests.get(contentUri, headers=headers)
+        if response.status_code != 200:
+            raise HTTPException(status_code=400, detail="Failed to download audio file")
+
+        # Infer file extension
+        ext_map = {
+            "audio/mpeg": ".mp3",
+            "audio/wav": ".wav",
+            "audio/x-wav": ".wav",
+            "audio/mp3": ".mp3",
+        }
+        file_extension = ext_map.get(contentType.lower(), ".mp3")
+
         if file_extension not in ALLOWED_EXTENSIONS:
             raise HTTPException(
-                status_code=400, 
+                status_code=400,
                 detail=f"Invalid file format. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}"
             )
 
         audio_id = str(uuid.uuid4())
         filename = f"{audio_id}{file_extension}"
         file_path = UPLOAD_DIR / filename
-        
-        # Save uploaded file
-        with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-        
+
+        # Save audio file locally
+        with open(file_path, "wb") as f:
+            f.write(response.content)
+
         # Preprocess audio
         preprocessed_path = PREPROCESSED_DIR / f"{audio_id}_preprocessed.wav"
         processed_path = preprocess_audio(str(file_path), str(preprocessed_path))
-        
-        # Save to database
+
+        # Store in DB
         db_audio = Audio(
             id=audio_id,
-            original_filename=file.filename,
+            original_filename=filename,
             original_path=str(file_path),
             processed_path=processed_path,
             file_type=file_extension,
-            processed=False
+            processed=False,
+            uploaded_at=datetime.utcnow()
         )
         db.add(db_audio)
         db.commit()
         db.refresh(db_audio)
-        
+
         return AudioUploadResponse(
             audio_id=audio_id,
             file_path=processed_path,
-            original_filename=file.filename,
+            original_filename=filename,
             file_type=file_extension
         )
+
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
+
+
 def transcribe_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE) -> str:
     """Generic transcription function with proper attention handling"""
     try:
@@ -160,6 +243,8 @@ def transcribe_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE) -> str:
     except Exception as e:
         print(f"Transcription error: {str(e)}")
         return ""
+
+
 @router.get("/diarize/{audio_id}", response_model=DiarizationResult)
 async def diarize_audio(audio_id: str, db: Session = Depends(get_db)):
     try:
@@ -248,6 +333,8 @@ async def diarize_audio(audio_id: str, db: Session = Depends(get_db)):
             status_code=500, 
             detail=f"Diarization failed: {str(e)}"
         )
+    
+
 
 def get_audio_segments(audio_id: str, db: Session) -> List[DiarizationSegment]:
     segments = db.query(Segment).filter(Segment.audio_id == audio_id).all()
