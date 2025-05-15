@@ -4,7 +4,7 @@ import ollama
 from typing import Dict, List, Any
 from fastapi import APIRouter, HTTPException, Depends, Header
 from sqlalchemy.orm import Session
- 
+from google_sheets_helper import append_dict_to_sheet 
 from src.database.database import get_db
 from src.models.model import Audio, Analysis, Segment
 from src.schemas.schema import CallAnalysisResult, DiarizationSegment
@@ -116,6 +116,23 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         db.add(db_analysis)
    
     db.commit()
+    row_data = {
+    # "Call Date & Time": getattr(db_audio, "uploaded_at", ""),
+
+    "audio_id" :getattr(db_audio, "id", ""),
+    "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
+    "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
+    "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
+    "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
+    "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
+    "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
+    "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
+    "Summary": parsed_analysis.get("summary", ""),
+    "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"), 
+    "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")}
+
+# Append it to the Google Sheet
+    append_dict_to_sheet(row_data)
    
     return CallAnalysisResult(
         audio_id=audio_id,
