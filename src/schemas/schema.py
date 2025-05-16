@@ -27,6 +27,7 @@ class AudioInDB(AudioBase):
     original_path: str
     processed_path: str
     uploaded_at: datetime
+    recording_id: str
     
     class Config:
         from_attributes = True  
@@ -123,3 +124,10 @@ class CallLogQueryParams(BaseModel):
     page: Optional[int] = 1
     perPage: Optional[int] = 100
     showDeleted: Optional[bool] = False
+
+
+class RecordingDetail(BaseModel):
+    recording_id: str
+    username: Optional[str] = None
+    phone_number: Optional[str] = None
+    start_time: Optional[datetime] = None

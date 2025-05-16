@@ -14,6 +14,8 @@ class Audio(Base):
     processed = Column(Boolean, default=False)
     full_transcript = Column(Text, nullable=True)
     uploaded_at = Column(DateTime, default=datetime.datetime.utcnow)
+    recording_id = Column(String, unique=True, nullable=False)
+    
     
     # Relationships
     segments = relationship("Segment", back_populates="audio", cascade="all, delete-orphan")
@@ -72,3 +74,13 @@ class Analysis(Base):
     
     # Relationship
     audio = relationship("Audio", back_populates="analysis")
+
+
+class RecordingDetail(Base):
+    __tablename__ = "recording_details"
+
+    id = Column(Integer, primary_key=True, index=True)
+    recording_id = Column(String, unique=True, nullable=False)
+    username = Column(String)
+    phone_number = Column(String)
+    start_time = Column(DateTime)

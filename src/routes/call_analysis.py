@@ -9,6 +9,7 @@ from src.database.database import get_db
 from src.models.model import Audio, Analysis, Segment
 from src.schemas.schema import CallAnalysisResult, DiarizationSegment
 from src.routes.audio import diarize_audio
+from src.models.model import RecordingDetail
  
 # Create a router
 router = APIRouter(
@@ -20,40 +21,170 @@ router = APIRouter(
 # Configure Ollama settings
 MISTRAL_MODEL = "mistral"  # Use the model name as configured in Ollama
  
+# @router.post("/", response_model=CallAnalysisResult)
+# async def analyze_call(audio_id: str = Header(..., description="Audio ID to analyze"), db: Session = Depends(get_db)):
+#     """
+#     Analyze a transcribed call using Ollama's Mistral model
+   
+#     Pass the audio_id in the request header. The segments will be retrieved from the database.
+#     """
+#     # Validate that the audio_id exists in the database
+#     db_audio = db.query(Audio).filter(Audio.id == audio_id).first()
+#     if not db_audio:
+#         raise HTTPException(status_code=404, detail="Audio ID not found")
+   
+#     # Check if the audio has been processed already
+#     if not db_audio.processed:
+#         # If not processed, try to diarize it first
+#         diarization_result = await diarize_audio(audio_id, db)
+       
+#         # Check if diarization was successful
+#         if diarization_result.status.startswith("failed"):
+#             raise HTTPException(
+#                 status_code=400,
+#                 detail=f"Failed to diarize audio: {diarization_result.status}"
+#             )
+   
+#     # Get segments from the database
+#     db_segments = db.query(Segment).filter(Segment.audio_id == audio_id).all()
+   
+#     # If no segments found or empty
+#     if not db_segments:
+#         raise HTTPException(
+#             status_code=400,
+#             detail="No transcribed segments found for this audio. Please diarize the audio first."
+#         )
+   
+#     # Convert DB segments to schema segments
+#     segments = [
+#         DiarizationSegment(
+#             speaker=segment.speaker,
+#             start=segment.start,
+#             end=segment.end,
+#             text=segment.text
+#         ) for segment in db_segments
+#     ]
+   
+#     # Format the conversation for analysis
+#     conversation_text = format_conversation(segments)
+   
+#     # Create the prompt for Mistral
+#     prompt = create_mistral_prompt(conversation_text)
+   
+#     # Call Ollama Python library with Mistral model
+#     try:
+#         analysis_result = query_ollama_mistral(prompt, MISTRAL_MODEL)
+#     except Exception as e:
+#         return CallAnalysisResult(
+#             audio_id=audio_id,
+#             analysis={"error": str(e)},
+#             status="failed"
+#         )
+   
+#     # Parse the analysis results
+#     parsed_analysis = parse_mistral_response(analysis_result)
+   
+#     # Store analysis in database
+#     db_analysis = db.query(Analysis).filter(Analysis.audio_id == audio_id).first()
+   
+#     if db_analysis:
+#         # Update existing analysis
+#         for key, value in parsed_analysis.items():
+#             setattr(db_analysis, key, value)
+#         db_analysis.status = "completed"
+#         # Add call outcome information
+#         db_analysis.outcome_category = parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
+#         db_analysis.outcome_phrases = parsed_analysis.get("call_outcome", {}).get("supporting_phrases", [])
+#         db_analysis.outcome_explanation = parsed_analysis.get("call_outcome", {}).get("explanation", "")
+#     else:
+#         # Create new analysis
+#         db_analysis = Analysis(
+#             audio_id=audio_id,
+#             professionalism_score=parsed_analysis.get("professionalism_score", 0),
+#             tone_analysis=parsed_analysis.get("tone_analysis", {}),
+#             context_awareness_score=parsed_analysis.get("context_awareness_score", 0),
+#             response_time_analysis=parsed_analysis.get("response_time_analysis", {}),
+#             fluency_score=parsed_analysis.get("fluency_score", 0),
+#             probing_effectiveness=parsed_analysis.get("probing_effectiveness", 0),
+#             call_closing_quality=parsed_analysis.get("call_closing_quality", 0),
+#             summary=parsed_analysis.get("summary", ""),
+#             # Add call outcome information
+#             outcome_category=parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
+#             outcome_phrases=parsed_analysis.get("call_outcome", {}).get("supporting_phrases", []),
+#             outcome_explanation=parsed_analysis.get("call_outcome", {}).get("explanation", ""),
+#             status="completed"
+#         )
+#         db.add(db_analysis)
+   
+#     db.commit()
+
+
+
+#     row_data = {
+
+
+#     "Recording Id": audio_id,
+#     "Username":  username,
+#     "PhoneNumber": phone_number,
+#     "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
+#     "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
+#     "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
+#     "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
+#     "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
+#     "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
+#     "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
+#     "Summary": parsed_analysis.get("summary", ""),
+#     "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"), 
+#     "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")}
+
+# # Append it to the Google Sheet
+#     append_dict_to_sheet(row_data)
+   
+#     return CallAnalysisResult(
+#         audio_id=audio_id,
+#         analysis=parsed_analysis,
+#         status="completed"
+#     )
+ 
 @router.post("/", response_model=CallAnalysisResult)
 async def analyze_call(audio_id: str = Header(..., description="Audio ID to analyze"), db: Session = Depends(get_db)):
     """
-    Analyze a transcribed call using Ollama's Mistral model
-   
+    Analyze a transcribed call using Ollama's Mistral model.
     Pass the audio_id in the request header. The segments will be retrieved from the database.
     """
     # Validate that the audio_id exists in the database
     db_audio = db.query(Audio).filter(Audio.id == audio_id).first()
     if not db_audio:
         raise HTTPException(status_code=404, detail="Audio ID not found")
-   
+
+    # ✅ Get recording_id from the audio record
+    recording_id = db_audio.recording_id
+
+    # ✅ Query RecordingDetail table to get user info
+    recording_detail = db.query(RecordingDetail).filter(RecordingDetail.recording_id == recording_id).first()
+
+    # Default to "Unknown" if values aren't available
+    username = recording_detail.username if recording_detail else "Unknown"
+    phone_number = recording_detail.phone_number if recording_detail else "Unknown"
+    start_time = recording_detail.start_time if recording_detail else None
+
     # Check if the audio has been processed already
     if not db_audio.processed:
-        # If not processed, try to diarize it first
         diarization_result = await diarize_audio(audio_id, db)
-       
-        # Check if diarization was successful
         if diarization_result.status.startswith("failed"):
             raise HTTPException(
                 status_code=400,
                 detail=f"Failed to diarize audio: {diarization_result.status}"
             )
-   
+
     # Get segments from the database
     db_segments = db.query(Segment).filter(Segment.audio_id == audio_id).all()
-   
-    # If no segments found or empty
     if not db_segments:
         raise HTTPException(
             status_code=400,
             detail="No transcribed segments found for this audio. Please diarize the audio first."
         )
-   
+
     # Convert DB segments to schema segments
     segments = [
         DiarizationSegment(
@@ -63,14 +194,11 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
             text=segment.text
         ) for segment in db_segments
     ]
-   
-    # Format the conversation for analysis
+
+    # Format the conversation
     conversation_text = format_conversation(segments)
-   
-    # Create the prompt for Mistral
     prompt = create_mistral_prompt(conversation_text)
-   
-    # Call Ollama Python library with Mistral model
+
     try:
         analysis_result = query_ollama_mistral(prompt, MISTRAL_MODEL)
     except Exception as e:
@@ -79,24 +207,18 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
             analysis={"error": str(e)},
             status="failed"
         )
-   
-    # Parse the analysis results
+
     parsed_analysis = parse_mistral_response(analysis_result)
-   
-    # Store analysis in database
+
     db_analysis = db.query(Analysis).filter(Analysis.audio_id == audio_id).first()
-   
     if db_analysis:
-        # Update existing analysis
         for key, value in parsed_analysis.items():
             setattr(db_analysis, key, value)
         db_analysis.status = "completed"
-        # Add call outcome information
         db_analysis.outcome_category = parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
         db_analysis.outcome_phrases = parsed_analysis.get("call_outcome", {}).get("supporting_phrases", [])
         db_analysis.outcome_explanation = parsed_analysis.get("call_outcome", {}).get("explanation", "")
     else:
-        # Create new analysis
         db_analysis = Analysis(
             audio_id=audio_id,
             professionalism_score=parsed_analysis.get("professionalism_score", 0),
@@ -107,39 +229,39 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
             probing_effectiveness=parsed_analysis.get("probing_effectiveness", 0),
             call_closing_quality=parsed_analysis.get("call_closing_quality", 0),
             summary=parsed_analysis.get("summary", ""),
-            # Add call outcome information
             outcome_category=parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
             outcome_phrases=parsed_analysis.get("call_outcome", {}).get("supporting_phrases", []),
             outcome_explanation=parsed_analysis.get("call_outcome", {}).get("explanation", ""),
             status="completed"
         )
         db.add(db_analysis)
-   
+
     db.commit()
+
+    # ✅ Prepare data for Google Sheet including fetched username & phone number
     row_data = {
-    # "Call Date & Time": getattr(db_audio, "uploaded_at", ""),
+        "Recording Id": recording_id,
+        "Username": username,
+        "PhoneNumber": phone_number,
+        "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
+        "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
+        "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
+        "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
+        "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
+        "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
+        "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
+        "Summary": parsed_analysis.get("summary", ""),
+        "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
+        "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")
+    }
 
-    "audio_id" :getattr(db_audio, "id", ""),
-    "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
-    "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
-    "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
-    "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
-    "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
-    "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
-    "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
-    "Summary": parsed_analysis.get("summary", ""),
-    "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"), 
-    "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")}
-
-# Append it to the Google Sheet
     append_dict_to_sheet(row_data)
-   
+
     return CallAnalysisResult(
         audio_id=audio_id,
         analysis=parsed_analysis,
         status="completed"
     )
- 
 
 def format_conversation(segments: List[DiarizationSegment]) -> str:
     """
