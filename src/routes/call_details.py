@@ -14,6 +14,7 @@ from src.database.database import get_db
 from datetime import datetime
 from src.models.model import RecordingDetail
 import logging
+from datetime import datetime, timedelta
 security = HTTPBearer()
 
 router = APIRouter(
@@ -51,66 +52,7 @@ def get_call_log(
 
     return response.json()
 
-   
-# @router.get("/ringcentral/recording/{recording_id}")
-# async def get_recording(
-#     recording_id: str,
-#     token: HTTPAuthorizationCredentials = Depends(security),
-#      db: Session = Depends(get_db)
-# ):
-#     headers = {
-#         "Authorization": f"Bearer {token.credentials}"
-#     }
-
-#     # Step 1: Get the recording metadata
-#     recording_url = f"https://platform.ringcentral.com/restapi/v1.0/account/~/recording/{recording_id}"
-#     recording_response = requests.get(recording_url, headers=headers)
-
-#     if recording_response.status_code != 200:
-#         raise HTTPException(status_code=recording_response.status_code, detail=recording_response.json())
-
-#     recording_data = recording_response.json()
-#     print(recording_data)
-
-#     # Step 2: Get call log entries (you might need to paginate if there are many)
-#     call_log_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
-#     call_log_response = requests.get(call_log_url, headers=headers)
-
-
-#     if call_log_response.status_code != 200:
-#         raise HTTPException(status_code=call_log_response.status_code, detail=call_log_response.json())
-
-#     call_logs = call_log_response.json().get("records", [])
-#     #print(call_logs)
-#     phone_number = ""
-#     name = ""
-#     # Step 3: Find the matching outbound call with the same recording id
-#     for log in call_logs:
-#         recording_info = log.get("recording")
-#         if recording_info and recording_info.get("id") == recording_id:
-#             recording_data["phoneNumber"] = log.get("to", {}).get("phoneNumber", "")
-#             recording_data["name"] = log.get("from", {}).get("name", "")
-#             recording_data["startTime"] = log.get("startTime", "")
-#             break  # Stop after finding the matching recording
-    
-
-#     existing = db.query(RecordingDetail).filter_by(recording_id=recording_id).first()
-#     if not existing:
-#         new_record = RecordingDetail(
-#             recording_id=recording_id,
-#             phone_number=recording_data.get("phoneNumber"),
-#             username=recording_data.get("name"),
-#             start_time=recording_data.get("startTime")
-#         )
-
-#         db.add(new_record)
-#         db.commit()
-#         db.refresh(new_record)
-
-#     return recording_data
-
-
-
+ 
 @router.get("/ringcentral/recording/{recording_id}")
 async def get_recording(
     recording_id: str,
@@ -134,38 +76,58 @@ async def get_recording(
     recording_data["name"] = ""
     recording_data["phoneNumber"] = ""
     recording_data["startTime"] = ""
-    
-    # Step 2: Get call log entries
+
     call_log_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
-    call_log_response = requests.get(call_log_url, headers=headers)
+    
 
-    if call_log_response.status_code != 200:
-        raise HTTPException(status_code=call_log_response.status_code, detail=call_log_response.json())
+    date_from = (datetime.utcnow() - timedelta(days=30)).isoformat() + "Z"
+    params = {
+        "withRecording": "true",
+        "perPage": 100,
+        "dateFrom": date_from,
+        "view": "Detailed"
+    }
 
-    call_logs = call_log_response.json().get("records", [])
-    print("Hi",call_logs)
-    # Step 3: Find the matching call with the same recording id
-    for log in call_logs:
+    found = False
+
+    while not found and call_log_url:
+        call_log_response = requests.get(call_log_url, headers=headers, params=params)
+        
+        if call_log_response.status_code != 200:
+            raise HTTPException(status_code=call_log_response.status_code, detail=call_log_response.json())
+
+        response_json = call_log_response.json()
+        call_logs = response_json.get("records", [])
+        print(call_logs)
+
+        for log in call_logs:
             recording_info = log.get("recording")
             if recording_info and recording_info.get("id") == recording_id:
                 recording_data["phoneNumber"] = log.get("to", {}).get("phoneNumber", "")
                 recording_data["name"] = log.get("from", {}).get("name", "")
                 recording_data["startTime"] = log.get("startTime", "")
-                break  # Stop after finding the matching recording
-    
-    # Save to database
-    existing = db.query(RecordingDetail).filter_by(recording_id=recording_id).first()
-    if not existing:
-        new_record = RecordingDetail(
-            recording_id=recording_id,
-            phone_number=recording_data.get("phoneNumber"),
-            username=recording_data.get("name"),
-            start_time=recording_data.get("startTime")
-        )
+                found = True
+                break
 
-        db.add(new_record)
-        db.commit()
-        db.refresh(new_record)
+        next_page_uri = response_json.get("navigation", {}).get("nextPage", {}).get("uri")
+        if next_page_uri:
+            call_log_url = f"https://platform.ringcentral.com{next_page_uri}"
+            params = None  
+        else:
+            break
+
+    # Step 4: Save to DB if not already present
+    # existing = db.query(RecordingDetail).filter_by(recording_id=recording_id).first()
+    # if not existing:
+    new_record = RecordingDetail(
+        recording_id=recording_id,
+        phone_number=recording_data.get("phoneNumber") or None,
+        username=recording_data.get("name") or None,
+        start_time=recording_data.get("startTime")
+    )
+    db.add(new_record)
+    db.commit()
+    db.refresh(new_record)
 
     return recording_data
 

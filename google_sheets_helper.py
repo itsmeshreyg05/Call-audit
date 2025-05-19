@@ -7,7 +7,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = "1TXIM275dqsC0J6hC9f7ZCMKDd2pj-r7lx-BELcG5u2g"
 RANGE_HEADER = "Sheet1!A1:Z1"  # Assumes headers are in row 1
 RANGE_APPEND = "Sheet1!A1"
-SERVICE_ACCOUNT_FILE = r"E:\InsideSalesProject\InsideSalesProject\call-audit-459810-d5b9d65cd8d8.json"
+SERVICE_ACCOUNT_FILE = r"D:\call_audit_sales\Call-audit\call-audit-459810-c12024ad92f7.json"
 
 # Authenticate and build the Sheets service
 creds = service_account.Credentials.from_service_account_file(

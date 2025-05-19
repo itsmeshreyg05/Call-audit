@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "call-audit-459810",
+  "private_key_id": "c12024ad92f70e6cca0bb2597165bfda4adb1381",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCzytj4Xyi286Ij\nybzSITivwfnqFSBlucm7vhArFQGbBb2sHtM+wrTOVQs0/KpSFpIYO+wixL8astb7\nMGU5Z5bua5+eUSoopIS8gjYC8jf6CU5SX/n1Eb7YHhNj+H6sLwMwtp4+u9sGAJP8\n4iUyOxFyCDD7PKakTrNgNjR3KbmZ2VaU3EarMh5gaG+/F2FGhJKslLTqODKDITW8\n2X3X6U8SXavp7GS9s20ZkqT32cFn9GtFO6X9RtAQfho9AjheJPVFEIUal6gXeIAZ\ncL/UQOto9eLC8n9n8ToIYD2pN5KlNtF5uMZbuzaVoqRXksZmL8Q3Yxao6ojghBRN\nQTYkZo81AgMBAAECggEABxj5vMBWRUv+jsbJgfVsHUrH42JHH6JDIPq3/QNncf0Q\nMknF5sMyoQyWvyuUS7OhZnyDGLzx8GC2qj7hrW+gnok4HryvMIs3buZTBzBps6Cy\nFgASSDGVpPF3AX95/LEfFp628Ny4oOwylg1AEP4SSmahYbb7ZclyPQOWyaIni2Jf\nSdPeUIsOq3uUXTic/mYRqR8J3UBZ9jSaQOYJ+LCxI9gwZJQ0YQUbO/ZjaxgwZKRC\nmYNJk4OyIMlLMLrYPxHdMrmoCHvO0t6rkDKjbuSZHr5B7w+dzLLLpD4nUToIZjjV\nOo4kI0Ac46WBKI9J/9qMpYGRUFI8mqrTDk38494/kQKBgQDZMrJsVsJkuN1SfEFW\n1we34X6txMJqkWH+WjCv9qEY8y6wbtvxsYw31TFQ48hTkfS3lSE5Z5CrW6LMrBIo\n+xRAXwOTR8Gh7Bee6aSbbbSlF0mM02PHJsD+Ui+vAeTZRr8D0EtyEmRLJ8t3TYBD\ns3BOj9AebzlOvKDNssaLrZ47HQKBgQDT6XIORVOFF3KXAXckm0iJiV0TThL9zOoq\nKLH8h1p3zfIv5c4bjbJSsqoNTELSohnVc8m0hkgH7igKfgSxipnwsETogih37YTS\nUwUoShz82RC4KVsU6BdQTlQ5BjboHThygctDXDsNKW1aDiJrTIcbieaiFXz0uEUy\nmk9W6j5Q+QKBgQC/5eHshI8GDKtGyI+2GRAxr6KMBw66ty58WtUvctkMwTccHSZo\nmbTIU61ZyZbh90/er30GSfFw5OqmqNT2rjdLVGdFRh3XYU/RUJ7l0HzNbBDIwrAi\ncaQMTzLgDe1S5wW3ad5ur787A7Lp+mh76FsunjOD4EMixNfSRcTT/haSJQKBgQDP\nFmpUkeEtxh1Afrkc9/cqGSfxDrI2foMz0fMl8mwxefw8XJpPiOiEMn9GYYlH6AvQ\n8cdi+Hr57P4KSt5xVh5b/RZKFbBQirfrBiCbH9o2KjZRknCk/K6T1wgtdepAaRXZ\nqQene0Fl+l8Xy4pNS0sZWWkealtjl5RgADaanG1rmQKBgBkFNDXmt9TiuI9aHLTa\nynZQlr6zyIFYWeHdlvw9+69NCPgi/NDNfd0mjF8i+hVtsvLQi5qNRSXC8A6epbP9\ni9MNaTOmGwnH18pyeorNI/fe7T84qTzPofncI7TJH9xOr724ebFcjco1zYdEIcuJ\nfUHX6iWUF+OQWOPtqyZ+J/9h\n-----END PRIVATE KEY-----\n",
+  "client_email": "shrutika@call-audit-459810.iam.gserviceaccount.com",
+  "client_id": "109395297502863651242",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/shrutika%40call-audit-459810.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

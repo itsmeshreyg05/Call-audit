@@ -40,38 +40,34 @@ def create_mistral_prompt(conversation_text: str) -> str:
     
     Please analyze this conversation across the following dimensions:
     
-    1. Professionalism (Score 1-10):
-       - Evaluate the overall professionalism of the speakers
-       - Consider language formality, respect, and business etiquette
+    1. Introduction/Hook (Score 1-100):
+       - Was the introduction clear, confident, and engaging?
+
+    2. Script Adherence (Score 1-100):
+       - Did the speaker follow the script or expected conversation flow?
+       - Mention any deviations.
+
+    3. Product Knowledge (Score 1-100):
+       - How well does the speaker demonstrate understanding of the product/service?
+
+    4. Actively Listening/Responding Appropriately (Score 1-100):
+       - Evaluate how well the speaker listens and tailors responses.
+
+    5. Fumble Score (Score 1-100):
+       - Identify unclear statements, fillers, hesitations.
+       - Lower score means more fumbling.
+
+    6. Probing (Score 1-100):
+       - Were the questions relevant and useful?
+       - How deep were the follow-ups?
+
+    7. Closing (Score 1-100):
+       - Was the call concluded confidently and with clarity?
+
+    8. Overall Score (Score 1-100):
+       - General effectiveness and communication throughout the call.
     
-    2. Tone Analysis (Score 1-10 for each tone):
-        - Identify the dominant tones used (formal, friendly, urgent, frustrated, etc.)
-        - Assign a score (1-10) to each tone detected, instead of percentages
-        - Explain how each tone was identified and its impact on the conversation
-    
-    3. Context Awareness & Active Listening (Score 1-10):
-       - Evaluate how well speakers understand and respond to context
-       - Assess if speakers acknowledge and build upon previous statements
-    
-    4. Response Time Analysis:
-       - Analyze pauses and response times between speakers
-       - Note any particularly long delays and their impact
-    
-    5. Fluency vs. Fumbling (Score 1-10):
-       - Rate the overall verbal fluency of each speaker
-       - Identify hesitations, filler words, or unclear statements
-    
-    6. Probing Effectiveness (Score 1-10):
-       - Evaluate how effectively questions elicit useful information
-       - Assess the quality and relevance of follow-up questions
-    
-    7. Call Closing Quality (Score 1-10):
-       - Analyze how effectively the call was concluded
-       - Evaluate clarity on next steps (if applicable)
-    
-    8. Script Adherence (if applicable):
-       - Determine if the call followed a standard script or protocol
-       - Identify deviations from expected conversation flow
+       
     
     Provide your analysis in JSON format with scores, percentages, and brief explanations for each dimension.
     Include a short summary of the overall conversation quality and key observations.
@@ -96,22 +92,18 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
         
         # Fallback: Extract information in a structured way
         analysis = {
-            "professionalism_score": extract_score(response_text, "Professionalism", 7),
-            "tone_analysis": extract_tone_percentages(response_text),
-            "context_awareness_score": extract_score(response_text, "Context Awareness", 6),
-            "response_time_analysis": {
-                "description": extract_section(response_text, "Response Time Analysis")
-            },
-            "fluency_score": extract_score(response_text, "Fluency", 5),
-            "probing_effectiveness": extract_score(response_text, "Probing Effectiveness", 4),
-            "call_closing_quality": extract_score(response_text, "Call Closing", 6),
-            "script_adherence": {
-                "description": extract_section(response_text, "Script Adherence")
-            },
-            "summary": extract_section(response_text, "summary") or 
-                       extract_section(response_text, "overall") or
-                       "Analysis complete but no summary provided"
-        }
+    "introduction_score": extract_score(response_text, "Introduction"),
+    "script_adherence_score": extract_score(response_text, "Script Adherence"),
+    "product_knowledge": extract_score(response_text, "Product Knowledge"),
+    "active_listening": extract_score(response_text, "Actively Listening"),
+    "fumble_score": extract_score(response_text, "Fumble"),
+    "probing_score": extract_score(response_text, "Probing"),
+    "closing_score": extract_score(response_text, "Closing"),
+    "overall_score": extract_score(response_text, "Overall Score"),
+    "summary": extract_section(response_text, "Summary") or 
+               extract_section(response_text, "Overall") or
+               "Analysis complete but no summary provided."
+}
         
         return analysis
     
@@ -127,7 +119,7 @@ def extract_score(text: str, category: str, default: int) -> int:
     """
     Extract numerical score for a category from text
     """
-    pattern = rf"{category}.*?(\d+)[\s/]10"
+    pattern = rf"{category}.*?(\d+)[\s/]100"
     match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
     if match:
         try:

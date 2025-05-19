@@ -221,13 +221,13 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     else:
         db_analysis = Analysis(
             audio_id=audio_id,
-            professionalism_score=parsed_analysis.get("professionalism_score", 0),
+            professionalism_score=parsed_analysis.get("introduction_score", 0),
             tone_analysis=parsed_analysis.get("tone_analysis", {}),
-            context_awareness_score=parsed_analysis.get("context_awareness_score", 0),
-            response_time_analysis=parsed_analysis.get("response_time_analysis", {}),
+            context_awareness_score=parsed_analysis.get("adherence_score", 0),
+            response_time_analysis=parsed_analysis.get("listening_score", {}),
             fluency_score=parsed_analysis.get("fluency_score", 0),
-            probing_effectiveness=parsed_analysis.get("probing_effectiveness", 0),
-            call_closing_quality=parsed_analysis.get("call_closing_quality", 0),
+            probing_effectiveness=parsed_analysis.get("probing_score", 0),
+            call_closing_quality=parsed_analysis.get("closing_score", 0),
             summary=parsed_analysis.get("summary", ""),
             outcome_category=parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
             outcome_phrases=parsed_analysis.get("call_outcome", {}).get("supporting_phrases", []),
@@ -238,21 +238,24 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
 
     db.commit()
 
-    # ✅ Prepare data for Google Sheet including fetched username & phone number
+
+
+
+ 
     row_data = {
         "Recording Id": recording_id,
         "Username": username,
         "PhoneNumber": phone_number,
         "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
-        "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
+        "Adherence to script/Product Knowledge": f"{parsed_analysis.get('adherence_score', 0)}%",
         "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
         "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
-        "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
-        "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
+        "Probing": f"{parsed_analysis.get('probing_score', 0)}%",
+        "Closing": f"{parsed_analysis.get('closing_score', 0)}%",
         "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
         "Summary": parsed_analysis.get("summary", ""),
-        "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
-        "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")
+        "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
+        "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
     }
 
     append_dict_to_sheet(row_data)
@@ -281,50 +284,59 @@ def create_mistral_prompt(conversation_text: str) -> str:
     Create a detailed prompt for the Mistral model to analyze the conversation
     """
     prompt = f"""
-    You are an expert conversation analyst. Analyze the following call transcript
+    You are an expert conversation analyst. Analyze the following call transcript 
     between two speakers and provide detailed insights.
-   
+    
     CONVERSATION TRANSCRIPT:
     {conversation_text}
-   
+    
     Please analyze this conversation across the following dimensions:
    
-    1. Professionalism (Score 1-10):
-       - Evaluate the overall professionalism of the speakers
-       - Consider language formality, respect, and business etiquette
-       - IMPORTANT: Provide a 1-2 sentence explanation for your score
+    1. Introduction/Hook (Score 1-100):
+        - Assess the effectiveness and engagement level of the conversation's opening
+        - Was the introduction clear, confident, and engaging?
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    2. Tone Analysis:
-        - Identify the dominant tones used (formal, friendly, urgent, frustrated, etc.)
-        - Assign a score (1-10) to each tone detected
-        - IMPORTANT: For each tone, provide a 1-2 sentence explanation of how it manifested in the conversation
+    2. Adherence to Script/Product Knowledge (Score 1-100):
+        - Evaluate how well the representative followed the expected conversation structure
+        - Rate the representative's command of product/service details
+        - Assess accuracy of information provided and ability to address questions
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    3. Context Awareness & Active Listening (Score 1-10):
-       - Evaluate how well speakers understand and respond to context
-       - Assess if speakers acknowledge and build upon previous statements
-       - IMPORTANT: Provide a 1-2 sentence explanation for your score
+    3. Actively Listening/Responding Appropriately (Score 1-100):
+        - Evaluate how well the representative understands and responds to context
+        - Assess if the representative acknowledges and builds upon prospect's statements
+        - Evaluate how well they tailor responses to the prospect's needs
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    4. Response Time Analysis:
-       - Analyze pauses and response times between speakers
-       - Note any particularly long delays and their impact
-       - IMPORTANT: Provide a clear explanation of your observations
+    4. Fumble (Score 1-100):
+        - Rate the overall verbal fluency of the representative
+        - Identify hesitations, filler words, unclear statements, or communication missteps
+        - Lower score means more fumbling occurred
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    5. Fluency vs. Fumbling (Score 1-10):
-       - Rate the overall verbal fluency of each speaker
-       - Identify hesitations, filler words, or unclear statements
-       - IMPORTANT: Provide a 1-2 sentence explanation for your score
+    5. Probing (Score 1-100):
+        - Evaluate how effectively questions elicit useful information
+        - Assess the quality and relevance of follow-up questions
+        - Note use of open-ended vs. closed questions and their appropriateness
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    6. Probing Effectiveness (Score 1-10):
-       - Evaluate how effectively questions elicit useful information
-       - Assess the quality and relevance of follow-up questions
-       - IMPORTANT: Provide a 1-2 sentence explanation for your score
+    6. Closing (Score 1-100):
+        - Analyze how effectively the call was concluded
+        - Evaluate clarity on next steps and any commitments secured
+        - Was the call concluded confidently and with clarity?
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
    
-    7. Call Closing Quality (Score 1-10):
-       - Analyze how effectively the call was concluded
-       - Evaluate clarity on next steps (if applicable)
-       - IMPORTANT: Provide a 1-2 sentence explanation for your score
-       
-    8. Call Outcome Classification:
+    7. Overall Score (Score 1-100):
+        - Calculate a weighted average score based on all the dimensions above
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score
+   
+    8. Summary:
+        - Provide a concise summary (3-5 sentences) of the overall conversation quality 
+        - Highlight key strengths and areas for improvement
+        - Include observations on conversation flow and effectiveness
+    
+    9. Call Outcome Classification:
        - Classify the call outcome based on the final conversation exchanges
        - Specifically identify if the person expressed disinterest with phrases like "I'm not interested", "Not for me", etc.
        - If disinterest was expressed, note the exact phrases used
@@ -388,6 +400,8 @@ def query_ollama_mistral(prompt: str, model: str) -> str:
 def parse_mistral_response(response_text: str) -> Dict[str, Any]:
     """
     Parse the raw text response from Mistral into structured analysis with explanations
+    based on the specified fields: Introduction/Hook, Adherence to Script/Product Knowledge,
+    Actively Listening/Responding Appropriately, Fumble, Probing, Closing, Overall Score, Summary
     """
     try:
         # First try to extract any JSON content from the response
@@ -402,26 +416,26 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
                 pass  # If direct JSON parsing fails, fallback to structured extraction
        
         # Fallback: Extract information in a structured way
-        professionalism_score = extract_score(response_text, "Professionalism", 7)
-        professionalism_explanation = extract_explanation(response_text, "Professionalism")
+        introduction_score = extract_score(response_text, "Introduction/Hook")
+        introduction_explanation = extract_explanation(response_text, "Introduction/Hook")
         
-        context_awareness_score = extract_score(response_text, "Context Awareness", 6)
-        context_awareness_explanation = extract_explanation(response_text, "Context Awareness")
+        adherence_product_score = extract_score(response_text, "Adherence to Script/Product Knowledge")
+        adherence_product_explanation = extract_explanation(response_text, "Adherence to Script/Product Knowledge")
         
-        fluency_score = extract_score(response_text, "Fluency", 5)
-        fluency_explanation = extract_explanation(response_text, "Fluency")
+        actively_listening_score = extract_score(response_text, "Actively Listening/Responding Appropriately")
+        actively_listening_explanation = extract_explanation(response_text, "Actively Listening/Responding Appropriately")
         
-        probing_effectiveness_score = extract_score(response_text, "Probing Effectiveness", 4)
-        probing_explanation = extract_explanation(response_text, "Probing Effectiveness")
+        fumble_score = extract_score(response_text, "Fumble")
+        fumble_explanation = extract_explanation(response_text, "Fumble")
         
-        call_closing_score = extract_score(response_text, "Call Closing", 6)
-        call_closing_explanation = extract_explanation(response_text, "Call Closing")
+        probing_score = extract_score(response_text, "Probing")
+        probing_explanation = extract_explanation(response_text, "Probing")
         
-        # Extract tone information with explanations
-        tone_analysis = extract_tone_with_explanations(response_text)
+        closing_score = extract_score(response_text, "Closing")
+        closing_explanation = extract_explanation(response_text, "Closing")
         
-        # Response time analysis
-        response_time_description = extract_section(response_text, "Response Time Analysis")
+        overall_score = extract_score(response_text, "Overall Score")
+        overall_explanation = extract_explanation(response_text, "Overall Score")
         
         # Extract call outcome classification
         outcome_category = "Unknown"
@@ -448,37 +462,37 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
         
         # Summary
         summary = extract_section(response_text, "summary") or \
-                 extract_section(response_text, "overall") or \
+                 extract_section(response_text, "overall summary") or \
                  "Analysis complete but no summary provided"
         
         analysis = {
-            "professionalism_score": professionalism_score,
-            "professionalism_explanation": professionalism_explanation,
+            "introduction_score": introduction_score,
+            "introduction_explanation": introduction_explanation,
             
-            "tone_analysis": tone_analysis,
+            "adherence_script_product_knowledge_score": adherence_product_score,
+            "adherence_script_product_knowledge_explanation": adherence_product_explanation,
             
-            "context_awareness_score": context_awareness_score,
-            "context_awareness_explanation": context_awareness_explanation,
+            "actively_listening_responding_score": actively_listening_score,
+            "actively_listening_responding_explanation": actively_listening_explanation,
             
-            "response_time_analysis": {
-                "description": response_time_description
-            },
+            "fumble_score": fumble_score,
+            "fumble_explanation": fumble_explanation,
             
-            "fluency_score": fluency_score,
-            "fluency_explanation": fluency_explanation,
-            
-            "probing_effectiveness": probing_effectiveness_score,
+            "probing_score": probing_score,
             "probing_explanation": probing_explanation,
             
-            "call_closing_quality": call_closing_score,
-            "call_closing_explanation": call_closing_explanation,
+            "closing_score": closing_score,
+            "closing_explanation": closing_explanation,
             
-            # Add call outcome information
+            "overall_score": overall_score,
+            "overall_explanation": overall_explanation,
+            
+            # Add call outcome information if available
             "call_outcome": {
                 "outcome_category": outcome_category,
                 "supporting_phrases": supporting_phrases,
                 "explanation": outcome_explanation
-            },
+            } if outcome_section else None,
             
             "summary": summary
         }
@@ -498,7 +512,7 @@ def extract_explanation(text: str, category: str) -> str:
     Extract explanation for a specific category
     """
     # Try to find explanations following the score mention
-    score_match = re.search(rf"{category}.*?(\d+)[\s/]10(.*?)(?=\d+\.|$|\n\s*\n)", text, re.IGNORECASE | re.DOTALL)
+    score_match = re.search(rf"{category}.*?(\d+)[\s/]100(.*?)(?=\d+\.|$|\n\s*\n)", text, re.IGNORECASE | re.DOTALL)
     if score_match:
         explanation = score_match.group(2).strip()
         # Clean up the explanation (remove bullet points, etc.)
@@ -510,7 +524,7 @@ def extract_explanation(text: str, category: str) -> str:
     section = extract_section(text, category)
     if section:
         # Remove any score mentions from the section text
-        section = re.sub(r'\d+[\s/]10', '', section).strip()
+        section = re.sub(r'\d+[\s/]100', '', section).strip()
         return section
         
     return f"No explanation provided for {category} score."
@@ -519,7 +533,7 @@ def extract_score(text: str, category: str, default: int) -> int:
     """
     Extract numerical score for a category from text
     """
-    pattern = rf"{category}.*?(\d+)[\s/]10"
+    pattern = rf"{category}.*?(\d+)[\s/]100"
     match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
     if match:
         try:
@@ -528,76 +542,6 @@ def extract_score(text: str, category: str, default: int) -> int:
             pass
     return default
 
-def extract_tone_with_explanations(text: str) -> Dict[str, Any]:
-    """
-    Extract tone information with explanations
-    """
-    tones = {}
-    explanations = {}
-    
-    # Extract the tone analysis section
-    tone_section = extract_section(text, "Tone Analysis")
-    
-    if tone_section:
-        # Look for patterns like "formal: 70%" or "formal (7/10)" or "formal - 7/10"
-        tone_matches = re.finditer(r'(\w+)(?:\s*[:(-]\s*)(\d+)(?:%|/10)', tone_section, re.IGNORECASE)
-        
-        for match in tone_matches:
-            tone = match.group(1).lower()
-            try:
-                score = int(match.group(2))
-                # If it's a percentage, convert to decimal
-                if '%' in match.group(0):
-                    tones[tone] = score / 100.0
-                else:
-                    tones[tone] = score / 10.0
-                
-                # Try to extract explanation for this tone
-                tone_explanation_pattern = rf"{tone}.*?(\d+)(?:%|/10)(.*?)(?=\w+\s*[:(-]\s*\d+(?:%|/10)|$)"
-                explanation_match = re.search(tone_explanation_pattern, tone_section, re.IGNORECASE | re.DOTALL)
-                if explanation_match:
-                    explanation = explanation_match.group(2).strip()
-                    explanation = re.sub(r'^[-:•*]+\s*', '', explanation)
-                    explanation = re.sub(r'\n[-:•*]+\s*', ' ', explanation)
-                    explanations[tone] = explanation
-                else:
-                    explanations[tone] = f"No specific explanation provided for {tone} tone."
-            except ValueError:
-                continue
-    
-    # If no tones found, provide default analysis
-    if not tones:
-        # Add some default tones based on keywords in the section
-        keywords = {
-            "formal": ["formal", "professional", "business"],
-            "friendly": ["friendly", "warm", "casual"],
-            "urgent": ["urgent", "pressing", "immediate"],
-            "frustrated": ["frustrated", "annoyed", "impatient"],
-            "neutral": ["neutral", "balanced", "even"]
-        }
-        
-        if tone_section:
-            for tone, words in keywords.items():
-                # Count occurrences of keywords
-                count = sum(1 for word in words if word.lower() in tone_section.lower())
-                if count > 0:
-                    tones[tone] = min(count * 0.2, 1.0)  # Scale up to 100% max
-                    explanations[tone] = f"Detected {tone} tone based on language patterns in the conversation."
-    
-    # If still no tones, add a default tone
-    if not tones:
-        tones = {"neutral": 0.7, "formal": 0.5}
-        explanations["neutral"] = "Default neutral tone assigned in the absence of clear tone indicators."
-        explanations["formal"] = "Default mild formal tone assigned in the absence of clear tone indicators."
-    
-    # Combine tones and explanations
-    result = {
-        "scores": tones,
-        "explanations": explanations
-    }
-    
-    return result
- 
 def extract_section(text: str, section_name: str) -> str:
     """
     Extract a specific section from the analysis text
