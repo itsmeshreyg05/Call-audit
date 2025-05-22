@@ -3,4 +3,4 @@ venv/
 alembic/
 __pycache__/
 alembic.ini
-call-audit-459810-c12024ad92f7.json
+*.json
