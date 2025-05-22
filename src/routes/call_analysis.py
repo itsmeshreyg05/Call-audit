@@ -157,10 +157,10 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     if not db_audio:
         raise HTTPException(status_code=404, detail="Audio ID not found")
 
-    # ✅ Get recording_id from the audio record
+    # Get recording_id from the audio record
     recording_id = db_audio.recording_id
 
-    # ✅ Query RecordingDetail table to get user info
+    # Query RecordingDetail table to get user info
     recording_detail = db.query(RecordingDetail).filter(RecordingDetail.recording_id == recording_id).first()
 
     # Default to "Unknown" if values aren't available
@@ -209,6 +209,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         )
 
     parsed_analysis = parse_mistral_response(analysis_result)
+    # print(parsed_analysis.keys())
 
     db_analysis = db.query(Analysis).filter(Analysis.audio_id == audio_id).first()
     if db_analysis:
@@ -223,8 +224,8 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
             audio_id=audio_id,
             professionalism_score=parsed_analysis.get("introduction_score", 0),
             tone_analysis=parsed_analysis.get("tone_analysis", {}),
-            context_awareness_score=parsed_analysis.get("adherence_score", 0),
-            response_time_analysis=parsed_analysis.get("listening_score", {}),
+            context_awareness_score=parsed_analysis.get("adherence_to_script_score", 0),
+            response_time_analysis=parsed_analysis.get("actively_listening_score", {}),
             fluency_score=parsed_analysis.get("fluency_score", 0),
             probing_effectiveness=parsed_analysis.get("probing_score", 0),
             call_closing_quality=parsed_analysis.get("closing_score", 0),
@@ -247,8 +248,8 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         "Username": username,
         "PhoneNumber": phone_number,
         "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
-        "Adherence to script/Product Knowledge": f"{parsed_analysis.get('adherence_score', 0)}%",
-        "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
+        "Adherence to script/Product Knowledge": f"{parsed_analysis.get('adherence_to_script_score', 0)}%",
+        "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('actively_listening_score', 0)}%",
         "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
         "Probing": f"{parsed_analysis.get('probing_score', 0)}%",
         "Closing": f"{parsed_analysis.get('closing_score', 0)}%",

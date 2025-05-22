@@ -25,6 +25,8 @@ from tempfile import NamedTemporaryFile
 from datetime import datetime
 from fastapi.security import HTTPBasic, HTTPBasicCredentials, HTTPBearer, HTTPAuthorizationCredentials
 import re
+from src.config.log_config import logger
+import logging
 
 # Load environment variables from .env file
 load_dotenv()
@@ -52,6 +54,18 @@ ALLOWED_EXTENSIONS = {".opus", ".mp3", ".wav"}
 HF_TOKEN = os.getenv("HF_TOKEN")
 SAMPLE_RATE = 16000
 MIN_SEGMENT_LENGTH = 0.5  # seconds
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("app.log"),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger("diarize_audio")
 
 # Validate and create directories
 for directory in [UPLOAD_DIR, PROCESSED_DIR, PREPROCESSED_DIR]:
@@ -95,6 +109,84 @@ def preprocess_audio(audio_path: str, output_path: str) -> str:
         return audio_path
 
 
+# @router.post("/upload", response_model=AudioUploadResponse)
+# async def upload_audio(
+#     contentUri: str = Body(..., embed=True),
+#     contentType: str = Body("audio/mpeg", embed=True),
+#     token: HTTPAuthorizationCredentials = Depends(security),
+#     db: Session = Depends(get_db)
+# ):
+#     try:
+       
+#         # Example: https://media.ringcentral.com/.../recording/2727550179031/content
+#         match = re.search(r"/recording/(\d+)/content", contentUri)
+#         if not match:
+#             raise HTTPException(status_code=400, detail="Invalid content URI format")
+#         recording_id = match.group(1)
+
+#         # Download audio file
+#         headers = {
+#             "Authorization": f"Bearer {token.credentials}"
+#         }
+#         response = requests.get(contentUri, headers=headers)
+#         if response.status_code != 200:
+#             raise HTTPException(status_code=400, detail="Failed to download audio file")
+
+#         # Infer file extension
+#         ext_map = {
+#             "audio/mpeg": ".mp3",
+#             "audio/wav": ".wav",
+#             "audio/x-wav": ".wav",
+#             "audio/mp3": ".mp3",
+#         }
+#         file_extension = ext_map.get(contentType.lower(), ".mp3")
+
+#         if file_extension not in ALLOWED_EXTENSIONS:
+#             raise HTTPException(
+#                 status_code=400,
+#                 detail=f"Invalid file format. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}"
+#             )
+
+#         audio_id = str(uuid.uuid4())
+#         filename = f"{audio_id}{file_extension}"
+#         file_path = UPLOAD_DIR / filename
+
+#         # Save audio file locally
+#         with open(file_path, "wb") as f:
+#             f.write(response.content)
+
+#         # Preprocess audio
+#         preprocessed_path = PREPROCESSED_DIR / f"{audio_id}_preprocessed.wav"
+#         processed_path = preprocess_audio(str(file_path), str(preprocessed_path))
+
+#         # Store in DB
+#         db_audio = Audio(
+#             id=audio_id,
+#             original_filename=filename,
+#             original_path=str(file_path),
+#             processed_path=processed_path,
+#             file_type=file_extension,
+#             processed=False,
+#             uploaded_at=datetime.utcnow(),
+#             recording_id=recording_id 
+#         )
+#         db.add(db_audio)
+#         db.commit()
+#         db.refresh(db_audio)
+
+#         return AudioUploadResponse(
+#             audio_id=audio_id,
+#             file_path=processed_path,
+#             original_filename=filename,
+#             file_type=file_extension
+#         )
+
+#     except Exception as e:
+#         db.rollback()
+#         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
+
+
 @router.post("/upload", response_model=AudioUploadResponse)
 async def upload_audio(
     contentUri: str = Body(..., embed=True),
@@ -103,28 +195,38 @@ async def upload_audio(
     db: Session = Depends(get_db)
 ):
     try:
-       
-        # Example: https://media.ringcentral.com/.../recording/2727550179031/content
+        # Validate URI format
         match = re.search(r"/recording/(\d+)/content", contentUri)
         if not match:
             raise HTTPException(status_code=400, detail="Invalid content URI format")
         recording_id = match.group(1)
 
-        # Download audio file
-        headers = {
-            "Authorization": f"Bearer {token.credentials}"
-        }
-        response = requests.get(contentUri, headers=headers)
-        if response.status_code != 200:
-            raise HTTPException(status_code=400, detail="Failed to download audio file")
+        # Ensure upload directories exist
+        UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+        PREPROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
-        # Infer file extension
+        # Download audio file
+        headers = {"Authorization": f"Bearer {token.credentials}"}
+        response = requests.get(contentUri, headers=headers)
+
+        if response.status_code != 200:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Failed to download audio file: {response.text}"
+            )
+
+        if not response.content:
+            raise HTTPException(status_code=400, detail="Downloaded file is empty")
+
+        # Determine file extension
         ext_map = {
             "audio/mpeg": ".mp3",
             "audio/wav": ".wav",
             "audio/x-wav": ".wav",
             "audio/mp3": ".mp3",
         }
+
+        contentType = contentType or response.headers.get("Content-Type", "audio/mpeg")
         file_extension = ext_map.get(contentType.lower(), ".mp3")
 
         if file_extension not in ALLOWED_EXTENSIONS:
@@ -133,11 +235,11 @@ async def upload_audio(
                 detail=f"Invalid file format. Allowed formats: {', '.join(ALLOWED_EXTENSIONS)}"
             )
 
+        # Save file
         audio_id = str(uuid.uuid4())
         filename = f"{audio_id}{file_extension}"
         file_path = UPLOAD_DIR / filename
 
-        # Save audio file locally
         with open(file_path, "wb") as f:
             f.write(response.content)
 
@@ -145,17 +247,18 @@ async def upload_audio(
         preprocessed_path = PREPROCESSED_DIR / f"{audio_id}_preprocessed.wav"
         processed_path = preprocess_audio(str(file_path), str(preprocessed_path))
 
-        # Store in DB
+        # Save metadata to DB
         db_audio = Audio(
             id=audio_id,
             original_filename=filename,
             original_path=str(file_path),
             processed_path=processed_path,
             file_type=file_extension,
-            processed=False,
+            processed=False,  # Change to True if preprocessing is final
             uploaded_at=datetime.utcnow(),
-            recording_id=recording_id 
+            recording_id=recording_id
         )
+
         db.add(db_audio)
         db.commit()
         db.refresh(db_audio)
@@ -257,6 +360,7 @@ async def diarize_audio(audio_id: str, db: Session = Depends(get_db)):
             
             text = transcribe_audio(segment, sr)
             
+            
             # Save segment to database
             db_segment = Segment(
                 audio_id=audio_id,
@@ -272,7 +376,7 @@ async def diarize_audio(audio_id: str, db: Session = Depends(get_db)):
                 "end": turn.end,
                 "text": text
             })
-        
+    
         # Update audio record
         db_audio.processed = True
         db_audio.full_transcript = full_transcript

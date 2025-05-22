@@ -1,0 +1,324 @@
+2025-05-20 13:11:04,820 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 13:11:13,157 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-20 13:11:14,276 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-20 13:11:14,404 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-20 13:11:14,422 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-20 13:11:14,423 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-20 13:11:14,425 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-20 13:14:14,418 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-20 13:14:14 IST], next run at: 2025-05-20 13:14:14 IST)" (scheduled at 2025-05-20 13:14:14.404562+05:30)
+2025-05-20 13:14:14,419 - apscheduler.scheduler - INFO - Removed job 9f05d84d4087444293f70b0460d5b180
+2025-05-20 13:14:14,420 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-20 13:14:15,268 - call_analyzer_scheduler - INFO - Found 100 recordings in the last 24 hours
+2025-05-20 13:17:18,435 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-05-20 13:17:18,435 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-20 13:17:44,344 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-20 13:17:53,731 - call_analyzer_scheduler - ERROR - Failed to diarize recording 2768750696030: {"detail":"No valid transcription segments found."}
+2025-05-20 13:18:07,174 - call_analyzer_scheduler - ERROR - Failed to diarize recording 2768749935030: {"detail":"No valid transcription segments found."}
+2025-05-20 13:28:22,999 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:09:38,157 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 14:14:15,004 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-05-20 14:14:15,005 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-20 14:14:21,899 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-20 14:41:02,043 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-20 14:41:03,138 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-20 14:41:03,177 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-20 14:41:03,177 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-20 14:41:03,177 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-20 14:41:03,179 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-20 14:44:03,186 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-20 14:44:03 IST], next run at: 2025-05-20 14:44:03 IST)" (scheduled at 2025-05-20 14:44:03.176538+05:30)
+2025-05-20 14:44:03,186 - apscheduler.scheduler - INFO - Removed job 374c600fcc904eceb44a450404d3471f
+2025-05-20 14:44:03,187 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-20 14:44:04,106 - call_analyzer_scheduler - INFO - Found 100 recordings in the last 24 hours
+2025-05-20 14:44:17,344 - call_analyzer_scheduler - ERROR - Failed to analyze recording 2768750696030: {"detail":"No transcribed segments found for this audio. Please diarize the audio first."}
+2025-05-20 14:44:28,242 - call_analyzer_scheduler - ERROR - Failed to analyze recording 2768749935030: {"detail":"No transcribed segments found for this audio. Please diarize the audio first."}
+2025-05-20 14:50:03,703 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:50:07,076 - call_analyzer_scheduler - INFO - Successfully processed recording 2768747968030
+2025-05-20 14:52:36,977 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:52:38,014 - call_analyzer_scheduler - INFO - Successfully processed recording 2768747213030
+2025-05-20 14:55:02,707 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:55:03,598 - call_analyzer_scheduler - INFO - Successfully processed recording 2768746115030
+2025-05-20 14:57:27,205 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:57:28,201 - call_analyzer_scheduler - INFO - Successfully processed recording 2768746205030
+2025-05-20 14:59:51,580 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 14:59:52,576 - call_analyzer_scheduler - INFO - Successfully processed recording 2768745489030
+2025-05-20 15:02:11,836 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:02:20,662 - call_analyzer_scheduler - INFO - Successfully processed recording 2768744648030
+2025-05-20 15:04:32,014 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:04:32,845 - call_analyzer_scheduler - INFO - Successfully processed recording 2768745324030
+2025-05-20 15:07:01,309 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:07:02,369 - call_analyzer_scheduler - INFO - Successfully processed recording 2768744017030
+2025-05-20 15:09:42,204 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:09:43,027 - call_analyzer_scheduler - INFO - Successfully processed recording 2768743668030
+2025-05-20 15:09:51,211 - call_analyzer_scheduler - ERROR - Failed to analyze recording 2768742720030: {"detail":"No transcribed segments found for this audio. Please diarize the audio first."}
+2025-05-20 15:12:11,917 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:12:12,973 - call_analyzer_scheduler - INFO - Successfully processed recording 2768742060030
+2025-05-20 15:14:35,652 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:14:36,549 - call_analyzer_scheduler - INFO - Successfully processed recording 2768742047030
+2025-05-20 15:16:57,016 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:16:57,875 - call_analyzer_scheduler - INFO - Successfully processed recording 2768740806030
+2025-05-20 15:19:14,643 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:19:15,606 - call_analyzer_scheduler - INFO - Successfully processed recording 2768739821030
+2025-05-20 15:21:42,493 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:21:43,425 - call_analyzer_scheduler - INFO - Successfully processed recording 2768740582030
+2025-05-20 15:24:21,469 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:24:22,297 - call_analyzer_scheduler - INFO - Successfully processed recording 2768738590030
+2025-05-20 15:26:50,118 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:26:51,035 - call_analyzer_scheduler - INFO - Successfully processed recording 2768738239030
+2025-05-20 15:29:09,144 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:29:10,070 - call_analyzer_scheduler - INFO - Successfully processed recording 2768737736030
+2025-05-20 15:29:19,896 - call_analyzer_scheduler - ERROR - Failed to analyze recording 2768736795030: {"detail":"No transcribed segments found for this audio. Please diarize the audio first."}
+2025-05-20 15:31:41,396 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:31:42,318 - call_analyzer_scheduler - INFO - Successfully processed recording 2768735881030
+2025-05-20 15:34:04,503 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:34:05,327 - call_analyzer_scheduler - INFO - Successfully processed recording 2768735229030
+2025-05-20 15:36:35,327 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:36:36,151 - call_analyzer_scheduler - INFO - Successfully processed recording 2768734299030
+2025-05-20 15:39:02,862 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:39:03,713 - call_analyzer_scheduler - INFO - Successfully processed recording 2768734167030
+2025-05-20 15:41:25,194 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:41:26,030 - call_analyzer_scheduler - INFO - Successfully processed recording 2768732788030
+2025-05-20 15:41:27,944 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768731439030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:28,660 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768728684030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:29,369 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768727343030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:30,015 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768726523030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:30,660 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768723269030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:31,380 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768723443030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:32,190 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768722303030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:32,873 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768721968030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:33,601 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768720306030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:34,295 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768718878030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:35,460 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768717656030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:35,998 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768716265030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:36,516 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768714954030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:37,119 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768713878030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:37,697 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768711275030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:38,239 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768710474030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:38,744 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768710348030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:39,346 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768709872030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:39,927 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768709384030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:40,433 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768709319030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:41,009 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768708614030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:41,588 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768708359030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:42,105 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768707937030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:42,601 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768706629030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:43,008 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768705957030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:44,140 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768705611030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:44,734 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768705183030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:45,100 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768705608030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:45,604 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768704593030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:46,110 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768705008030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:46,772 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768703991030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:47,350 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768703232030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:47,896 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768702700030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:48,398 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768703426030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:48,911 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768702323030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:49,563 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768701163030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:50,058 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768700881030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:50,712 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768700680030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:51,367 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768700163030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:51,956 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768699456030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:53,090 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768699330030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:53,596 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768698493030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:54,151 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768697762030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:54,647 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768698278030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:55,167 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768696573030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:55,679 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768694964030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:56,188 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768693730030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:56,767 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768692334030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:57,112 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768690055030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:57,809 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768688948030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:58,413 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768689813030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:59,054 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768688491030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:59,633 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768688565030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:41:59,981 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768687032030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:00,581 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768687030030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:01,077 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768687091030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:01,591 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768685926030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:02,188 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768686387030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:02,798 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768685914030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:03,381 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768685517030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:03,750 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768684520030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:04,333 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768683179030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:04,915 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768681817030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:05,325 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768681735030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:05,906 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768678882030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:06,400 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768677578030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:06,962 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768673344030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:07,466 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768671624030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:08,033 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768670622030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:08,633 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768670917030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:09,035 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768669635030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:09,446 - call_analyzer_scheduler - ERROR - Failed to upload recording 2768668701030: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-20 15:42:09,446 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 22 recordings.
+2025-05-20 15:42:09,763 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-20 14:44:03 IST], next run at: 2025-05-20 14:44:03 IST)" executed successfully
+2025-05-20 15:48:36,400 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:51:32,553 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:54:43,986 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:54:59,037 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:56:50,764 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 15:57:49,112 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:58:07,186 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:58:22,832 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:58:47,095 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 15:59:01,454 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 16:00:33,967 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-20 16:02:11,734 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 16:02:27,925 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 16:53:03,767 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 16:53:17,062 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-20 18:08:19,347 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-20 18:08:19,350 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-20 18:08:49,839 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-20 18:08:50,659 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-20 18:08:50,671 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-20 18:08:50,672 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-20 18:08:50,672 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-20 18:08:50,675 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-21 02:00:00,606 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: cron[hour='2', minute='0'], next run at: 2025-05-21 02:00:00 IST)" (scheduled at 2025-05-21 02:00:00+05:30)
+2025-05-21 02:00:00,609 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-21 02:00:01,549 - call_analyzer_scheduler - ERROR - Failed to fetch recordings: {'errorCode': 'TokenExpired', 'message': 'Access token is expired', 'errors': [{'errorCode': 'OAU-128', 'message': 'Access token is expired'}]}
+2025-05-21 02:00:01,551 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 0 recordings.
+2025-05-21 02:00:01,554 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: cron[hour='2', minute='0'], next run at: 2025-05-22 02:00:00 IST)" executed successfully
+2025-05-22 02:00:01,954 - apscheduler.executors.default - WARNING - Run time of job "CallAnalysisScheduler.run_daily_analysis (trigger: cron[hour='2', minute='0'], next run at: 2025-05-23 02:00:00 IST)" was missed by 0:00:01.954226
+2025-05-22 10:08:39,331 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 10:08:39,331 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-22 10:11:35,545 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 10:11:37,483 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-22 10:11:38,848 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-22 10:11:38,881 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-22 10:11:38,881 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-22 10:11:38,882 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-22 10:11:38,884 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-22 10:28:49,900 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 10:28:49,901 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-22 10:29:33,311 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 10:29:34,370 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-22 10:29:34,370 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-22 10:29:34,371 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-22 10:29:34,372 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-22 10:32:34,393 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 10:32:34 IST], next run at: 2025-05-22 10:32:34 IST)" (scheduled at 2025-05-22 10:32:34.370835+05:30)
+2025-05-22 10:32:34,394 - apscheduler.scheduler - INFO - Removed job 38d8635d87984b4c8e8bc29c06736d75
+2025-05-22 10:32:34,396 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-22 10:32:36,203 - call_analyzer_scheduler - INFO - Found 100 recordings in the last 24 hours
+2025-05-22 10:33:48,001 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-05-22 10:33:48,001 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-22 10:33:57,852 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-22 10:42:34,785 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:42:39,655 - call_analyzer_scheduler - INFO - Successfully processed recording 2771954390031
+2025-05-22 10:45:42,386 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:45:43,619 - call_analyzer_scheduler - INFO - Successfully processed recording 2771949371031
+2025-05-22 10:48:28,387 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:48:29,353 - call_analyzer_scheduler - INFO - Successfully processed recording 2771948535031
+2025-05-22 10:51:09,709 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:51:10,813 - call_analyzer_scheduler - INFO - Successfully processed recording 2771947582031
+2025-05-22 10:53:46,115 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:53:47,212 - call_analyzer_scheduler - INFO - Successfully processed recording 2771947368031
+2025-05-22 10:56:13,713 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:56:14,617 - call_analyzer_scheduler - INFO - Successfully processed recording 2771946847031
+2025-05-22 10:58:41,337 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 10:58:42,182 - call_analyzer_scheduler - INFO - Successfully processed recording 2771945486031
+2025-05-22 11:01:20,698 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 11:01:21,659 - call_analyzer_scheduler - INFO - Successfully processed recording 2771942447031
+2025-05-22 11:03:52,598 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 11:03:53,561 - call_analyzer_scheduler - INFO - Successfully processed recording 2771941208031
+2025-05-22 11:06:19,468 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 11:06:20,318 - call_analyzer_scheduler - INFO - Successfully processed recording 2771941271031
+2025-05-22 11:08:47,849 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 11:08:48,853 - call_analyzer_scheduler - INFO - Successfully processed recording 2771939899031
+2025-05-22 11:12:36,110 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 11:12:37,215 - call_analyzer_scheduler - INFO - Successfully processed recording 2771936952031
+2025-05-22 11:12:39,920 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771936224031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:40,622 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771935549031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:41,108 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771936288031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:42,035 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771934852031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:42,599 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771934112031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:43,101 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771932085031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:43,550 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771929752031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:43,899 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771930604031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:44,349 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771928436031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:44,798 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771927631031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:45,236 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771925923031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:45,719 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771924722031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:46,157 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771924179031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:46,506 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771923197031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:46,874 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771922983031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:47,287 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771921234031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:47,770 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771921179031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:48,229 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919251031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:48,691 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919468031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:49,131 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919346031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:49,562 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771918220031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:50,003 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771918355031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:50,449 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771917664031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:50,944 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771916990031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:51,313 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771915565031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:51,743 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771915379031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:52,071 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771913647031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:52,429 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771913025031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:52,867 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771911956031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:53,302 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771909256031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:53,656 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771907238031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:54,068 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771906760031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:54,494 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771906015031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:54,808 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905973031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:55,138 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905266031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:55,508 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905045031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:55,995 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771904477031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:56,425 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902928031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:57,056 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902502031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:57,520 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902108031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:57,879 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902048031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:58,215 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902697031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:58,531 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771900756031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:58,865 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771901533031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:59,277 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771899967031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:12:59,717 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771899344031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:00,069 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771897072031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:00,378 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771893721031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:00,744 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771889941031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:01,088 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771889687031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:01,418 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771888505031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:01,915 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771888514031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:02,390 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771886402031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:02,712 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771886414031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:03,132 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771885503031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:03,584 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771885073031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:03,928 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771884857031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:04,251 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771883595031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:04,567 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882850031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:04,913 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882785031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:05,236 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882497031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:05,617 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882035031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:06,000 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771881141031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:06,410 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771880523031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:06,834 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771878394031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:07,155 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771877381031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:07,515 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876100031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:07,897 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876765031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:08,236 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876589031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:08,604 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771875187031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:09,072 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771875620031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:09,518 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771874919031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:09,964 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771872440031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:10,276 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871549031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:10,656 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871199031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:10,972 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871842031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:11,310 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771870598031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:11,639 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771870196031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:12,060 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869465031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:12,445 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869068031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:12,772 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771868653031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:13,120 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869247031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:13,486 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771867913031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:13,823 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771867954031: {"detail":"Upload failed: 400: Failed to download audio file"}
+2025-05-22 11:13:13,858 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 12 recordings.
+2025-05-22 11:13:13,956 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 10:32:34 IST], next run at: 2025-05-22 10:32:34 IST)" executed successfully
+2025-05-22 11:33:35,683 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 11:34:29,449 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 11:34:29,452 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-22 11:34:59,067 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-22 11:35:00,479 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-22 11:35:00,588 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-22 11:35:00,589 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-22 11:35:00,589 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-22 11:35:00,592 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.

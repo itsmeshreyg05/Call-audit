@@ -98,7 +98,7 @@ async def get_recording(
 
         response_json = call_log_response.json()
         call_logs = response_json.get("records", [])
-        print(call_logs)
+        # print(call_logs)
 
         for log in call_logs:
             recording_info = log.get("recording")
@@ -117,17 +117,17 @@ async def get_recording(
             break
 
     # Step 4: Save to DB if not already present
-    # existing = db.query(RecordingDetail).filter_by(recording_id=recording_id).first()
-    # if not existing:
-    new_record = RecordingDetail(
-        recording_id=recording_id,
-        phone_number=recording_data.get("phoneNumber") or None,
-        username=recording_data.get("name") or None,
-        start_time=recording_data.get("startTime")
-    )
-    db.add(new_record)
-    db.commit()
-    db.refresh(new_record)
+    existing = db.query(RecordingDetail).filter_by(recording_id=recording_id).first()
+    if not existing:
+        new_record = RecordingDetail(
+            recording_id=recording_id,
+            phone_number=recording_data.get("phoneNumber") or None,
+            username=recording_data.get("name") or None,
+            start_time=recording_data.get("startTime")
+        )
+        db.add(new_record)
+        db.commit()
+        db.refresh(new_record)
 
-    return recording_data
+        return recording_data
 

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey, JSON, DateTime, Text
 from sqlalchemy.orm import relationship
 import datetime
+from datetime import datetime
 from src.database.database import Base
 
 class Audio(Base):
@@ -13,7 +14,7 @@ class Audio(Base):
     file_type = Column(String)
     processed = Column(Boolean, default=False)
     full_transcript = Column(Text, nullable=True)
-    uploaded_at = Column(DateTime, default=datetime.datetime.utcnow)
+    uploaded_at = Column(DateTime, default=datetime.utcnow)
     recording_id = Column(String, unique=True, nullable=False)
     
     
@@ -69,8 +70,8 @@ class Analysis(Base):
     # Summary and metadata
     summary = Column(Text)
     status = Column(String, default="pending")  # pending, processing, completed, failed
-    created_at = Column(DateTime, default=datetime.datetime.utcnow)
-    updated_at = Column(DateTime, onupdate=datetime.datetime.utcnow, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, onupdate=datetime.utcnow, nullable=True)
     
     # Relationship
     audio = relationship("Audio", back_populates="analysis")
@@ -84,3 +85,17 @@ class RecordingDetail(Base):
     username = Column(String)
     phone_number = Column(String)
     start_time = Column(DateTime)
+
+
+class TokenStore(Base):
+    __tablename__ = "token_store"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    client_id = Column(String, nullable=False)
+    client_secret = Column(String, nullable=False)
+    access_token = Column(String, nullable=False)
+    refresh_token = Column(String, nullable=False)
+    token_type = Column(String, default="Bearer")
+    expires_at = Column(DateTime, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
