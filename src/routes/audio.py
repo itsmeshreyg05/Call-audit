@@ -27,6 +27,7 @@ from fastapi.security import HTTPBasic, HTTPBasicCredentials, HTTPBearer, HTTPAu
 import re
 from src.config.log_config import logger
 import logging
+from src.utils.utils import refresh_ringcentral_token
 
 # Load environment variables from .env file
 load_dotenv()
@@ -205,10 +206,29 @@ async def upload_audio(
         UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
         PREPROCESSED_DIR.mkdir(parents=True, exist_ok=True)
 
-        # Download audio file
+        # # Download audio file
+        # headers = {"Authorization": f"Bearer {token.credentials}"}
+        # response = requests.get(contentUri, headers=headers)
+
+        # if response.status_code != 200:
+        #     raise HTTPException(
+        #         status_code=400,
+        #         detail=f"Failed to download audio file: {response.text}"
+        #     )
+
         headers = {"Authorization": f"Bearer {token.credentials}"}
         response = requests.get(contentUri, headers=headers)
 
+        # If token expired, refresh and retry
+        if response.status_code == 401:
+            try:
+                refreshed_token = refresh_ringcentral_token(db)  # <- Call your function here
+                headers = {"Authorization": f"Bearer {refreshed_token}"}
+                response = requests.get(contentUri, headers=headers)
+            except Exception as e:
+                raise HTTPException(status_code=401, detail=f"Token refresh failed: {str(e)}")
+
+        # Still failed after retry
         if response.status_code != 200:
             raise HTTPException(
                 status_code=400,

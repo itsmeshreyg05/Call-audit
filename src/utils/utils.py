@@ -1,7 +1,12 @@
+import base64
 import re
 import json
 from typing import Dict, List, Any, Optional
-from src.schemas import DiarizationSegment
+
+import requests
+from src.schemas.schema import DiarizationSegment
+from datetime import datetime, timedelta
+from src.models.model import TokenStore
 
 def format_conversation(segments: List[Any]) -> str:
     """
@@ -180,3 +185,34 @@ def extract_section(text: str, section_name: str) -> Optional[str]:
     if match:
         return match.group(1).strip()
     return None
+
+
+def refresh_ringcentral_token(db: requests.Session) -> str:
+    token_record = db.query(TokenStore).first()  # adjust model/query if needed
+    if not token_record:
+        raise Exception("Token record not found")
+
+    token_url = "https://platform.ringcentral.com/restapi/oauth/token"
+    auth_str = f"{token_record.client_id}:{token_record.client_secret}"
+    auth_header = base64.b64encode(auth_str.encode("ascii")).decode("ascii")
+
+    headers = {
+        "Authorization": f"Basic {auth_header}",
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+
+    data = {
+        "grant_type": "refresh_token",
+        "refresh_token": token_record.refresh_token
+    }
+
+    response = requests.post(token_url, headers=headers, data=data)
+    if response.status_code != 200:
+        raise Exception(f"Token refresh failed: {response.text}")
+
+    token_data = response.json()
+    token_record.access_token = token_data["access_token"]
+    token_record.refresh_token = token_data["refresh_token"]
+    token_record.expires_at = datetime.utcnow() + timedelta(seconds=token_data["expires_in"])
+    db.commit()
+    return token_data["access_token"]

@@ -322,3 +322,687 @@
 2025-05-22 11:35:00,589 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
 2025-05-22 11:35:00,589 - apscheduler.scheduler - INFO - Scheduler started
 2025-05-22 11:35:00,592 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-22 11:38:00,605 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 11:38:00 IST], next run at: 2025-05-22 11:38:00 IST)" (scheduled at 2025-05-22 11:38:00.588963+05:30)
+2025-05-22 11:38:00,606 - apscheduler.scheduler - INFO - Removed job 12fc34adf4c740788e96163ecdd9c731
+2025-05-22 11:38:00,608 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-22 11:38:01,921 - call_analyzer_scheduler - INFO - Found 100 recordings in the last 24 hours
+2025-05-22 11:38:01,944 - call_analyzer_scheduler - INFO - Recording 2771954390031 already processed, skipping
+2025-05-22 11:38:01,952 - call_analyzer_scheduler - INFO - Recording 2771949371031 already processed, skipping
+2025-05-22 11:38:01,957 - call_analyzer_scheduler - INFO - Recording 2771948535031 already processed, skipping
+2025-05-22 11:38:01,962 - call_analyzer_scheduler - INFO - Recording 2771947582031 already processed, skipping
+2025-05-22 11:38:01,967 - call_analyzer_scheduler - INFO - Recording 2771947368031 already processed, skipping
+2025-05-22 11:38:01,971 - call_analyzer_scheduler - INFO - Recording 2771946847031 already processed, skipping
+2025-05-22 11:38:01,974 - call_analyzer_scheduler - INFO - Recording 2771945486031 already processed, skipping
+2025-05-22 11:38:01,976 - call_analyzer_scheduler - INFO - Recording 2771942447031 already processed, skipping
+2025-05-22 11:38:01,979 - call_analyzer_scheduler - INFO - Recording 2771941208031 already processed, skipping
+2025-05-22 11:38:01,982 - call_analyzer_scheduler - INFO - Recording 2771941271031 already processed, skipping
+2025-05-22 11:38:01,984 - call_analyzer_scheduler - INFO - Recording 2771939899031 already processed, skipping
+2025-05-22 11:38:01,986 - call_analyzer_scheduler - INFO - Recording 2771936952031 already processed, skipping
+2025-05-22 11:38:02,031 - call_analyzer_scheduler - ERROR - Error processing recording: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-05-22 11:38:02,032 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,033 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,034 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,035 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,035 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,036 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,037 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,038 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,038 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,039 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,040 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,040 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,041 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,042 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,042 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,043 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,044 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,044 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,045 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,046 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,047 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,048 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,048 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,049 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,049 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,050 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,051 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,051 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,052 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,052 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,053 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,053 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,054 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,055 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,055 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,056 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,056 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,057 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,057 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,058 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,058 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,059 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,060 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,060 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,061 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,062 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,062 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,063 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,063 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,064 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,065 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,065 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,066 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,067 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,067 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,068 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,069 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,069 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,070 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,070 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,071 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,072 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,072 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,073 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,074 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,074 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,075 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,075 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,076 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,077 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,077 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,078 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,079 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,079 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,080 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,080 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,081 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,082 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,082 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,083 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,083 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,084 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,084 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2771936224031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2771936224031', 'username': 'Hannah Smith', 'phone_number': '+13363927869', 'start_time': '2025-05-21T20:57:14.604Z'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-05-22 11:38:02,085 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 0 recordings.
+2025-05-22 11:38:02,085 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 11:38:00 IST], next run at: 2025-05-22 11:38:00 IST)" executed successfully
+2025-05-22 11:57:42,889 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 11:57:51,383 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 11:57:51,384 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-22 11:58:07,469 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-22 11:58:07,469 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-22 11:58:07,469 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-22 11:58:07,471 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-22 12:01:07,484 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 12:01:07 IST], next run at: 2025-05-22 12:01:07 IST)" (scheduled at 2025-05-22 12:01:07.469425+05:30)
+2025-05-22 12:01:07,485 - apscheduler.scheduler - INFO - Removed job ed8ea3bd86d0442aaecdf6395b755b86
+2025-05-22 12:01:07,485 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-22 12:01:08,455 - call_analyzer_scheduler - INFO - Found 100 recordings in the last 24 hours
+2025-05-22 12:01:40,629 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-05-22 12:01:40,630 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-22 12:01:46,539 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-22 12:07:17,583 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:07:22,427 - call_analyzer_scheduler - INFO - Successfully processed recording 2771954390031
+2025-05-22 12:11:05,272 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:11:06,367 - call_analyzer_scheduler - INFO - Successfully processed recording 2771949371031
+2025-05-22 12:13:55,163 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:13:56,326 - call_analyzer_scheduler - INFO - Successfully processed recording 2771948535031
+2025-05-22 12:17:04,378 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:17:05,360 - call_analyzer_scheduler - INFO - Successfully processed recording 2771947582031
+2025-05-22 12:19:56,099 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:19:57,123 - call_analyzer_scheduler - INFO - Successfully processed recording 2771947368031
+2025-05-22 12:22:30,749 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:22:31,732 - call_analyzer_scheduler - INFO - Successfully processed recording 2771946847031
+2025-05-22 12:25:13,381 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:25:14,399 - call_analyzer_scheduler - INFO - Successfully processed recording 2771945486031
+2025-05-22 12:27:57,188 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:27:58,060 - call_analyzer_scheduler - INFO - Successfully processed recording 2771942447031
+2025-05-22 12:30:25,413 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:30:26,427 - call_analyzer_scheduler - INFO - Successfully processed recording 2771941208031
+2025-05-22 12:33:01,773 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:33:02,788 - call_analyzer_scheduler - INFO - Successfully processed recording 2771941271031
+2025-05-22 12:35:58,250 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 12:35:59,301 - call_analyzer_scheduler - INFO - Successfully processed recording 2771939899031
+2025-05-22 12:36:01,475 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771936952031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:01,987 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771936224031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:02,515 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771935549031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:02,976 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771936288031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:03,452 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771934852031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:03,877 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771934112031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:04,771 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771932085031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:05,196 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771929752031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:05,734 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771930604031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:06,280 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771928436031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:06,825 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771927631031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:07,430 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771925923031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:08,012 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771924722031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:08,475 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771924179031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:08,952 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771923197031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:09,432 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771922983031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:10,309 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771921234031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:10,664 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771921179031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:11,101 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919251031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:11,596 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919468031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:12,006 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771919346031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:12,449 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771918220031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:12,872 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771918355031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:13,309 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771917664031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:13,648 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771916990031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:14,109 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771915565031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:14,518 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771915379031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:14,925 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771913647031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:15,340 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771913025031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:15,775 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771911956031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:16,190 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771909256031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:16,602 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771907238031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:17,042 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771906760031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:17,490 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771906015031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:17,935 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905973031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:18,393 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905266031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:18,838 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771905045031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:19,264 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771904477031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:19,840 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902928031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:20,281 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902502031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:20,738 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902108031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:21,897 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902048031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:22,328 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771902697031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:22,666 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771900756031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:23,006 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771901533031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:23,472 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771899967031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:23,851 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771899344031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:25,212 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771897072031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:25,686 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771893721031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:27,340 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771889941031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:28,656 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771889687031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:29,009 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771888505031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:29,643 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771888514031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:30,301 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771886402031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:30,669 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771886414031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:31,090 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771885503031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:31,410 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771885073031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:31,744 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771884857031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:32,089 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771883595031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:32,421 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882850031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:32,963 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882785031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:33,949 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882497031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:34,430 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771882035031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:35,035 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771881141031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:35,474 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771880523031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:35,993 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771878394031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:36,550 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771877381031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:37,055 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876100031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:37,357 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876765031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:37,749 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771876589031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:38,349 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771875187031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:38,680 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771875620031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:39,080 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771874919031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:39,426 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771872440031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:39,862 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871549031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:40,297 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871199031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:40,624 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771871842031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:40,964 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771870598031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:41,436 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771870196031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:41,760 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869465031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:42,083 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869068031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:42,526 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771868653031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:43,026 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771869247031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:43,384 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771867913031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:43,697 - call_analyzer_scheduler - ERROR - Failed to upload recording 2771867954031: {"detail":"Upload failed: 400: Failed to download audio file: {\n  \"errorCode\" : \"TokenExpired\",\n  \"message\" : \"Access token is expired\",\n  \"errors\" : [ {\n    \"errorCode\" : \"OAU-128\",\n    \"message\" : \"Access token is expired\"\n  } ]\n}"}
+2025-05-22 12:36:43,714 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 11 recordings.
+2025-05-22 12:36:43,895 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 12:01:07 IST], next run at: 2025-05-22 12:01:07 IST)" executed successfully
+2025-05-22 13:16:49,506 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 13:16:49,568 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-22 14:47:32,943 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 14:53:34,935 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 14:53:51,765 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 14:54:05,859 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 15:12:45,271 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 15:13:52,484 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-22 15:13:53,982 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-22 15:13:55,076 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-22 15:13:55,133 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-22 15:13:55,133 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-22 15:13:55,133 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-22 15:13:55,135 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-22 15:16:55,146 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 15:16:55 IST], next run at: 2025-05-22 15:16:55 IST)" (scheduled at 2025-05-22 15:16:55.132861+05:30)
+2025-05-22 15:16:55,147 - apscheduler.scheduler - INFO - Removed job eccf894287b24d47883d755e7c70a7c0
+2025-05-22 15:16:55,149 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-22 15:16:56,039 - call_analyzer_scheduler - INFO - Found 7 recordings (>= 1 min) in the last 24 hours
+2025-05-22 15:17:28,337 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [allow_tf32, disable_jit_profiling]
+2025-05-22 15:17:28,337 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-22 15:17:33,459 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-22 15:23:30,723 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 15:23:53,690 - call_analyzer_scheduler - INFO - Successfully processed recording 2771936952031
+2025-05-22 15:37:20,968 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 15:37:42,454 - call_analyzer_scheduler - INFO - Successfully processed recording 2771935549031
+2025-05-22 15:57:33,343 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 15:58:04,098 - call_analyzer_scheduler - INFO - Successfully processed recording 2771919251031
+2025-05-22 16:02:25,578 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 16:02:27,449 - call_analyzer_scheduler - INFO - Successfully processed recording 2771919346031
+2025-05-22 16:06:57,057 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 16:06:59,288 - call_analyzer_scheduler - INFO - Successfully processed recording 2771905266031
+2025-05-22 16:13:22,911 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 16:13:24,936 - call_analyzer_scheduler - INFO - Successfully processed recording 2771889941031
+2025-05-22 16:18:06,633 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-22 16:18:07,772 - call_analyzer_scheduler - INFO - Successfully processed recording 2771870196031
+2025-05-22 16:18:08,941 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 7 recordings.
+2025-05-22 16:18:09,585 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-22 15:16:55 IST], next run at: 2025-05-22 15:16:55 IST)" executed successfully
+2025-05-22 16:18:28,911 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-05-22 16:18:29,099 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.

@@ -4,6 +4,7 @@ import logging
 import requests
 import json
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 import base64
 from sqlalchemy.orm import Session
 import time
@@ -11,6 +12,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 import signal
 from apscheduler.triggers.date import DateTrigger
+
 
 # Add the project root to the path so we can import our modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -93,14 +95,64 @@ class CallAnalysisScheduler:
         except Exception as e:
             logger.error(f"Error refreshing token: {str(e)}")
             return False
+        
+    def _make_authorized_request(self, method, url, headers=None, **kwargs):
+            """Make authorized requests and refresh token if expired"""
+            if headers is None:
+                headers = {}
+            headers["Authorization"] = f"Bearer {self.token}"
+            
+            response = requests.request(method, url, headers=headers, **kwargs)
+
+            # Check for token expiration (RingCentral returns 401 or 400 with TokenExpired)
+            if response.status_code in [400, 401] and "token" in response.text.lower():
+                logger.warning("Access token expired during request. Refreshing and retrying...")
+                token_record = self.db.query(TokenStore).first()
+                if self._refresh_token(token_record):
+                    headers["Authorization"] = f"Bearer {self.token}"
+                    response = requests.request(method, url, headers=headers, **kwargs)
+            
+            return response
     
+    # def fetch_recent_recordings(self):
+    #     """Fetch recent call recordings from RingCentral"""
+    #     try:
+    #         # Get recordings from the last 24 hours
+    #         date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
+    #         date_to = datetime.utcnow().isoformat() + "Z"
+            
+    #         url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
+    #         headers = {"Authorization": f"Bearer {self.token}"}
+    #         params = {
+    #             "withRecording": "true",
+    #             "perPage": 100,
+    #             "dateFrom": date_from,
+    #             "dateTo": date_to,
+    #             "view": "Detailed"
+    #         }
+            
+    #         response = requests.get(url, headers=headers, params=params)
+            
+    #         if response.status_code != 200:
+    #             logger.error(f"Failed to fetch recordings: {response.json()}")
+    #             return []
+                
+    #         records = response.json().get("records", [])
+    #         logger.info(f"Found {len(records)} recordings in the last 24 hours")
+            
+    #         return records
+            
+    #     except Exception as e:
+    #         logger.error(f"Error fetching recordings: {str(e)}")
+    #         return []
+
     def fetch_recent_recordings(self):
-        """Fetch recent call recordings from RingCentral"""
+        """Fetch recent call recordings from RingCentral with duration >= 1 minute and time in EST"""
         try:
             # Get recordings from the last 24 hours
             date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
             date_to = datetime.utcnow().isoformat() + "Z"
-            
+
             url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
             headers = {"Authorization": f"Bearer {self.token}"}
             params = {
@@ -110,21 +162,32 @@ class CallAnalysisScheduler:
                 "dateTo": date_to,
                 "view": "Detailed"
             }
-            
+
             response = requests.get(url, headers=headers, params=params)
-            
+
             if response.status_code != 200:
                 logger.error(f"Failed to fetch recordings: {response.json()}")
                 return []
-                
-            records = response.json().get("records", [])
-            logger.info(f"Found {len(records)} recordings in the last 24 hours")
-            
-            return records
-            
+
+            all_records = response.json().get("records", [])
+            filtered_records = []
+
+            for record in all_records:
+                if record.get("duration", 0) >= 60:
+                    utc_time_str = record.get("startTime")
+                    if utc_time_str:
+                        utc_time = datetime.fromisoformat(utc_time_str.replace("Z", "+00:00"))
+                        est_time = utc_time.astimezone(ZoneInfo("America/New_York"))
+                        record["startTime"] = est_time.isoformat()
+                    filtered_records.append(record)
+
+            logger.info(f"Found {len(filtered_records)} recordings (>= 1 min) in the last 24 hours")
+            return filtered_records
+
         except Exception as e:
             logger.error(f"Error fetching recordings: {str(e)}")
             return []
+    
     
     def process_recording(self, recording_data):
         """Process a single recording: save details, upload audio, trigger analysis"""
@@ -140,13 +203,18 @@ class CallAnalysisScheduler:
             if existing_audio:
                 logger.info(f"Recording {recording_id} already processed, skipping")
                 return False
+        
+            start_time_utc = recording_data.get("startTime")
+            start_time_est = None
+            if start_time_utc:
+                start_time_est = datetime.fromisoformat(start_time_utc.replace("Z", "+00:00")).astimezone(ZoneInfo("America/New_York"))
                 
             # Save recording details
             recording_detail = RecordingDetail(
                 recording_id=recording_id,
                 phone_number=recording_data.get("to", {}).get("phoneNumber"),
                 username=recording_data.get("from", {}).get("name"),
-                start_time=recording_data.get("startTime")
+                start_time=start_time_est
             )
             self.db.add(recording_detail)
             self.db.commit()
@@ -155,12 +223,20 @@ class CallAnalysisScheduler:
             content_uri = f"https://platform.ringcentral.com/restapi/v1.0/account/~/recording/{recording_id}/content"
             
             # Upload and process audio
+            
             headers = {"Authorization": f"Bearer {self.token}"}
-            response = requests.post(
-                "http://127.0.0.1:8004/audio/upload",  # Adjust to your actual API endpoint
-                json={"contentUri": content_uri, "contentType": "audio/mpeg"},
-                headers=headers
+            # response = requests.post(
+            #     "http://127.0.0.1:8004/audio/upload",  # Adjust to your actual API endpoint
+            #     json={"contentUri": content_uri, "contentType": "audio/mpeg"},
+            #     headers=headers
+            # )
+            response = self._make_authorized_request(
+                    "POST",
+                    "http://127.0.0.1:8004/audio/upload",
+                    json={"contentUri": content_uri, "contentType": "audio/mpeg"},
+                    
             )
+
             
             if response.status_code != 200:
                 logger.error(f"Failed to upload recording {recording_id}: {response.text}")

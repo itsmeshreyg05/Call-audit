@@ -244,6 +244,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
 
  
     row_data = {
+        "Date/Time": start_time.isoformat() if start_time else "Unknown",
         "Recording Id": recording_id,
         "Username": username,
         "PhoneNumber": phone_number,

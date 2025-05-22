@@ -63,6 +63,8 @@ Base.metadata.create_all(bind=engine)
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
+
 # Initialize FastAPI application
 app = FastAPI(
     title="Audio Analysis API",

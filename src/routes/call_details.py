@@ -15,6 +15,7 @@ from datetime import datetime
 from src.models.model import RecordingDetail
 import logging
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 security = HTTPBearer()
 
 router = APIRouter(
@@ -22,14 +23,45 @@ router = APIRouter(
     tags=["call_details"]
 )
 
+# @router.get("/ringcentral/call-log")
+# def get_call_log(
+#     params: CallLogQueryParams = Depends(),  # Use the Pydantic schema for query params
+#     token: HTTPAuthorizationCredentials = Depends(security)
+# ):
+#     base_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
+    
+#     params = {
+#         "showBlocked": str(params.showBlocked).lower(),
+#         "view": params.view,
+#         "withRecording": str(params.withRecording).lower(),
+#         "recordingType": params.recordingType,
+#         "dateFrom": params.dateFrom.isoformat(),
+#         "dateTo": params.dateTo.isoformat(),
+#         "page": params.page,
+#         "perPage": params.perPage,
+#         "showDeleted": str(params.showDeleted).lower()
+#     }
+
+#     headers = {
+#         "Authorization": f"Bearer {token.credentials}"
+#     }
+
+#     response = requests.get(base_url, headers=headers, params=params)
+
+#     if response.status_code != 200:
+#         raise HTTPException(status_code=response.status_code, detail=response.json())
+
+#     return response.json()
+
+
 @router.get("/ringcentral/call-log")
 def get_call_log(
-    params: CallLogQueryParams = Depends(),  # Use the Pydantic schema for query params
+    params: CallLogQueryParams = Depends(),
     token: HTTPAuthorizationCredentials = Depends(security)
 ):
     base_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
     
-    params = {
+    query_params = {
         "showBlocked": str(params.showBlocked).lower(),
         "view": params.view,
         "withRecording": str(params.withRecording).lower(),
@@ -45,13 +77,24 @@ def get_call_log(
         "Authorization": f"Bearer {token.credentials}"
     }
 
-    response = requests.get(base_url, headers=headers, params=params)
+    response = requests.get(base_url, headers=headers, params=query_params)
 
     if response.status_code != 200:
         raise HTTPException(status_code=response.status_code, detail=response.json())
 
-    return response.json()
+    response_json = response.json()
+    filtered_records = []
 
+    for record in response_json.get("records", []):
+        if record.get("duration", 0) >= 60:
+            # Convert UTC startTime to EST
+            utc_time = datetime.fromisoformat(record.get("startTime").replace("Z", "+00:00"))
+            est_time = utc_time.astimezone(ZoneInfo("America/New_York"))
+            record["startTime"] = est_time.isoformat()
+            filtered_records.append(record)
+
+    response_json["records"] = filtered_records
+    return response_json
  
 @router.get("/ringcentral/recording/{recording_id}")
 async def get_recording(
@@ -105,7 +148,11 @@ async def get_recording(
             if recording_info and recording_info.get("id") == recording_id:
                 recording_data["phoneNumber"] = log.get("to", {}).get("phoneNumber", "")
                 recording_data["name"] = log.get("from", {}).get("name", "")
-                recording_data["startTime"] = log.get("startTime", "")
+                # chages to convert time zone to EST
+                # recording_data["startTime"] = log.get("startTime", "")
+                utc_time = datetime.fromisoformat(log.get("startTime").replace("Z", "+00:00"))
+                est_time = utc_time.astimezone(ZoneInfo("America/New_York"))
+                recording_data["startTime"] = est_time.isoformat()
                 found = True
                 break
 

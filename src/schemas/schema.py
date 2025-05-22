@@ -119,8 +119,8 @@ class CallLogQueryParams(BaseModel):
     view: Optional[str] = "Simple"
     withRecording: Optional[bool] = False
     recordingType: Optional[str] = "All"
-    dateFrom: datetime
-    dateTo: datetime
+    dateFrom: Optional[datetime]
+    dateTo: Optional[datetime]
     page: Optional[int] = 1
     perPage: Optional[int] = 100
     showDeleted: Optional[bool] = False
