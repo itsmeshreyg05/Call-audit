@@ -1,20 +1,13 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import os
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
 
 # Constants
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 SPREADSHEET_ID = "1TXIM275dqsC0J6hC9f7ZCMKDd2pj-r7lx-BELcG5u2g"
 RANGE_HEADER = "Sheet1!A1:Z1"  # Assumes headers are in row 1
 RANGE_APPEND = "Sheet1!A1"
-  # Load variables from .env
-
-SERVICE_ACCOUNT_FILE = os.getenv("SERVICE_ACCOUNT_FILE")
+SERVICE_ACCOUNT_FILE = r"D:\call_audit_sales\Call-audit\call-audit-459810-d2d5872f5487.json"
 
 # Authenticate and build the Sheets service
 creds = service_account.Credentials.from_service_account_file(

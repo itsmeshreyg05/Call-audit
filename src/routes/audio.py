@@ -1,4 +1,5 @@
 import os
+import time
 import uuid
 import shutil
 from pathlib import Path
@@ -28,6 +29,7 @@ import re
 from src.config.log_config import logger
 import logging
 from src.utils.utils import refresh_ringcentral_token
+from datetime import datetime
 
 # Load environment variables from .env file
 load_dotenv()
@@ -187,6 +189,56 @@ def preprocess_audio(audio_path: str, output_path: str) -> str:
 #         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
 
+# def download_audio_with_retry(content_uri, headers, db, max_retries=5):
+#     wait = 1
+#     for attempt in range(max_retries):
+#         response = requests.get(content_uri, headers=headers)
+
+#         if response.status_code == 200:
+#             return response.content
+
+#         if response.status_code == 401 and attempt == 0:
+#             try:
+#                 refreshed_token = refresh_ringcentral_token(db)
+#                 headers["Authorization"] = f"Bearer {refreshed_token}"
+#                 continue
+#             except Exception as e:
+#                 raise HTTPException(status_code=401, detail=f"Token refresh failed: {str(e)}")
+
+#         if response.status_code == 429 or "CMN-301" in response.text:
+#             time.sleep(wait)
+#             wait *= 2
+#             continue
+
+#         raise HTTPException(status_code=response.status_code, detail=f"Failed to download audio file: {response.text}")
+#     raise HTTPException(status_code=429, detail="Exceeded retry limit due to rate limiting.")
+
+# def download_audio_with_retry(content_uri, headers, db, max_retries=5):
+#     wait = 1
+#     for attempt in range(max_retries):
+#         response = requests.get(content_uri, headers=headers)
+
+#         if response.status_code == 200:
+#             return response.content
+
+#         if response.status_code == 401 and attempt == 0:
+#             try:
+#                 refreshed_token = refresh_ringcentral_token(db)
+#                 headers["Authorization"] = f"Bearer {refreshed_token}"
+#                 continue
+#             except Exception as e:
+#                 raise HTTPException(status_code=401, detail=f"Token refresh failed: {str(e)}")
+
+#         # Rate limit: 429 or CMN-301 error
+#         if response.status_code == 429 or "CMN-301" in response.text:
+#             print(f"[Attempt {attempt+1}] Rate limit hit. Waiting {wait}s before retry...")
+#             time.sleep(wait)
+#             wait = min(wait * 2, 30)  # exponential backoff with cap
+#             continue
+
+#         raise HTTPException(status_code=response.status_code, detail=f"Failed to download audio file: {response.text}")
+
+#     raise HTTPException(status_code=429, detail="Exceeded retry limit due to rate limiting.")
 
 @router.post("/upload", response_model=AudioUploadResponse)
 async def upload_audio(
@@ -218,7 +270,11 @@ async def upload_audio(
 
         headers = {"Authorization": f"Bearer {token.credentials}"}
         response = requests.get(contentUri, headers=headers)
-
+        # response = download_audio_with_retry(contentUri, headers, db)
+        # Check if the response is empty    
+        if response is None:
+            raise HTTPException(status_code=400, detail="Downloaded file is empty")
+       
         # If token expired, refresh and retry
         if response.status_code == 401:
             try:

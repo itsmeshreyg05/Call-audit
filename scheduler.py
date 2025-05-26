@@ -146,11 +146,13 @@ class CallAnalysisScheduler:
     #         logger.error(f"Error fetching recordings: {str(e)}")
     #         return []
 
+
+
     def fetch_recent_recordings(self):
         """Fetch recent call recordings from RingCentral with duration >= 1 minute and time in EST"""
         try:
-            # Get recordings from the last 24 hours
-            date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
+            # Get recordings from the last 7 days
+            date_from = (datetime.utcnow() - timedelta(days=7)).isoformat() + "Z"
             date_to = datetime.utcnow().isoformat() + "Z"
 
             url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
@@ -163,7 +165,8 @@ class CallAnalysisScheduler:
                 "view": "Detailed"
             }
 
-            response = requests.get(url, headers=headers, params=params)
+            # response = requests.get(url, headers=headers, params=params)
+            response = self._make_authorized_request("GET", url, params=params)
 
             if response.status_code != 200:
                 logger.error(f"Failed to fetch recordings: {response.json()}")
@@ -181,14 +184,91 @@ class CallAnalysisScheduler:
                         record["startTime"] = est_time.isoformat()
                     filtered_records.append(record)
 
-            logger.info(f"Found {len(filtered_records)} recordings (>= 1 min) in the last 24 hours")
+            logger.info(f"Found {len(filtered_records)} recordings from last one week with duration >= 1 minute")
             return filtered_records
 
         except Exception as e:
             logger.error(f"Error fetching recordings: {str(e)}")
             return []
     
-    
+
+    # def fetch_recent_recordings(self):
+    #     """Fetch recent call recordings from RingCentral with duration >= 1 minute and time in EST"""
+    #     try:
+    #         # Get recordings from the last 7 days
+    #         date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
+    #         date_to = datetime.utcnow().isoformat() + "Z"
+
+    #         base_url = "https://platform.ringcentral.com"
+    #         endpoint = "/restapi/v1.0/account/~/call-log"
+    #         url = base_url + endpoint
+
+    #         headers = {"Authorization": f"Bearer {self.token}"}
+    #         params = {
+    #             "withRecording": "true",
+    #             "perPage": 100,
+    #             "dateFrom": date_from,
+    #             "dateTo": date_to,
+    #             "view": "Detailed"
+    #         }
+
+    #         filtered_records = []
+
+    #         while url:
+    #             response = requests.get(url, headers=headers, params=params)
+    #             if response.status_code != 200:
+    #                 logger.error(f"Failed to fetch recordings: {response.json()}")
+    #                 break
+
+    #             data = response.json()
+    #             all_records = data.get("records", [])
+
+    #             for record in all_records:
+    #                 if record.get("duration", 0) >= 60:
+    #                     utc_time_str = record.get("startTime")
+    #                     if utc_time_str:
+    #                         utc_time = datetime.fromisoformat(utc_time_str.replace("Z", "+00:00"))
+    #                         est_time = utc_time.astimezone(ZoneInfo("America/New_York"))
+    #                         record["startTime"] = est_time.isoformat()
+    #                     filtered_records.append(record)
+
+    #             # Prepare for next page
+    #             next_page = data.get("navigation", {}).get("nextPage", {}).get("uri")
+    #             if next_page:
+    #                 if next_page.startswith("http"):
+    #                     url = next_page
+    #                 else:
+    #                     url = base_url + next_page
+    #                 params = None  # Params already included in nextPage URI
+    #             else:
+    #                 url = None
+
+    #         logger.info(f"Found {len(filtered_records)} recordings from last 7 days with duration >= 1 minute")
+    #         return filtered_records
+
+    #     except Exception as e:
+    #         logger.error(f"Error fetching recordings: {str(e)}")
+    #         return []
+
+ 
+    def get_extension_number_from_id(self, extension_id):
+        try:
+            # base_url = "https://platform.ringcentral.com"
+            # url = f"{base_url}/restapi/v1.0/account/~/extension/{extension_id}"
+            
+            url = f"https://platform.ringcentral.com/restapi/v1.0/account/~/extension/{extension_id}"
+            response = self._make_authorized_request("GET", url)
+
+            headers = {"Authorization": f"Bearer {self.token}"}
+
+            response = requests.get(url, headers=headers)
+            response.raise_for_status()
+            return response.json().get("extensionNumber")
+
+        except Exception as e:
+            logger.warning(f"Failed to fetch extension number for ID {extension_id}: {e}")
+            return None
+        
     def process_recording(self, recording_data):
         """Process a single recording: save details, upload audio, trigger analysis"""
         try:
@@ -208,13 +288,21 @@ class CallAnalysisScheduler:
             start_time_est = None
             if start_time_utc:
                 start_time_est = datetime.fromisoformat(start_time_utc.replace("Z", "+00:00")).astimezone(ZoneInfo("America/New_York"))
-                
+
+            # To fetch the extension number from the call log
+            extension_id = recording_data.get("from", {}).get("extensionId")
+            extension_number = None
+            if extension_id:
+                extension_number = self.get_extension_number_from_id(extension_id)   
             # Save recording details
             recording_detail = RecordingDetail(
                 recording_id=recording_id,
                 phone_number=recording_data.get("to", {}).get("phoneNumber"),
                 username=recording_data.get("from", {}).get("name"),
-                start_time=start_time_est
+                start_time=start_time_est,
+                duration=recording_data.get("duration", 0),
+                extension_number=extension_number
+
             )
             self.db.add(recording_detail)
             self.db.commit()
@@ -225,17 +313,17 @@ class CallAnalysisScheduler:
             # Upload and process audio
             
             headers = {"Authorization": f"Bearer {self.token}"}
-            # response = requests.post(
-            #     "http://127.0.0.1:8004/audio/upload",  # Adjust to your actual API endpoint
-            #     json={"contentUri": content_uri, "contentType": "audio/mpeg"},
-            #     headers=headers
-            # )
-            response = self._make_authorized_request(
-                    "POST",
-                    "http://127.0.0.1:8004/audio/upload",
-                    json={"contentUri": content_uri, "contentType": "audio/mpeg"},
-                    
+            response = requests.post(
+                "http://127.0.0.1:8004/audio/upload",  # Adjust to your actual API endpoint
+                json={"contentUri": content_uri, "contentType": "audio/mpeg"},
+                headers=headers
             )
+            # response = self._make_authorized_request(
+            #         "POST",
+            #         "http://127.0.0.1:8004/audio/upload",
+            #         json={"contentUri": content_uri, "contentType": "audio/mpeg"},
+                    
+            # )
 
             
             if response.status_code != 200:
@@ -304,7 +392,7 @@ class CallAnalysisScheduler:
 
 if __name__ == "__main__":
     # scheduler = CallAnalysisScheduler()
-    # scheduler.run_daily_analysis()
+    # # scheduler.run_daily_analysis()
     scheduler_instance = CallAnalysisScheduler()
     
     # Set up APScheduler

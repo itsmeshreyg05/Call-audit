@@ -52,9 +52,23 @@ from apscheduler.triggers.cron import CronTrigger
 from datetime import datetime, timedelta
 import asyncio
 import logging
+import signal
+import sys
+import time
+import logging
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+from scheduler import CallAnalysisScheduler 
 
 from src.routes import audio, call_analysis, auth, call_details
 from src.database.database import Base, engine
+import signal
+import sys
+import time
+import logging
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+
 
 # Create tables in the database
 Base.metadata.create_all(bind=engine)
@@ -87,40 +101,43 @@ app.include_router(call_details.router)
 app.include_router(audio.router)
 app.include_router(call_analysis.router)
 
-# # Scheduler setup
-# scheduler = BackgroundScheduler()
 
-# class CallAnalysisScheduler:
-#     def run_daily_analysis(self):
-#         logger.info("Running daily call analysis...")
-#         # Your actual analysis logic goes here
 
+
+# # Create APScheduler instance
+# apscheduler = BackgroundScheduler()
+
+# # Create scheduler handler instance
 # scheduler_instance = CallAnalysisScheduler()
 
-# async def schedule_job():
-#     scheduler_instance.run_daily_analysis()
+# # Add job
+# apscheduler.add_job(
+#     scheduler_instance.run_daily_analysis,
+#     trigger=CronTrigger(day_of_week='mon', hour=2, minute=0),
+#     name="Weekly Call Analysis Job"
+# )
 
-# @app.on_event("startup")
-# async def startup_event():
-#     logger.info("FastAPI startup - initializing scheduler")
+# # Handle graceful shutdown
+# def shutdown(signum, frame):
+#     logger.info("Shutting down scheduler...")
+#     apscheduler.shutdown()
+#     sys.exit(0)
 
-#     # Schedule job to run once, 3 minutes after startup
-#     run_time = datetime.now() + timedelta(minutes=3)
-#     scheduler.add_job(
-#         lambda: asyncio.run(schedule_job()),
-#         trigger=DateTrigger(run_date=run_time),
-#         id="run_once_after_startup"
-#     )
+# signal.signal(signal.SIGINT, shutdown)
+# signal.signal(signal.SIGTERM, shutdown)
 
-#     # # Schedule recurring job daily at 5:30 AM
-#     # scheduler.add_job(
-#     #     lambda: asyncio.run(schedule_job()),
-#     #     trigger=CronTrigger(hour=5, minute=30),
-#     #     id="daily_job_530am"
-#     # )
+# # Start the scheduler
+# logger.info("Starting background scheduler...")
+# apscheduler.start()
 
-#     scheduler.start()
-#     logger.info(f"Scheduler started. One-time job at {run_time.strftime('%Y-%m-%d %H:%M:%S')} and daily job at 5:30 AM.")
+
+# try:
+#     while True:
+#         time.sleep(60)
+# except (KeyboardInterrupt, SystemExit):
+#     shutdown(None, None)
+
+
 
 @app.get("/")
 async def root():

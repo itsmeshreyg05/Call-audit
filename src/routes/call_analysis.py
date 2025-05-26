@@ -167,6 +167,8 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     username = recording_detail.username if recording_detail else "Unknown"
     phone_number = recording_detail.phone_number if recording_detail else "Unknown"
     start_time = recording_detail.start_time if recording_detail else None
+    duration = recording_detail.duration if recording_detail else None
+    extension = recording_detail.extension_number if recording_detail else None  # Placeholder for extension, if needed
 
     # Check if the audio has been processed already
     if not db_audio.processed:
@@ -239,14 +241,12 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
 
     db.commit()
 
-
-
-
- 
     row_data = {
         "Date/Time": start_time.isoformat() if start_time else "Unknown",
+        "Duration": duration,
         "Recording Id": recording_id,
         "Username": username,
+        "Extension": extension,
         "PhoneNumber": phone_number,
         "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
         "Adherence to script/Product Knowledge": f"{parsed_analysis.get('adherence_to_script_score', 0)}%",

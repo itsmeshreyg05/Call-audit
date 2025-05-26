@@ -153,6 +153,7 @@ async def get_recording(
                 utc_time = datetime.fromisoformat(log.get("startTime").replace("Z", "+00:00"))
                 est_time = utc_time.astimezone(ZoneInfo("America/New_York"))
                 recording_data["startTime"] = est_time.isoformat()
+                recording_data["duration"]= log.get("duration", 0)
                 found = True
                 break
 
@@ -170,7 +171,8 @@ async def get_recording(
             recording_id=recording_id,
             phone_number=recording_data.get("phoneNumber") or None,
             username=recording_data.get("name") or None,
-            start_time=recording_data.get("startTime")
+            start_time=recording_data.get("startTime"),
+            duration=recording_data.get("duration") or None
         )
         db.add(new_record)
         db.commit()

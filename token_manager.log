@@ -8,3 +8,5 @@ FROM token_store
 [parameters: {'param_1': 1}]
 (Background on this error at: https://sqlalche.me/e/20/f405)
 2025-05-19 17:03:24,579 - token_manager - INFO - Token stored successfully
+2025-05-23 15:23:13,552 - token_manager - INFO - Token stored successfully
+2025-05-23 16:10:19,952 - token_manager - INFO - Token stored successfully

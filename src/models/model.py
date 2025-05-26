@@ -85,6 +85,8 @@ class RecordingDetail(Base):
     username = Column(String)
     phone_number = Column(String)
     start_time = Column(DateTime)
+    duration = Column(Float)  # Duration in seconds
+    extension_number = Column(String, nullable=True)
 
 
 class TokenStore(Base):
