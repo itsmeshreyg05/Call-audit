@@ -556,6 +556,7 @@
 
 import json
 import re
+from zoneinfo import ZoneInfo
 import ollama
 from typing import Dict, List, Any
 from fastapi import APIRouter, HTTPException, Depends, Header
@@ -577,131 +578,24 @@ router = APIRouter(
 # Configure Ollama settings
 MISTRAL_MODEL = "mistral"  # Use the model name as configured in Ollama
  
-# @router.post("/", response_model=CallAnalysisResult)
-# async def analyze_call(audio_id: str = Header(..., description="Audio ID to analyze"), db: Session = Depends(get_db)):
-#     """
-#     Analyze a transcribed call using Ollama's Mistral model
-   
-#     Pass the audio_id in the request header. The segments will be retrieved from the database.
-#     """
-#     # Validate that the audio_id exists in the database
-#     db_audio = db.query(Audio).filter(Audio.id == audio_id).first()
-#     if not db_audio:
-#         raise HTTPException(status_code=404, detail="Audio ID not found")
-   
-#     # Check if the audio has been processed already
-#     if not db_audio.processed:
-#         # If not processed, try to diarize it first
-#         diarization_result = await diarize_audio(audio_id, db)
-       
-#         # Check if diarization was successful
-#         if diarization_result.status.startswith("failed"):
-#             raise HTTPException(
-#                 status_code=400,
-#                 detail=f"Failed to diarize audio: {diarization_result.status}"
-#             )
-   
-#     # Get segments from the database
-#     db_segments = db.query(Segment).filter(Segment.audio_id == audio_id).all()
-   
-#     # If no segments found or empty
-#     if not db_segments:
-#         raise HTTPException(
-#             status_code=400,
-#             detail="No transcribed segments found for this audio. Please diarize the audio first."
-#         )
-   
-#     # Convert DB segments to schema segments
-#     segments = [
-#         DiarizationSegment(
-#             speaker=segment.speaker,
-#             start=segment.start,
-#             end=segment.end,
-#             text=segment.text
-#         ) for segment in db_segments
-#     ]
-   
-#     # Format the conversation for analysis
-#     conversation_text = format_conversation(segments)
-   
-#     # Create the prompt for Mistral
-#     prompt = create_mistral_prompt(conversation_text)
-   
-#     # Call Ollama Python library with Mistral model
-#     try:
-#         analysis_result = query_ollama_mistral(prompt, MISTRAL_MODEL)
-#     except Exception as e:
-#         return CallAnalysisResult(
-#             audio_id=audio_id,
-#             analysis={"error": str(e)},
-#             status="failed"
-#         )
-   
-#     # Parse the analysis results
-#     parsed_analysis = parse_mistral_response(analysis_result)
-   
-#     # Store analysis in database
-#     db_analysis = db.query(Analysis).filter(Analysis.audio_id == audio_id).first()
-   
-#     if db_analysis:
-#         # Update existing analysis
-#         for key, value in parsed_analysis.items():
-#             setattr(db_analysis, key, value)
-#         db_analysis.status = "completed"
-#         # Add call outcome information
-#         db_analysis.outcome_category = parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
-#         db_analysis.outcome_phrases = parsed_analysis.get("call_outcome", {}).get("supporting_phrases", [])
-#         db_analysis.outcome_explanation = parsed_analysis.get("call_outcome", {}).get("explanation", "")
-#     else:
-#         # Create new analysis
-#         db_analysis = Analysis(
-#             audio_id=audio_id,
-#             professionalism_score=parsed_analysis.get("professionalism_score", 0),
-#             tone_analysis=parsed_analysis.get("tone_analysis", {}),
-#             context_awareness_score=parsed_analysis.get("context_awareness_score", 0),
-#             response_time_analysis=parsed_analysis.get("response_time_analysis", {}),
-#             fluency_score=parsed_analysis.get("fluency_score", 0),
-#             probing_effectiveness=parsed_analysis.get("probing_effectiveness", 0),
-#             call_closing_quality=parsed_analysis.get("call_closing_quality", 0),
-#             summary=parsed_analysis.get("summary", ""),
-#             # Add call outcome information
-#             outcome_category=parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
-#             outcome_phrases=parsed_analysis.get("call_outcome", {}).get("supporting_phrases", []),
-#             outcome_explanation=parsed_analysis.get("call_outcome", {}).get("explanation", ""),
-#             status="completed"
-#         )
-#         db.add(db_analysis)
-   
-#     db.commit()
- 
- 
- 
-#     row_data = {
- 
- 
-#     "Recording Id": audio_id,
-#     "Username":  username,
-#     "PhoneNumber": phone_number,
-#     "Introduction/Hook": f"{parsed_analysis.get('introduction_score', 0)}%",
-#     "Adherence to script/Product Knowledge": f"{parsed_analysis.get('script_knowledge_score', 0)}%",
-#     "Actively listening/ Responding Appropriately": f"{parsed_analysis.get('listening_score', 0)}%",
-#     "Fumble": f"{parsed_analysis.get('fumble_score', 0)}%",
-#     "Probing": f"{parsed_analysis.get('probing_effectiveness', 0)}%",
-#     "Closing": f"{parsed_analysis.get('call_closing_quality', 0)}%",
-#     "Overall Score": f"{parsed_analysis.get('overall_score', 0)}%",
-#     "Summary": parsed_analysis.get("summary", ""),
-#     "Remarks": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown"),
-#     "Reason": parsed_analysis.get("call_outcome", {}).get("explanation", "")}
- 
-# # Append it to the Google Sheet
-#     append_dict_to_sheet(row_data)
-   
-#     return CallAnalysisResult(
-#         audio_id=audio_id,
-#         analysis=parsed_analysis,
-#         status="completed"
-#     )
- 
+def is_voicemail_call(conversation_text: str) -> bool:
+    """
+    Detect if the call went to voicemail
+    """
+    voicemail_indicators = [
+        "forwarded to voicemail",
+        "person you're trying to reach is not available",
+        "at the tone, please record your message",
+        "when you have finished recording",
+        "leave a message after the beep",
+        "please leave your message",
+        "mailbox is full",
+        "subscriber is not available"
+    ]
+    
+    text_lower = conversation_text.lower()
+    return any(indicator in text_lower for indicator in voicemail_indicators)
+
 @router.post("/", response_model=CallAnalysisResult)
 async def analyze_call(audio_id: str = Header(..., description="Audio ID to analyze"), db: Session = Depends(get_db)):
     """
@@ -712,6 +606,21 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     db_audio = db.query(Audio).filter(Audio.id == audio_id).first()
     if not db_audio:
         raise HTTPException(status_code=404, detail="Audio ID not found")
+   
+     ##
+    full_transcript = db_audio.full_transcript
+    if not full_transcript:
+        raise HTTPException(status_code=400, detail="No transcript available")
+ 
+    # Check if voicemail
+    if is_voicemail_call(full_transcript):
+        return {
+            "call_type": "voicemail",
+            "analysis": "No analysis performed - call went to voicemail",
+            "action": "skipped"
+        }
+    ##
+ 
  
     # Get recording_id from the audio record
     recording_id = db_audio.recording_id
@@ -725,6 +634,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     start_time = recording_detail.start_time if recording_detail else None
     duration = recording_detail.duration if recording_detail else None
     extension = recording_detail.extension_number if recording_detail else None  # Placeholder for extension, if needed
+    transcription = db_audio.full_transcript if db_audio.full_transcript else "No transcription available"
  
     # Check if the audio has been processed already
     if not db_audio.processed:
@@ -797,24 +707,70 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
  
     db.commit()
  
+ 
+ 
+    introduction_score = apply_score_threshold(parsed_analysis.get('introduction_score', 0))
+    adherence_score = apply_score_threshold(parsed_analysis.get('adherence_to_script_score', 0))
+    listening_score = apply_score_threshold(parsed_analysis.get('actively_listening_score', 0))
+    fumble_score = apply_score_threshold(parsed_analysis.get('fumble_score', 0))
+    probing_score = apply_score_threshold(parsed_analysis.get('probing_score', 0))
+    closing_score = apply_score_threshold(parsed_analysis.get('closing_score', 0))
+ 
+    # Calculate average score
+    scores = [introduction_score, adherence_score, listening_score, fumble_score, probing_score, closing_score]
+    print(f"Scores before conversion: {scores}")
+    scores = [float(score) for score in scores]
+    print(f"Scores after conversion: {scores}")
+    average_score = round(sum(scores) / len(scores), 2)  # rounded to 2 decimal places
+    print(f"Average Score: {average_score}")
+    est = ZoneInfo("America/New_York")
+    formatted_datetime = start_time.astimezone(est).strftime("%Y-%m-%d %H:%M:%S") if start_time else "Unknown"
+ 
+ 
+   
+    # # Build row_data
+    # row_data = {
+    #     # "Date/Time": start_time.astimezone(est) if start_time else None,
+    #     # "Date/Time": start_time.astimezone(ZoneInfo("Asia/Kolkata")).isoformat() if start_time else "Unknown",
+    #     # "Date/Time": start_time.strftime("%Y-%m-%d %H:%M:%S") if start_time else "Unknown",
+    #     "Date/Time": formatted_datetime,
+    #     "Duration": duration,
+    #     "Recording Id": recording_id,
+    #     "Username": username,
+    #     "Extension": extension,
+    #     "PhoneNumber": phone_number,
+    #     "Introduction/Hook": f"{introduction_score}%",
+    #     "Adherence to script/Product Knowledge": f"{adherence_score}%",
+    #     "Actively listening/ Responding Appropriately": f"{listening_score}%",
+    #     "Fumble": f"{fumble_score}%",
+    #     "Probing": f"{probing_score}%",
+    #     "Closing": f"{closing_score}%",
+    #     "Overall Score": f"{average_score}%",
+    #     "Summary": parsed_analysis.get("summary", ""),
+    #     "Transcript": transcription,
+    #     "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
+    #     "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
+    #      }\
     row_data = {
-        "Date/Time": start_time.isoformat() if start_time else "Unknown",
-        "Duration": duration,
-        "Recording Id": recording_id,
-        "Username": username,
-        "Extension": extension,
-        "PhoneNumber": phone_number,
-        "Introduction/Hook": f"{apply_score_threshold(parsed_analysis.get('introduction_score', 0))}%",
-        "Adherence to script/Product Knowledge": f"{apply_score_threshold(parsed_analysis.get('adherence_to_script_score', 0))}%",
-        "Actively listening/ Responding Appropriately": f"{apply_score_threshold(parsed_analysis.get('actively_listening_score', 0))}%",
-        "Fumble": f"{apply_score_threshold(parsed_analysis.get('fumble_score', 0))}%",
-        "Probing": f"{apply_score_threshold(parsed_analysis.get('probing_score', 0))}%",
-        "Closing": f"{apply_score_threshold(parsed_analysis.get('closing_score', 0))}%",
-        "Overall Score": f"{apply_score_threshold(parsed_analysis.get('overall_score', 0))}%",
-        "Summary": parsed_analysis.get("summary", ""),
-        "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
-        "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
-    }
+    "Date/Time": formatted_datetime,
+    "Duration": duration,
+    "Recording Id": recording_id,
+    "Username": username,
+    "Extension": extension,
+    "PhoneNumber": phone_number,
+    "Introduction/Hook": introduction_score,
+    "Adherence to script/Product Knowledge": adherence_score,
+    "Actively listening/ Responding Appropriately": listening_score,
+    "Fumble": fumble_score,
+    "Probing": probing_score,
+    "Closing": closing_score,
+    "Overall Score": f"{average_score}%",  # this is fine because it's calculated separately
+    "Summary": parsed_analysis.get("summary", ""),
+    "Transcript": transcription,
+    "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
+    "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
+}
+
  
     append_dict_to_sheet(row_data)
  
@@ -837,6 +793,7 @@ def format_conversation(segments: List[DiarizationSegment]) -> str:
    
     return formatted_text
  
+
 def create_mistral_prompt(conversation_text: str) -> str:
     """
     Create a detailed prompt for the Mistral model to analyze the conversation
@@ -895,11 +852,20 @@ def create_mistral_prompt(conversation_text: str) -> str:
         - Include observations on conversation flow and effectiveness
    
     9. Call Outcome Classification:
-       - Classify the call outcome based on the final conversation exchanges
-       - Specifically identify if the person expressed disinterest with phrases like "I'm not interested", "Not for me", etc.
+       - Classify the call outcome based on the final conversation exchanges and overall conversation context
+       - Carefully analyze the prospect's final response and tone to determine the accurate outcome
+       - Available outcome categories: "Agreed for the meeting", "Disconnected the call", "Not interested", "Out of scope", "Prospect will reach out"
+       
+       Classification Guidelines:
+       • "Call back requested" should ONLY be used when the prospect explicitly asks to be called back at a specific time or says they want the representative to call them again
+       • "Not interested" - when prospect explicitly states disinterest with phrases like "I'm not interested", "Not for me", "This doesn't work for us"
+       • "Out of scope" - when prospect indicates they are not with the target organization or not the right person (e.g., "I'm not with that organization", "I don't work there anymore", "Wrong department")
+       • "Prospect will reach out" - when prospect says they will contact the representative themselves, mentions connecting on LinkedIn, or will get back to them on their own
+       • "Agreed for the meeting" - when prospect confirms a meeting, agrees to next steps, or shows clear interest in proceeding
+       • "Disconnected the call" - when call ends abruptly without clear resolution
+       
        - If disinterest was expressed, note the exact phrases used
-       - Provide the appropriate outcome category: "Agreed for the meeting", "Disconnected the call", "Call back requested", "Not interested", etc.
-       - IMPORTANT: Provide specific phrases that indicated the outcome
+       - IMPORTANT: Provide specific phrases that indicated the outcome and ensure the classification matches the actual conversation ending
    
     Provide your analysis in JSON format with scores and explanations for each dimension.
     Include a short summary of the overall conversation quality and key observations.
@@ -920,7 +886,6 @@ def create_mistral_prompt(conversation_text: str) -> str:
     }}
     """
     return prompt
- 
  
 def query_ollama_mistral(prompt: str, model: str) -> str:
     """

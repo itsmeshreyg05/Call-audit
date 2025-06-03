@@ -4,10 +4,10 @@ import os
 
 # Constants
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-SPREADSHEET_ID = "1TXIM275dqsC0J6hC9f7ZCMKDd2pj-r7lx-BELcG5u2g"
+SPREADSHEET_ID = "1fL20ZAJMXJwJeERsz7ioxcPr6UI_ZDnHzRSuWhrqEMU"
 RANGE_HEADER = "Sheet1!A1:Z1"  # Assumes headers are in row 1
 RANGE_APPEND = "Sheet1!A1"
-SERVICE_ACCOUNT_FILE = r"D:\call_audit_sales\Call-audit\call-audit-459810-d2d5872f5487.json"
+SERVICE_ACCOUNT_FILE = r"E:\InsideSalesProject\InsideSalesProject\phonic-studio-460306-t8-8e2d9b68dee4.json"
 
 # Authenticate and build the Sheets service
 creds = service_account.Credentials.from_service_account_file(

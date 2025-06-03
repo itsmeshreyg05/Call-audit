@@ -3742,3 +3742,744 @@ DETAIL:  Key (recording_id)=(2776270614030) already exists.
 2025-05-28 15:08:06,724 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
 2025-05-28 18:25:58,906 - apscheduler.scheduler - INFO - Scheduler has been shut down
 2025-05-28 18:25:58,938 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-05-28 18:44:16,582 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-28 19:20:33,439 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-28 19:20:43,323 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-05-28 19:20:44,238 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-05-28 19:20:44,280 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-05-28 19:20:44,280 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-05-28 19:20:44,281 - apscheduler.scheduler - INFO - Scheduler started
+2025-05-28 19:20:44,282 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-05-28 19:23:44,284 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-05-28 19:23:44 IST], next run at: 2025-05-28 19:23:44 IST)" (scheduled at 2025-05-28 19:23:44.280533+05:30)
+2025-05-28 19:23:44,284 - apscheduler.scheduler - INFO - Removed job 4830cbac577b4f0ebe58d01059e74db7
+2025-05-28 19:23:44,285 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-05-28 19:29:33,020 - call_analyzer_scheduler - INFO - Found 256 recordings from last one week with duration >= 1 minute
+2025-05-29 17:55:08,404 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-30 12:55:14,730 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-30 12:57:26,467 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-05-30 13:06:49,869 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-05-30 13:06:49,870 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-05-30 13:07:01,759 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-05-30 13:21:15,853 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-30 18:16:54,004 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-05-30 18:43:56,680 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-02 16:54:10,417 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-02 16:54:41,576 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-02 16:55:03,932 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-02 16:56:26,518 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-06-02 16:56:27,547 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-02 16:56:27,577 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-02 16:56:27,580 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-02 16:56:27,581 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-02 16:56:27,584 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-02 16:59:27,587 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-02 16:59:27 IST], next run at: 2025-06-02 16:59:27 IST)" (scheduled at 2025-06-02 16:59:27.577746+05:30)
+2025-06-02 16:59:27,587 - apscheduler.scheduler - INFO - Removed job c6a5e550fe98483c980b4b7c1310230b
+2025-06-02 16:59:27,588 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-02 17:01:23,263 - call_analyzer_scheduler - INFO - Found 69 recordings from last one week with duration >= 1 minute
+2025-06-02 17:03:30,671 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-06-02 17:03:30,672 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-06-02 17:03:43,814 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-06-02 17:10:41,961 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 500 Internal Server Error"
+2025-06-02 17:10:43,696 - call_analyzer_scheduler - INFO - Successfully processed recording 2782849508030
+2025-06-02 17:20:19,730 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-02 17:20:41,166 - call_analyzer_scheduler - INFO - Successfully processed recording 2782835126030
+2025-06-02 17:24:20,886 - call_analyzer_scheduler - ERROR - Error processing recording: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-06-02 17:24:21,646 - call_analyzer_scheduler - ERROR - Error processing recording: (psycopg2.OperationalError) server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+
+[SQL: SELECT audios.id AS audios_id, audios.original_filename AS audios_original_filename, audios.original_path AS audios_original_path, audios.processed_path AS audios_processed_path, audios.file_type AS audios_file_type, audios.processed AS audios_processed, audios.full_transcript AS audios_full_transcript, audios.uploaded_at AS audios_uploaded_at, audios.recording_id AS audios_recording_id 
+FROM audios 
+WHERE audios.recording_id = %(recording_id_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'recording_id_1': '2782530728030', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-06-02 17:24:24,114 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,115 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,116 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,117 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,118 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,118 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,119 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,120 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,121 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,121 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,122 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,123 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,123 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,124 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,125 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,126 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,126 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,128 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,128 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,129 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,130 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,131 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,131 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,132 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,133 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,133 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,134 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,135 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,136 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,137 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,138 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,139 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,139 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,140 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,141 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,141 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,142 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,143 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,143 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,278 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,280 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,281 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,371 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,450 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,451 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,452 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,495 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,531 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,532 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,533 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,534 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,540 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,632 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,633 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,633 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,811 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,812 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,813 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,813 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,814 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,959 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,960 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,961 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:24,962 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:25,137 - call_analyzer_scheduler - ERROR - Error processing recording: Can't reconnect until invalid transaction is rolled back.  Please rollback() fully before proceeding (Background on this error at: https://sqlalche.me/e/20/8s2b)
+2025-06-02 17:24:25,138 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 2 recordings.
+2025-06-02 17:24:26,227 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-02 16:59:27 IST], next run at: 2025-06-02 16:59:27 IST)" executed successfully
+2025-06-02 17:32:59,360 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-02 17:32:59,360 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-02 17:32:59,361 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-02 17:32:59,362 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-02 17:33:02,874 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-02 17:35:59,382 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-02 17:35:59 IST], next run at: 2025-06-02 17:35:59 IST)" (scheduled at 2025-06-02 17:35:59.360700+05:30)
+2025-06-02 17:35:59,382 - apscheduler.scheduler - INFO - Removed job ac6b015cde3e4754bdb0671b9a269447
+2025-06-02 17:35:59,383 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-02 17:37:58,242 - call_analyzer_scheduler - INFO - Found 69 recordings from last one week with duration >= 1 minute
+2025-06-02 17:37:58,282 - call_analyzer_scheduler - INFO - Recording 2782849508030 already processed, skipping
+2025-06-02 17:37:58,284 - call_analyzer_scheduler - INFO - Recording 2782835126030 already processed, skipping
+2025-06-02 17:37:58,285 - call_analyzer_scheduler - INFO - Recording 2782549335030 already processed, skipping
+2025-06-02 18:43:45,924 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-02 18:43:52,651 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-06-02 18:43:53,553 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-02 18:43:53,562 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-02 18:43:53,563 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-02 18:43:53,563 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-02 18:43:53,564 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-02 18:46:53,570 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-02 18:46:53 IST], next run at: 2025-06-02 18:46:53 IST)" (scheduled at 2025-06-02 18:46:53.562191+05:30)
+2025-06-02 18:46:53,570 - apscheduler.scheduler - INFO - Removed job 8233502213ae466a9886fa5dc2364cda
+2025-06-02 18:46:53,571 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-02 18:48:45,941 - call_analyzer_scheduler - INFO - Found 67 recordings from last one week with duration >= 1 minute
+2025-06-03 11:17:32,099 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-06-03 11:17:33,578 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-03 11:17:33,625 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-03 11:17:33,626 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-03 11:17:33,626 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-03 11:17:33,627 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-03 11:17:35,017 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-03 11:20:33,637 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-03 11:20:33 IST], next run at: 2025-06-03 11:20:33 IST)" (scheduled at 2025-06-03 11:20:33.625246+05:30)
+2025-06-03 11:20:33,637 - apscheduler.scheduler - INFO - Removed job 576a45062a654bbca8032ad7379ba4bb
+2025-06-03 11:20:33,638 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-03 11:22:53,310 - call_analyzer_scheduler - INFO - Found 106 recordings from last one week with duration >= 1 minute
+2025-06-03 11:28:39,982 - call_analyzer_scheduler - ERROR - Error processing recording: ('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))
+2025-06-03 11:28:42,968 - call_analyzer_scheduler - ERROR - Error processing recording: HTTPConnectionPool(host='127.0.0.1', port=8004): Max retries exceeded with url: /audio/upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000209BE8C8860>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-03 11:28:46,292 - call_analyzer_scheduler - ERROR - Error processing recording: HTTPConnectionPool(host='127.0.0.1', port=8004): Max retries exceeded with url: /audio/upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000209BE8C9850>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-03 11:28:49,076 - call_analyzer_scheduler - ERROR - Error processing recording: HTTPConnectionPool(host='127.0.0.1', port=8004): Max retries exceeded with url: /audio/upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000209BE8CAF00>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-03 11:28:51,129 - call_analyzer_scheduler - ERROR - Error processing recording: HTTPConnectionPool(host='127.0.0.1', port=8004): Max retries exceeded with url: /audio/upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000209BE8B2090>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-03 11:28:54,422 - call_analyzer_scheduler - ERROR - Error processing recording: HTTPConnectionPool(host='127.0.0.1', port=8004): Max retries exceeded with url: /audio/upload (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000209BE8B01A0>: Failed to establish a new connection: [WinError 10061] No connection could be made because the target machine actively refused it'))
+2025-06-03 11:30:04,754 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-03 11:30:07,811 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-03 11:30:07,812 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-03 11:30:07,812 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-03 11:30:07,813 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-03 11:33:07,829 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-03 11:33:07 IST], next run at: 2025-06-03 11:33:07 IST)" (scheduled at 2025-06-03 11:33:07.811854+05:30)
+2025-06-03 11:33:07,830 - apscheduler.scheduler - INFO - Removed job c62e634559a2421abc24ef84761ba30e
+2025-06-03 11:33:07,873 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-03 11:34:34,611 - call_analyzer_scheduler - INFO - Found 86 recordings from last one week with duration >= 1 minute
+2025-06-03 11:34:35,456 - call_analyzer_scheduler - ERROR - Error processing recording: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-06-03 11:34:35,460 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,462 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,464 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,473 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,479 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,481 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,483 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,491 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,495 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,497 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,501 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,506 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,510 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,512 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,514 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,515 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,522 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,527 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,529 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,534 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,540 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,542 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,545 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,547 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,548 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,553 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,557 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,560 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,563 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,564 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,567 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,573 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,575 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,578 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,581 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,583 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,592 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,594 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,596 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,599 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,601 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,605 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,610 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,612 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,613 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,614 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,616 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,618 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,621 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,623 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,624 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,626 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,627 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,629 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,631 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,632 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,634 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,638 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,640 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,642 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,643 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,645 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,646 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,649 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,656 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,659 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,662 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,664 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,666 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,673 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,675 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,677 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,679 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,681 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,682 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,684 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,689 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,691 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,694 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,696 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,698 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,700 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,704 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,708 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,711 - call_analyzer_scheduler - ERROR - Error processing recording: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "recording_details_recording_id_key"
+DETAIL:  Key (recording_id)=(2785345453031) already exists.
+
+[SQL: INSERT INTO recording_details (recording_id, username, phone_number, start_time, duration, extension_number) VALUES (%(recording_id)s, %(username)s, %(phone_number)s, %(start_time)s, %(duration)s, %(extension_number)s) RETURNING recording_details.id]
+[parameters: {'recording_id': '2785345453031', 'username': 'Saul Peters', 'phone_number': '+14168222832', 'start_time': '2025-06-02T17:20:25.396000-04:00', 'duration': 108, 'extension_number': '200'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj) (Background on this error at: https://sqlalche.me/e/20/7s2a)
+2025-06-03 11:34:35,714 - call_analyzer_scheduler - INFO - Daily analysis complete. Processed 0 recordings.
+2025-06-03 11:34:35,714 - apscheduler.executors.default - INFO - Job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-03 11:33:07 IST], next run at: 2025-06-03 11:33:07 IST)" executed successfully
+2025-06-03 11:36:43,572 - apscheduler.scheduler - INFO - Scheduler has been shut down
+2025-06-03 11:36:43,573 - call_analyzer_scheduler - INFO - Scheduler shut down successfully.
+2025-06-03 11:39:27,778 - googleapiclient.discovery_cache - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-06-03 11:40:05,226 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-06-03 11:40:05,227 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-06-03 11:40:05,227 - apscheduler.scheduler - INFO - Scheduler started
+2025-06-03 11:40:05,228 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-06-03 11:43:05,241 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-06-03 11:43:05 IST], next run at: 2025-06-03 11:43:05 IST)" (scheduled at 2025-06-03 11:43:05.226467+05:30)
+2025-06-03 11:43:05,242 - apscheduler.scheduler - INFO - Removed job ba44c7999fa04b079dfaf028d5abb811
+2025-06-03 11:43:05,242 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-06-03 11:44:32,533 - call_analyzer_scheduler - INFO - Found 82 recordings from last one week with duration >= 1 minute
+2025-06-03 11:46:20,692 - speechbrain.utils.quirks - INFO - Applied quirks (see `speechbrain.utils.quirks`): [disable_jit_profiling, allow_tf32]
+2025-06-03 11:46:20,693 - speechbrain.utils.quirks - INFO - Excluded quirks specified by the `SB_DISABLE_QUIRKS` environment (comma-separated list): []
+2025-06-03 11:46:38,484 - datasets - INFO - PyTorch version 2.6.0 available.
+2025-06-03 11:58:54,658 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 11:59:40,051 - call_analyzer_scheduler - INFO - Successfully processed recording 2785345453031
+2025-06-03 12:15:28,295 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 12:15:49,776 - call_analyzer_scheduler - INFO - Successfully processed recording 2785344537031
+2025-06-03 12:24:44,920 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 12:24:52,553 - call_analyzer_scheduler - INFO - Successfully processed recording 2785331232031
+2025-06-03 12:24:55,011 - call_analyzer_scheduler - WARNING - Access token expired during request. Refreshing and retrying...
+2025-06-03 12:25:00,245 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-03 12:25:51,026 - call_analyzer_scheduler - ERROR - Failed to analyze recording 2785326057031: Internal Server Error
+2025-06-03 12:32:25,656 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 12:32:27,092 - call_analyzer_scheduler - INFO - Successfully processed recording 2785267029031
+2025-06-03 12:44:46,758 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 12:44:59,289 - call_analyzer_scheduler - INFO - Successfully processed recording 2785252788031
+2025-06-03 13:09:01,212 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:09:08,173 - call_analyzer_scheduler - INFO - Successfully processed recording 2785234086031
+2025-06-03 13:17:34,896 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:17:36,476 - call_analyzer_scheduler - INFO - Successfully processed recording 2785224721031
+2025-06-03 13:25:12,830 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:25:15,668 - call_analyzer_scheduler - INFO - Successfully processed recording 2785218973031
+2025-06-03 13:25:18,281 - call_analyzer_scheduler - WARNING - Access token expired during request. Refreshing and retrying...
+2025-06-03 13:25:19,522 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-03 13:29:55,017 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:29:56,426 - call_analyzer_scheduler - INFO - Successfully processed recording 2785211232031
+2025-06-03 13:40:12,789 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:40:20,175 - call_analyzer_scheduler - INFO - Successfully processed recording 2785209275031
+2025-06-03 13:50:43,886 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 13:50:45,442 - call_analyzer_scheduler - INFO - Successfully processed recording 2785200344031
+2025-06-03 14:03:15,264 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:03:20,652 - call_analyzer_scheduler - INFO - Successfully processed recording 2785184506031
+2025-06-03 14:13:55,219 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:14:03,243 - call_analyzer_scheduler - INFO - Successfully processed recording 2785168131031
+2025-06-03 14:22:08,942 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:22:10,003 - call_analyzer_scheduler - INFO - Successfully processed recording 2785150331031
+2025-06-03 14:32:44,487 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:32:49,011 - call_analyzer_scheduler - INFO - Successfully processed recording 2785148555031
+2025-06-03 14:32:51,966 - call_analyzer_scheduler - WARNING - Access token expired during request. Refreshing and retrying...
+2025-06-03 14:32:54,219 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-06-03 14:44:07,365 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:44:10,571 - call_analyzer_scheduler - INFO - Successfully processed recording 2785142897031
+2025-06-03 14:49:40,662 - httpx - INFO - HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2025-06-03 14:49:43,449 - call_analyzer_scheduler - INFO - Successfully processed recording 2785091920031
