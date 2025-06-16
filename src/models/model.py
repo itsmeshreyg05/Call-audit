@@ -84,7 +84,7 @@ class RecordingDetail(Base):
     recording_id = Column(String, unique=True, nullable=False)
     username = Column(String)
     phone_number = Column(String)
-    start_time = Column(DateTime)
+    start_time = Column(DateTime(timezone=True))
     duration = Column(Float)  # Duration in seconds
     extension_number = Column(String, nullable=True)
 

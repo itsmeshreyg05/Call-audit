@@ -131,3 +131,9 @@ class RecordingDetail(BaseModel):
     username: Optional[str] = None
     phone_number: Optional[str] = None
     start_time: Optional[datetime] = None
+
+    class Config:
+        orm_mode = True
+        json_encoders = {
+            datetime: lambda v: v.isoformat()  # Ensures -04:00 offset is shown
+        }
