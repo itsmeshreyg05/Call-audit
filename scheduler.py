@@ -15,6 +15,8 @@ from apscheduler.triggers.date import DateTrigger
 from collections import defaultdict
 from datetime import datetime
 from google_sheets_helper import append_dict_to_sheet
+from google_sheets_reader import fetch_sheet1_data
+from dateutil import parser
 
 # Add the project root to the path so we can import our modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -115,131 +117,15 @@ class CallAnalysisScheduler:
                     response = requests.request(method, url, headers=headers, **kwargs)
             
             return response
-    
-    # def fetch_recent_recordings(self):
-    #     """Fetch recent call recordings from RingCentral with duration >= 1 minute and time in EST"""
-    #     try:
-    #         # Get recordings from the last 7 days
-    #         date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
-    #         date_to = datetime.utcnow().isoformat() + "Z"
 
-    #         base_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
-    #         headers = {"Authorization": f"Bearer {self.token}"}
-    #         params = {
-    #             "withRecording": "true",
-    #             "perPage": 100,
-    #             "dateFrom": date_from,
-    #             "dateTo": date_to,
-    #             "view": "Detailed"
-    #         }
-
-    #         all_records = []
-    #         call_log_url = base_url
-
-    #         while call_log_url:
-    #             response = self._make_authorized_request("GET", call_log_url, params=params)
-    #             time.sleep(5)
-
-    #             if response.status_code != 200:
-    #                 logger.error(f"Failed to fetch recordings: {response.json()}")
-    #                 break
-
-    #             response_json = response.json()
-    #             records = response_json.get("records", [])
-    #             all_records.extend(records)
-
-    #             # Prepare for next page
-    #             next_page_uri = response_json.get("navigation", {}).get("nextPage", {}).get("uri")
-    #             if next_page_uri:
-    #                 if next_page_uri.startswith("http"):
-    #                     call_log_url = next_page_uri
-    #                 else:
-    #                     call_log_url = f"https://platform.ringcentral.com{next_page_uri}"
-    #                 params = None  # Only needed on the first call
-    #             else:
-    #                 break
-
-    #         filtered_records = []
-    #         for record in all_records:
-    #             if record.get("duration", 0) >= 60 and record.get("direction") != "Inbound":
-    #                 filtered_records.append(record)
- 
-
-    #         logger.info(f"Found {len(filtered_records)} recordings from last one week with duration >= 1 minute")
-    #         return filtered_records
-
-    #     except Exception as e:
-    #         logger.error(f"Error fetching recordings: {str(e)}")
-    #         return []
-
-    # def fetch_recent_recordings(self):
-    #     """Fetch recent call recordings from RingCentral with duration >= 1 minute and time in EST"""
-    #     try:
-    #         # Get recordings from the last 7 days
-    #         date_from = (datetime.utcnow() - timedelta(days=1)).isoformat() + "Z"
-    #         date_to = datetime.utcnow().isoformat() + "Z"
- 
-    #         base_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
-    #         headers = {"Authorization": f"Bearer {self.token}"}
-    #         params = {
-    #             "withRecording": "true",
-    #             "perPage": 100,
-    #             "dateFrom": date_from,
-    #             "dateTo": date_to,
-    #             "view": "Detailed"
-    #         }
- 
-    #         all_records = []
-    #         call_log_url = base_url
- 
-    #         while call_log_url:
-    #             response = self._make_authorized_request("GET", call_log_url, params=params)
-    #             time.sleep(5)
- 
-    #             if response.status_code != 200:
-    #                 logger.error(f"Failed to fetch recordings: {response.json()}")
-    #                 break
- 
-    #             response_json = response.json()
-    #             records = response_json.get("records", [])
-    #             all_records.extend(records)
- 
-    #             # Prepare for next page
-    #             next_page_uri = response_json.get("navigation", {}).get("nextPage", {}).get("uri")
-    #             if next_page_uri:
-    #                 if next_page_uri.startswith("http"):
-    #                     call_log_url = next_page_uri
-    #                 else:
-    #                     call_log_url = f"https://platform.ringcentral.com{next_page_uri}"
-    #                 params = None  # Only needed on the first call
-    #             else:
-    #                 break
- 
-    #         filtered_records = []
- 
-    #         rep_call_counts = {}
- 
-    #         for record in all_records:
-    #             if record.get("duration", 0) >= 60 and record.get("direction") != "Inbound":
-    #                 filtered_records.append(record)
-    #                 rep_name = record.get("from", {}).get("name", "Unknown")
-    #                 rep_call_counts[rep_name] = rep_call_counts.get(rep_name, 0) + 1
-   
- 
-    #         logger.info(f"Found {len(filtered_records)} recordings from last one week with duration >= 1 minute")
-    #         return filtered_records
- 
-    #     except Exception as e:
-    #         logger.error(f"Error fetching recordings: {str(e)}")
-    #         return []
 
 
         #fetching the call recordings and adding the total counts of the call in sheet 2
-    def fetch_recent_recordings(self , days=2):
+    def fetch_recent_recordings(self , hours=48):
             """Fetch recent call recordings from RingCentral (filtered + total counts)"""
             try:
                 # Get recordings from the last 7 days
-                date_from = (datetime.utcnow() - timedelta(days=days)).isoformat() + "Z"
+                date_from = (datetime.utcnow() - timedelta(hours=hours)).isoformat() + "Z"
                 date_to = datetime.utcnow().isoformat() + "Z"
  
                 base_url = "https://platform.ringcentral.com/restapi/v1.0/account/~/call-log"
@@ -295,7 +181,7 @@ class CallAnalysisScheduler:
                         rep_call_counts_filtered[rep_name] = rep_call_counts_filtered.get(rep_name, 0) + 1
  
                 logger.info(f"Total recordings (all): {len(all_records)}")
-                logger.info(f"Filtered recordings (duration ≥ 1 min & outbound): {len(filtered_records)}")
+                logger.info(f"Filtered recordings (duration >= 1 min & outbound): {len(filtered_records)}")
  
                 # Store both counts in each recording for downstream use (optional)
                 self.rep_call_counts_total = rep_call_counts_total
@@ -344,11 +230,7 @@ class CallAnalysisScheduler:
         
             start_time_utc = recording_data.get("startTime")
             print("utc",start_time_utc)
-            # start_time = datetime.fromisoformat(start_time_utc)
 
-            # # Normalize to America/New_York zone
-            # start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
-            # print("est",start_time_est)
 
            
 
@@ -381,12 +263,7 @@ class CallAnalysisScheduler:
                 json={"contentUri": content_uri, "contentType": "audio/mpeg"},
                 headers=headers
             )
-            # response = self._make_authorized_request(
-            #         "POST",
-            #         "http://127.0.0.1:8004/audio/upload",
-            #         json={"contentUri": content_uri, "contentType": "audio/mpeg"},
-                    
-            # )
+
 
             
             if response.status_code != 200:
@@ -405,12 +282,7 @@ class CallAnalysisScheduler:
                 logger.error(f"Failed to diarize recording {recording_id}: {diarize_response.text}")
                 return False
                 
-            # Trigger analysis
-            # analysis_response = requests.post(
-            #     "http://127.0.0.1:8004/call-analysis/",
-            #     headers={"audio_id": audio_id}
-            # )
-            
+     
             # Trigger analysis
             analysis_response = requests.post(
                 "http://127.0.0.1:8004/call-analysis/",
@@ -418,118 +290,15 @@ class CallAnalysisScheduler:
                     "audio-id": audio_id  
                 }
             )
-
-            if analysis_response.status_code != 200:
-                logger.error(f"Failed to analyze recording {recording_id}: {analysis_response.text}")
-                return False
-                
-            logger.info(f"Successfully processed recording {recording_id}")
-            return True
             
-        except Exception as e:
-            logger.error(f"Error processing recording: {str(e)}")
-            return False
-    
-    # def run_daily_analysis(self):
-    #     """Main function to run daily call analysis"""
-    #     logger.info("Starting daily call analysis")
-        
-    #     try:
-    #         # Fetch recent recordings
-    #         recordings = self.fetch_recent_recordings()
-            
-    #         # Process each recording
-    #         processed_count = 0
-    #         for recording in recordings:
-    #             if self.process_recording(recording):
-    #                 processed_count += 1
-    #                 # Small delay to avoid overwhelming the server
-    #                 time.sleep(1)
-            
-    #         logger.info(f"Daily analysis complete. Processed {processed_count} recordings.")
-            
-    #     except Exception as e:
-    #         logger.error(f"Error in daily analysis: {str(e)}")
-    #     finally:
-    #         self.db.close()
 
 
-
-    # def run_daily_analysis(self):
-    #         """Main function to run daily call analysis"""
-    #         logger.info("=== Starting daily call analysis ===")
-
-    #         try:
-    #             recordings = self.fetch_recent_recordings()
-    #             logger.info(f"Fetched {len(recordings)} recordings.")
-
-    #             # Track rep-wise call data
-    #             rep_call_counts = defaultdict(int)
-    #             processed_recordings = []
-
-    #             for recording in recordings:
-    #                 recording_id = recording.get("id") or recording.get("recording_id")
-    #                 logger.debug(f"Processing recording ID: {recording_id}")
-                    
-    #                 if self.process_recording(recording):
-    #                     processed_recordings.append(recording)
-    #                     rep_name = recording.get("from", {}).get("name")
-    #                     logger.debug(f"Recording processed successfully for rep: {rep_name}")
-                        
-    #                     if rep_name:
-    #                         rep_call_counts[rep_name] += 1
-    #                 else:
-    #                     logger.warning(f"Recording processing failed/skipped: {recording_id}")
-    #                 time.sleep(1)
-
-    #             logger.info(f"Total processed recordings: {len(processed_recordings)}")
-    #             logger.debug(f"Rep call counts: {dict(rep_call_counts)}")
-
-    #             # Compute audited calls from Audio table
-    #             rep_audited_counts = defaultdict(int)
-    #             for rep_name in rep_call_counts:
-    #                 try:
-    #                     rep_audio_count = (
-    #                         self.db.query(Audio)
-    #                         .join(RecordingDetail, Audio.recording_id == RecordingDetail.recording_id)
-    #                         .filter(RecordingDetail.username == rep_name)
-    #                         .count()
-    #                     )
-    #                     rep_audited_counts[rep_name] = rep_audio_count
-    #                     logger.debug(f"Audited count for {rep_name}: {rep_audio_count}")
-    #                 except Exception as db_err:
-    #                     logger.error(f"DB error for rep {rep_name}: {str(db_err)}")
-
-    #             # Append to Google Sheet "Sheet2"
-    #             today = datetime.now().strftime("%Y-%m-%d")
-    #             for rep in rep_call_counts:
-    #                 row = {
-    #                     "IS Rep Name": rep,
-    #                     "Total Outbound Calls": rep_call_counts[rep],
-    #                     "Audited Calls": rep_audited_counts.get(rep, 0)
-    #                 }
-
-    #                 try:
-    #                     logger.debug(f"Appending row to Sheet2: {row}")
-    #                     append_dict_to_sheet(row, sheet_name="Sheet2")
-    #                     logger.info(f"Appended to Sheet2: {row}")
-    #                 except Exception as sheet_err:
-    #                     logger.error(f"Failed to append to Google Sheet for {rep}: {str(sheet_err)}")
-
-    #         except Exception as e:
-    #             logger.exception(f"Error in daily analysis: {str(e)}")  # This logs stack trace too
-
-    #         finally:
-    #             logger.info("Closing database connection.")
-    #             self.db.close()
-    #             logger.info("=== Daily call analysis complete ===")
-
-    def run_daily_analysis(self, days=2):
+    def run_daily_analysis(self, hours=48):
         """Main function to run daily call analysis for a given number of days"""
         logger.info("Starting daily call analysis")
  
         try:
-            recordings = self.fetch_recent_recordings(days=days)
+            recordings = self.fetch_recent_recordings(hours=hours)
             rep_call_counts_total = self.rep_call_counts_total
             processed_recordings = []
  
@@ -577,16 +346,74 @@ class CallAnalysisScheduler:
             # Format date range
             date_range_str = f"{start_range.strftime('%m/%d/%Y')} - {end_range.strftime('%m/%d/%Y')}"
  
-            # Append to Sheet2
+          
+
+
+            
+            analysis_data = fetch_sheet1_data()
+
             for rep in rep_call_counts_total:
-                row = {
-                    "Date Range": date_range_str,
-                    "IS Rep Name": rep,
-                    "Total Calls": rep_call_counts_total[rep],
-                    "Audited Calls": rep_audited_counts.get(rep, 0)
-                }
-                append_dict_to_sheet(row, sheet_name="Sheet2")
-                logger.info(f"Appended to Sheet2: {row}")
+                    total_calls = rep_call_counts_total[rep]
+                    audited_calls = rep_audited_counts.get(rep, 0)
+
+                    filtered_scores = []
+
+                    for row in analysis_data:
+                        # try:
+                        #     username = row.get("Username") or row.get("username") or ""
+                        #     timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+                        #     score_str = row.get("Overall Score") or ""
+
+                        #     if not username or not timestamp_str or not score_str:
+                        #         continue
+
+                        #     # Adjust this format if your actual date is different
+                        #     timestamp = datetime.strptime(timestamp_str, "%m/%d/%Y %I:%M %p") 
+
+                        #     if start_range <= timestamp <= end_range and username.strip().lower() == rep.strip().lower():
+                        #         filtered_scores.append(float(score_str))
+                        # except Exception as e:
+                        #     logger.warning(f"Skipping row due to error: {e} | row = {row}")
+                        try:
+                                username = row.get("Username") or row.get("username") or ""
+                                timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+                                score_str = row.get("Overall Score") or ""
+
+                                if not username or not timestamp_str or not score_str:
+                                    continue
+
+                                # Strip % and parse float
+                                score = float(score_str.replace('%', '').strip())
+
+                                # Parse timestamp using flexible parser
+                                timestamp = parser.parse(timestamp_str)
+
+                                # Match user and date range
+                                if (
+                                    start_range <= timestamp <= end_range and
+                                    username.strip().lower() == rep.strip().lower()
+                                ):
+                                    filtered_scores.append(score)
+                        except Exception as e:
+                                logger.warning(f"Skipping row due to error: {e} | row = {row}")
+
+                    # Calculate average weightage
+                    if filtered_scores:
+                        weightage_score = round(sum(filtered_scores) / len(filtered_scores), 2)
+                        weightage = f"{weightage_score}%"
+                    else:
+                        weightage = "0%"
+
+                    row = {
+                        "Date Range": date_range_str,
+                        "IS Rep Name": rep,
+                        "Total Calls": total_calls,
+                        "Audited Calls": audited_calls,
+                        "Overall Weightage": weightage,
+                    }
+
+                    append_dict_to_sheet(row, sheet_name="Sheet2")
+                    logger.info(f"Appended to Sheet2: {row}")
  
         except Exception as e:
             logger.error(f"Error in daily analysis: {str(e)}")
@@ -596,15 +423,13 @@ class CallAnalysisScheduler:
 
 
 if __name__ == "__main__":
-    # scheduler = CallAnalysisScheduler()
-    # # scheduler.run_daily_analysis()
+  
     scheduler_instance = CallAnalysisScheduler()
     
     # Set up APScheduler
     apscheduler = BackgroundScheduler()
 
-    # Schedule the job daily at 2 AM (change time as needed)
-    # trigger = CronTrigger(hour=2, minute=0)
+ 
     run_time = datetime.now() + timedelta(minutes=3)
     trigger = DateTrigger(run_date=run_time)
     apscheduler.add_job(scheduler_instance.run_daily_analysis, trigger)

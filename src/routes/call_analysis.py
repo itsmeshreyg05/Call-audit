@@ -80,7 +80,30 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     duration = recording_detail.duration if recording_detail else None
     extension = recording_detail.extension_number if recording_detail else None  # Placeholder for extension, if needed
     transcription = db_audio.full_transcript if db_audio.full_transcript else "No transcription available"
- 
+    
+
+    # # Convert IST to US Eastern Time
+    # start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
+
+    # # Format as MM/DD/YYYY h:mm AM/PM (Windows-friendly)
+    # formatted_est = start_time_est.strftime("%m/%d/%Y %#I:%M %p")
+    # print(f"formatted_est {formatted_est}")
+    print(f"start time: {start_time}")
+    if start_time:
+        try:
+            start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
+            formatted_est = start_time_est.strftime("%m/%d/%Y %I:%M %p").lstrip("0")
+            
+        except Exception as e:
+            formatted_est = "Unknown"
+    else:
+        formatted_est = "Unknown"
+
+    print(f"formatted time {formatted_est}")
+    
+
+
+
     # Check if the audio has been processed already
     if not db_audio.processed:
         diarization_result = await diarize_audio(audio_id, db)
@@ -172,15 +195,10 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     print(f"Average Score: {average_score}%")
 
 
-    # Convert IST to US Eastern Time
-    start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
-
-    # Format as MM/DD/YYYY h:mm AM/PM (Windows-friendly)
-    formatted_est = start_time_est.strftime("%m/%d/%Y %#I:%M %p")
-
+    
 
     row_data = {
-        "Date/Time": formatted_est,
+        "Date/Time": formatted_est,  
         "Duration": duration,
         "Recording Id": recording_id,
         "Username": username,
@@ -198,6 +216,8 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
         "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
     }
+
+    
 
 
  

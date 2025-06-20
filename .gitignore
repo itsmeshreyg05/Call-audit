@@ -6,3 +6,7 @@ alembic.ini
 *.json
 preprocessed/
 uploads/
+google_sheets_helper.py
+
+
+
