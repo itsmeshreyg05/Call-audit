@@ -133,7 +133,7 @@ class RecordingDetail(BaseModel):
     start_time: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         json_encoders = {
             datetime: lambda v: v.isoformat()  # Ensures -04:00 offset is shown
         }

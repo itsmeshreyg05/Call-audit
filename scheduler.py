@@ -17,6 +17,7 @@ from datetime import datetime
 from google_sheets_helper import append_dict_to_sheet
 from google_sheets_reader import fetch_sheet1_data
 from dateutil import parser
+from dateutil import tz
 
 # Add the project root to the path so we can import our modules
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -121,7 +122,7 @@ class CallAnalysisScheduler:
 
 
         #fetching the call recordings and adding the total counts of the call in sheet 2
-    def fetch_recent_recordings(self , hours=48):
+    def fetch_recent_recordings(self , hours=17):
             """Fetch recent call recordings from RingCentral (filtered + total counts)"""
             try:
                 # Get recordings from the last 7 days
@@ -290,18 +291,295 @@ class CallAnalysisScheduler:
                     "audio-id": audio_id  
                 }
             )
+
+            if analysis_response.status_code != 200:
+                logger.error(f"Failed to analyze recording {recording_id}: {analysis_response.text}")
+                return False
+                
+            logger.info(f"Successfully processed recording {recording_id}")
+            return True
             
+        except Exception as e:
+            logger.error(f"Error processing recording: {str(e)}")
+            return False
+    
 
 
-    def run_daily_analysis(self, hours=48):
+    # def run_daily_analysis(self, hours=14):
+    #     """Main function to run daily call analysis for a given number of days"""
+    #     logger.info("Starting daily call analysis")
+ 
+    #     try:
+    #         recordings = self.fetch_recent_recordings(hours=hours)
+    #         rep_call_counts_total = self.rep_call_counts_total
+    #         processed_recordings = []
+ 
+    #         # Collect all start times from the recordings
+    #         start_times = []
+    #         for recording in recordings:
+    #             start_str = recording.get("startTime")
+    #             if start_str:
+    #                 try:
+    #                     start_dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+    #                     start_times.append(start_dt)
+    #                 except Exception as e:
+    #                     logger.warning(f"Invalid date format in recording: {start_str}")
+ 
+    #         if not start_times:
+    #             logger.warning("No valid start times found in recordings.")
+    #             return
+ 
+    #         start_range = min(start_times).astimezone(ZoneInfo("Asia/Kolkata"))
+    #         end_range = max(start_times).astimezone(ZoneInfo("Asia/Kolkata"))
+ 
+    #         # Process recordings
+    #         for recording in recordings:
+    #             if self.process_recording(recording):
+    #                 processed_recordings.append(recording)
+    #                 time.sleep(1)
+ 
+    #         # Calculate audited calls within that date range
+    #         rep_audited_counts = defaultdict(int)
+    #         for rep_name in rep_call_counts_total:
+    #             rep_audio_count = (
+    #                 self.db.query(Audio)
+    #                 .join(RecordingDetail, Audio.recording_id == RecordingDetail.recording_id)
+    #                 .filter(
+    #                     RecordingDetail.username == rep_name,
+    #                     RecordingDetail.start_time >= start_range,
+    #                     RecordingDetail.start_time <= end_range
+    #                 )
+    #                 .count()
+    #             )
+    #             rep_audited_counts[rep_name] = rep_audio_count
+ 
+    #         logger.info(f"Processed {len(processed_recordings)} recordings.")
+ 
+    #         # Format date range
+    #         date_range_str = f"{start_range.strftime('%m/%d/%Y')} - {end_range.strftime('%m/%d/%Y')}"
+ 
+          
+
+
+            
+    #         analysis_data = fetch_sheet1_data()
+
+    #         for rep in rep_call_counts_total:
+    #                 total_calls = rep_call_counts_total[rep]
+    #                 audited_calls = rep_audited_counts.get(rep, 0)
+
+    #                 filtered_scores = []
+
+    #                 for row in analysis_data:
+    #                     # try:
+    #                     #     username = row.get("Username") or row.get("username") or ""
+    #                     #     timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+    #                     #     score_str = row.get("Overall Score") or ""
+
+    #                     #     if not username or not timestamp_str or not score_str:
+    #                     #         continue
+
+    #                     #     # Adjust this format if your actual date is different
+    #                     #     timestamp = datetime.strptime(timestamp_str, "%m/%d/%Y %I:%M %p") 
+
+    #                     #     if start_range <= timestamp <= end_range and username.strip().lower() == rep.strip().lower():
+    #                     #         filtered_scores.append(float(score_str))
+    #                     # except Exception as e:
+    #                     #     logger.warning(f"Skipping row due to error: {e} | row = {row}")
+    #                     try:
+    #                             username = row.get("Username") or row.get("username") or ""
+    #                             timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+    #                             score_str = row.get("Overall Score") or ""
+
+    #                             if not username or not timestamp_str or not score_str:
+    #                                 continue
+
+    #                             # Strip % and parse float
+    #                             score = float(score_str.replace('%', '').strip())
+
+    #                             # Parse timestamp using flexible parser
+    #                             timestamp = parser.parse(timestamp_str)
+
+    #                             # Match user and date range
+    #                             if (
+    #                                 start_range <= timestamp <= end_range and
+    #                                 username.strip().lower() == rep.strip().lower()
+    #                             ):
+    #                                 filtered_scores.append(score)
+    #                     except Exception as e:
+    #                             logger.warning(f"Skipping row due to error: {e} | row = {row}")
+
+    #                 # Calculate average weightage
+    #                 if filtered_scores:
+    #                     weightage_score = round(sum(filtered_scores) / len(filtered_scores), 2)
+    #                     weightage = f"{weightage_score}%"
+    #                 else:
+    #                     weightage = "0%"
+
+    #                 row = {
+    #                     "Date Range": date_range_str,
+    #                     "IS Rep Name": rep,
+    #                     "Total Calls": total_calls,
+    #                     "Audited Calls": audited_calls,
+    #                     "Overall Weightage": weightage,
+    #                 }
+
+
+
+    #                 append_dict_to_sheet(row, sheet_name="Sheet2")
+    #                 logger.info(f"Appended to Sheet2: {row}")
+ 
+    #     except Exception as e:
+    #         logger.error(f"Error in daily analysis: {str(e)}")
+    #     finally:
+    #         self.db.close()
+
+
+    # def run_daily_analysis(self, hours=15):
+    #         """Main function to run daily call analysis for a given number of days"""
+    #         logger.info("Starting daily call analysis")
+
+    #         try:
+    #             recordings = self.fetch_recent_recordings(hours=hours)
+    #             rep_call_counts_total = self.rep_call_counts_total
+    #             processed_recordings = []
+
+    #             # Collect all start times from the recordings
+    #             start_times = []
+    #             for recording in recordings:
+    #                 start_str = recording.get("startTime")
+    #                 if start_str:
+    #                     try:
+    #                         start_dt = datetime.fromisoformat(start_str.replace("Z", "+00:00"))
+    #                         start_times.append(start_dt)
+    #                     except Exception as e:
+    #                         logger.warning(f"Invalid date format in recording: {start_str}")
+
+    #             if not start_times:
+    #                 logger.warning("No valid start times found in recordings.")
+    #                 return
+
+    #             local_tz = tz.tzlocal()
+    #             start_range = min(start_times).astimezone(local_tz)
+    #             end_range = max(start_times).astimezone(local_tz)
+
+    #             # Process recordings
+    #             for recording in recordings:
+    #                 if self.process_recording(recording):
+    #                     processed_recordings.append(recording)
+    #                     time.sleep(1)
+
+    #             # Calculate audited calls within that date range
+    #             rep_audited_counts = defaultdict(int)
+    #             for rep_name in rep_call_counts_total:
+    #                 rep_audio_count = (
+    #                     self.db.query(Audio)
+    #                     .join(RecordingDetail, Audio.recording_id == RecordingDetail.recording_id)
+    #                     .filter(
+    #                         RecordingDetail.username == rep_name,
+    #                         RecordingDetail.start_time >= start_range,
+    #                         RecordingDetail.start_time <= end_range
+    #                     )
+    #                     .count()
+    #                 )
+    #                 rep_audited_counts[rep_name] = rep_audio_count
+
+    #             logger.info(f"Processed {len(processed_recordings)} recordings.")
+
+    #             # Format date range
+    #             date_range_str = f"{start_range.strftime('%m/%d/%Y')} - {end_range.strftime('%m/%d/%Y')}"
+
+    #             analysis_data = fetch_sheet1_data()
+
+    #             for rep in rep_call_counts_total:
+    #                 total_calls = rep_call_counts_total[rep]
+    #                 audited_calls = rep_audited_counts.get(rep, 0)
+
+    #                 filtered_scores = []
+    #                 reason_counts = defaultdict(int)
+
+    #                 for row in analysis_data:
+    #                     try:
+    #                         username = row.get("Username") or row.get("username") or ""
+    #                         timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+    #                         score_str = row.get("Overall Score") or ""
+    #                         reason = row.get("Reason", "").strip()
+
+    #                         if not username or not timestamp_str or not score_str:
+    #                             continue
+
+    #                         timestamp = parser.parse(timestamp_str)
+    #                         if timestamp.tzinfo is None:
+    #                             timestamp = timestamp.replace(tzinfo=local_tz)
+    #                         else:
+    #                             timestamp = timestamp.astimezone(local_tz)
+
+    #                         if (
+    #                             start_range <= timestamp <= end_range and
+    #                             username.strip().lower() == rep.strip().lower()
+    #                         ):
+    #                             score = float(score_str.replace('%', '').strip())
+    #                             filtered_scores.append(score)
+    #                             reason_counts[reason] += 1
+
+    #                     except Exception as e:
+    #                         logger.warning(f"Skipping row due to error: {e} | row = {row}")
+
+    #                 # Average score
+    #                 if filtered_scores:
+    #                     weightage_score = round(sum(filtered_scores) / len(filtered_scores), 2)
+    #                     weightage = f"{weightage_score}%"
+    #                 else:
+    #                     weightage = "0%"
+
+    #                 # Format remarks using defined categories
+    #                 categories = [
+    #                     "Agreed for the meeting",
+    #                     "Not interested",
+    #                     "Call back requested",
+    #                     "Out of scope",
+    #                     "Disconnected the call",
+    #                     "Prospect will reach out"
+    #                 ]
+
+    #                 feedback_parts = []
+    #                 for cat in categories:
+    #                     count = reason_counts.get(cat, 0)
+    #                     if count:
+    #                         feedback_parts.append(f"{count} were '{cat}'")
+
+    #                 if feedback_parts:
+    #                     remarks = f"Out of {audited_calls}/{total_calls} calls, " + "; ".join(feedback_parts)
+    #                 else:
+    #                     remarks = f"Out of {audited_calls}/{total_calls} calls, no actionable outcomes recorded."
+
+    #                 row = {
+    #                     "Date Range": date_range_str,
+    #                     "IS Rep Name": rep,
+    #                     "Total Calls": total_calls,
+    #                     "Audited Calls": audited_calls,
+    #                     "Overall Weightage": weightage,
+    #                     "Remarks/Feedback": remarks
+    #                 }
+
+    #                 append_dict_to_sheet(row, sheet_name="Sheet2")
+    #                 logger.info(f"Appended to Sheet2: {row}")
+
+    #         except Exception as e:
+    #             logger.error(f"Error in daily analysis: {str(e)}")
+    #         finally:
+    #             self.db.close()
+    
+
+    def run_daily_analysis(self, hours=17):
         """Main function to run daily call analysis for a given number of days"""
         logger.info("Starting daily call analysis")
- 
+
         try:
             recordings = self.fetch_recent_recordings(hours=hours)
             rep_call_counts_total = self.rep_call_counts_total
             processed_recordings = []
- 
+
             # Collect all start times from the recordings
             start_times = []
             for recording in recordings:
@@ -312,21 +590,22 @@ class CallAnalysisScheduler:
                         start_times.append(start_dt)
                     except Exception as e:
                         logger.warning(f"Invalid date format in recording: {start_str}")
- 
+
             if not start_times:
                 logger.warning("No valid start times found in recordings.")
                 return
- 
-            start_range = min(start_times)
-            end_range = max(start_times)
- 
+
+            local_tz = tz.tzlocal()
+            start_range = min(start_times).astimezone(local_tz)
+            end_range = max(start_times).astimezone(local_tz)
+
             # Process recordings
             for recording in recordings:
                 if self.process_recording(recording):
                     processed_recordings.append(recording)
                     time.sleep(1)
- 
-            # Calculate audited calls within that date range
+
+            # Calculate audited calls
             rep_audited_counts = defaultdict(int)
             for rep_name in rep_call_counts_total:
                 rep_audio_count = (
@@ -340,86 +619,70 @@ class CallAnalysisScheduler:
                     .count()
                 )
                 rep_audited_counts[rep_name] = rep_audio_count
- 
+
             logger.info(f"Processed {len(processed_recordings)} recordings.")
- 
+
             # Format date range
             date_range_str = f"{start_range.strftime('%m/%d/%Y')} - {end_range.strftime('%m/%d/%Y')}"
- 
-          
 
-
-            
             analysis_data = fetch_sheet1_data()
 
             for rep in rep_call_counts_total:
-                    total_calls = rep_call_counts_total[rep]
-                    audited_calls = rep_audited_counts.get(rep, 0)
+                total_calls = rep_call_counts_total[rep]
+                audited_calls = rep_audited_counts.get(rep, 0)
 
-                    filtered_scores = []
+                filtered_scores = []
 
-                    for row in analysis_data:
-                        # try:
-                        #     username = row.get("Username") or row.get("username") or ""
-                        #     timestamp_str = row.get("Date/Time") or row.get("Date") or ""
-                        #     score_str = row.get("Overall Score") or ""
+                for row in analysis_data:
+                    try:
+                        username = row.get("Username") or row.get("username") or ""
+                        timestamp_str = row.get("Date/Time") or row.get("Date") or ""
+                        score_str = row.get("Overall Score") or ""
 
-                        #     if not username or not timestamp_str or not score_str:
-                        #         continue
+                        if not username or not timestamp_str or not score_str:
+                            continue
 
-                        #     # Adjust this format if your actual date is different
-                        #     timestamp = datetime.strptime(timestamp_str, "%m/%d/%Y %I:%M %p") 
+                        timestamp = parser.parse(timestamp_str)
+                        if timestamp.tzinfo is None:
+                            timestamp = timestamp.replace(tzinfo=local_tz)
+                        else:
+                            timestamp = timestamp.astimezone(local_tz)
 
-                        #     if start_range <= timestamp <= end_range and username.strip().lower() == rep.strip().lower():
-                        #         filtered_scores.append(float(score_str))
-                        # except Exception as e:
-                        #     logger.warning(f"Skipping row due to error: {e} | row = {row}")
-                        try:
-                                username = row.get("Username") or row.get("username") or ""
-                                timestamp_str = row.get("Date/Time") or row.get("Date") or ""
-                                score_str = row.get("Overall Score") or ""
+                        if (
+                            start_range <= timestamp <= end_range and
+                            username.strip().lower() == rep.strip().lower()
+                        ):
+                            score = float(score_str.replace('%', '').strip())
+                            filtered_scores.append(score)
 
-                                if not username or not timestamp_str or not score_str:
-                                    continue
+                            logger.debug(f"Matched row: rep={rep}, username={username}, score={score}, timestamp={timestamp}")
 
-                                # Strip % and parse float
-                                score = float(score_str.replace('%', '').strip())
+                    except Exception as e:
+                        logger.warning(f"Skipping row due to error: {e} | row = {row}")
 
-                                # Parse timestamp using flexible parser
-                                timestamp = parser.parse(timestamp_str)
+                # Average score
+                if filtered_scores:
+                    weightage_score = round(sum(filtered_scores) / len(filtered_scores), 2)
+                    weightage = f"{weightage_score}%"
+                else:
+                    weightage = "0%"
 
-                                # Match user and date range
-                                if (
-                                    start_range <= timestamp <= end_range and
-                                    username.strip().lower() == rep.strip().lower()
-                                ):
-                                    filtered_scores.append(score)
-                        except Exception as e:
-                                logger.warning(f"Skipping row due to error: {e} | row = {row}")
+                row = {
+                    "Date Range": date_range_str,
+                    "IS Rep Name": rep,
+                    "Total Calls": total_calls,
+                    "Audited Calls": audited_calls,
+                    "Overall Weightage": weightage,
+                    # "Remarks/Feedback": remarks  # Removed as per your request
+                }
 
-                    # Calculate average weightage
-                    if filtered_scores:
-                        weightage_score = round(sum(filtered_scores) / len(filtered_scores), 2)
-                        weightage = f"{weightage_score}%"
-                    else:
-                        weightage = "0%"
+                append_dict_to_sheet(row, sheet_name="Sheet2")
+                logger.info(f"Appended to Sheet2: {row}")
 
-                    row = {
-                        "Date Range": date_range_str,
-                        "IS Rep Name": rep,
-                        "Total Calls": total_calls,
-                        "Audited Calls": audited_calls,
-                        "Overall Weightage": weightage,
-                    }
-
-                    append_dict_to_sheet(row, sheet_name="Sheet2")
-                    logger.info(f"Appended to Sheet2: {row}")
- 
         except Exception as e:
             logger.error(f"Error in daily analysis: {str(e)}")
         finally:
             self.db.close()
- 
 
 
 if __name__ == "__main__":

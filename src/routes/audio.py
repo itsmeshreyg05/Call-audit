@@ -365,7 +365,7 @@ def transcribe_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE) -> str:
             generated_ids = whisper_model.generate(
                 input_features=processed["input_features"],
                 attention_mask=processed["attention_mask"],
-                max_length=448,
+                max_length=896,
                 language="en",
                 task="transcribe"
             )
@@ -374,9 +374,25 @@ def transcribe_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE) -> str:
         print(f"Transcription error: {str(e)}")
         return ""
 
-def transcribe_long_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE, chunk_duration: int = 30) -> str:
-    """Split long audio into chunks and transcribe each, then join."""
+# def transcribe_long_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE, chunk_duration: int = 30) -> str:
+#     """Split long audio into chunks and transcribe each, then join."""
+#     chunk_size = chunk_duration * sr
+#     full_text = []
+#     start = 0
+#     total_len = len(audio_data)
+
+#     while start < total_len:
+#         end = min(start + chunk_size, total_len)
+#         chunk = audio_data[start:end]
+#         text = transcribe_audio(chunk, sr)
+#         if text:
+#             full_text.append(text)
+#         start = end
+
+#     return " ".join(full_text).strip()
+def transcribe_long_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE, chunk_duration: int = 30, overlap: int = 3) -> str:
     chunk_size = chunk_duration * sr
+    overlap_size = overlap * sr
     full_text = []
     start = 0
     total_len = len(audio_data)
@@ -387,9 +403,10 @@ def transcribe_long_audio(audio_data: np.ndarray, sr: int = SAMPLE_RATE, chunk_d
         text = transcribe_audio(chunk, sr)
         if text:
             full_text.append(text)
-        start = end
+        start = end - overlap_size  # Slide back for overlap
 
     return " ".join(full_text).strip()
+
 
 @router.get("/diarize/{audio_id}", response_model=DiarizationResult)
 async def diarize_audio(audio_id: str, db: Session = Depends(get_db)):
