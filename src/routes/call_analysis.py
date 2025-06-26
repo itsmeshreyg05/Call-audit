@@ -92,7 +92,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     if start_time:
         try:
             start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
-            formatted_est = start_time_est.strftime("%m/%d/%Y %I:%M %p").lstrip("0")
+            formatted_est = start_time_est.strftime("%m/%d/%Y %I:%M %p")
             
         except Exception as e:
             formatted_est = "Unknown"
@@ -145,7 +145,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         )
  
     parsed_analysis = parse_mistral_response(analysis_result)
-    print(parsed_analysis.keys())
+
  
     db_analysis = db.query(Analysis).filter(Analysis.audio_id == audio_id).first()
     if db_analysis:
@@ -186,13 +186,12 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
 
 
     scores = [introduction_score, adherence_score, listening_score, fumble_score, probing_score, closing_score]
-    print(f"Scores before conversion: {scores}")
     scores = [float(score) for score in scores]
-    print(f"Scores after conversion: {scores}")
+  
 
   
     average_score = round((sum(scores) / len(scores) ) , 2)
-    print(f"Average Score: {average_score}%")
+
 
 
     
