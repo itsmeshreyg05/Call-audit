@@ -1,14 +1,13 @@
-from fastapi import FastAPI, Depends, Form, Query, Header, HTTPException
-from fastapi.responses import RedirectResponse, StreamingResponse
-from fastapi.security import HTTPBasic, HTTPBasicCredentials, HTTPBearer, HTTPAuthorizationCredentials
-from typing import Optional, Annotated
-from datetime import datetime
+from fastapi import Depends, HTTPException
+from fastapi.responses import RedirectResponse
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
+from typing import  Annotated
 from urllib.parse import urlencode
-from io import BytesIO
 import base64
 import requests
 from src.schemas.schema import OAuthRequestSchema , TokenRequestSchema
 from fastapi import APIRouter
+from src.config.log_config import logger
 
 
 router = APIRouter(
@@ -38,11 +37,11 @@ def redirect_to_ringcentral(params: OAuthRequestSchema = Depends()):
 @router.post("/ringcentral/token")
 def get_ringcentral_token(
     credentials: Annotated[HTTPBasicCredentials, Depends(security)],
-    token_data: TokenRequestSchema  # Use the Pydantic schema here
+    token_data: TokenRequestSchema  
 ):
   
     RINGCENTRAL_TOKEN_URL = "https://platform.ringcentral.com/restapi/oauth/token"
-    # token_data = TokenRequestSchema(grant_type=grant_type, code=code, redirect_uri=redirect_uri)
+    
 
     client_id = credentials.username
     client_secret = credentials.password
@@ -58,10 +57,21 @@ def get_ringcentral_token(
         "code": token_data.code,
         "redirect_uri": str(token_data.redirect_uri)
     }
+    try:
 
-    response = requests.post(RINGCENTRAL_TOKEN_URL, headers=headers, data=data)
+        response = requests.post(RINGCENTRAL_TOKEN_URL, headers=headers, data=data)
 
-    if response.status_code != 200:
-        raise HTTPException(status_code=response.status_code, detail=response.json())
+        if response.status_code != 200:
+            logger.error(f"RingCentral token request failed - Status: {response.status_code}, Response: {response.text}")
+            raise HTTPException(status_code=response.status_code, detail=response.json())
 
-    return response.json()
+        return response.json()
+    
+    except requests.exceptions.RequestException as e:  # **ADDED**
+        logger.error(f"Network error during RingCentral token request: {str(e)}")
+        raise HTTPException(status_code=500, detail="Failed to connect to RingCentral API")
+    
+    except Exception as e:  # **ADDED**
+        logger.error(f"Unexpected error in get_ringcentral_token: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+    

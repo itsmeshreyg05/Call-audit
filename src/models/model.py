@@ -64,12 +64,12 @@ class Analysis(Base):
     
     # Call outcome fields
     outcome_category = Column(String, nullable=True)
-    outcome_phrases = Column(JSON, nullable=True)  # Stores list of phrases
+    outcome_phrases = Column(JSON, nullable=True)  
     outcome_explanation = Column(Text, nullable=True)
     
     # Summary and metadata
     summary = Column(Text)
-    status = Column(String, default="pending")  # pending, processing, completed, failed
+    status = Column(String, default="pending")  
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, onupdate=datetime.utcnow, nullable=True)
     

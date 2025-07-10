@@ -1,0 +1,8 @@
+2025-07-03 13:14:49,838 - src.config.log_config - INFO - Token expired, refreshing...
+2025-07-03 13:14:50,920 - src.config.log_config - INFO - Token refreshed successfully
+2025-07-03 13:14:50,981 - src.config.log_config - INFO - APScheduler started. Daily analysis job scheduled.
+2025-07-03 13:17:50,991 - src.config.log_config - INFO - Starting daily call analysis
+2025-07-03 13:18:48,104 - src.config.log_config - INFO - APScheduler started. Daily analysis job scheduled.
+2025-07-03 13:21:48,095 - src.config.log_config - INFO - Starting daily call analysis
+2025-07-03 13:22:39,908 - src.config.log_config - INFO - Total recordings (all): 776
+2025-07-03 13:22:39,908 - src.config.log_config - INFO - Filtered recordings (duration >= 1 min & outbound): 45

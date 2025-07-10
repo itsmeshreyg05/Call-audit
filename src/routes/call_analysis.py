@@ -5,41 +5,24 @@ import ollama
 from typing import Dict, List, Any
 from fastapi import APIRouter, HTTPException, Depends, Header
 from sqlalchemy.orm import Session
-from google_sheets_helper import append_dict_to_sheet
+from src.utils.google_sheets_helper import append_dict_to_sheet
 from src.database.database import get_db
 from src.models.model import Audio, Analysis, Segment
 from src.schemas.schema import CallAnalysisResult, DiarizationSegment
 from src.routes.audio import diarize_audio
 from src.models.model import RecordingDetail
-from datetime import datetime   
+from src.config.log_config import logger
  
-# Create a router
+
 router = APIRouter(
     prefix="/call-analysis",
     tags=["call analysis"],
     responses={404: {"description": "Not found"}},
 )
  
-# Configure Ollama settings
-MISTRAL_MODEL = "mistral"  # Use the model name as configured in Ollama
- 
-def is_voicemail_call(conversation_text: str) -> bool:
-    """
-    Detect if the call went to voicemail
-    """
-    voicemail_indicators = [
-        "forwarded to voicemail",
-        "person you're trying to reach is not available",
-        "at the tone, please record your message",
-        "when you have finished recording",
-        "leave a message after the beep",
-        "please leave your message",
-        "mailbox is full",
-        "subscriber is not available"
-    ]
-    
-    text_lower = conversation_text.lower()
-    return any(indicator in text_lower for indicator in voicemail_indicators)
+
+MISTRAL_MODEL = "mistral"  
+
 
 @router.post("/", response_model=CallAnalysisResult)
 async def analyze_call(audio_id: str = Header(..., description="Audio ID to analyze"), db: Session = Depends(get_db)):
@@ -47,7 +30,6 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     Analyze a transcribed call using Ollama's Mistral model.
     Pass the audio_id in the request header. The segments will be retrieved from the database.
     """
-    # Validate that the audio_id exists in the database
     db_audio = db.query(Audio).filter(Audio.id == audio_id).first()
     if not db_audio:
         raise HTTPException(status_code=404, detail="Audio ID not found")
@@ -56,24 +38,16 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     full_transcript = db_audio.full_transcript
     if not full_transcript:
         raise HTTPException(status_code=400, detail="No transcript available")
- 
-    # Check if voicemail
-    if is_voicemail_call(full_transcript):
-        return {
-            "call_type": "voicemail",
-            "analysis": "No analysis performed - call went to voicemail",
-            "action": "skipped"
-        }
-    ##
+
  
  
-    # Get recording_id from the audio record
+
     recording_id = db_audio.recording_id
  
-    # Query RecordingDetail table to get user info
+
     recording_detail = db.query(RecordingDetail).filter(RecordingDetail.recording_id == recording_id).first()
  
-    # Default to "Unknown" if values aren't available
+
     username = recording_detail.username if recording_detail else "Unknown"
     phone_number = recording_detail.phone_number if recording_detail else "Unknown"
     start_time = recording_detail.start_time if recording_detail else None
@@ -81,13 +55,6 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     extension = recording_detail.extension_number if recording_detail else None  # Placeholder for extension, if needed
     transcription = db_audio.full_transcript if db_audio.full_transcript else "No transcription available"
     
-
-    # # Convert IST to US Eastern Time
-    # start_time_est = start_time.astimezone(ZoneInfo("America/New_York"))
-
-    # # Format as MM/DD/YYYY h:mm AM/PM (Windows-friendly)
-    # formatted_est = start_time_est.strftime("%m/%d/%Y %#I:%M %p")
-    # print(f"formatted_est {formatted_est}")
     print(f"start time: {start_time}")
     if start_time:
         try:
@@ -102,18 +69,18 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
     print(f"formatted time {formatted_est}")
     
 
-
-
-    # Check if the audio has been processed already
     if not db_audio.processed:
-        diarization_result = await diarize_audio(audio_id, db)
-        if diarization_result.status.startswith("failed"):
-            raise HTTPException(
-                status_code=400,
-                detail=f"Failed to diarize audio: {diarization_result.status}"
-            )
- 
-    # Get segments from the database
+        try:
+            diarization_result = await diarize_audio(audio_id, db)
+            if diarization_result.status.startswith("failed"):
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Failed to diarize audio: {diarization_result.status}"
+                )
+        except Exception as e:  
+                logger.error(f"Error during diarization for audio_id {audio_id}: {str(e)}")
+                raise HTTPException(status_code=500, detail="Failed to process audio diarization")
+    
     db_segments = db.query(Segment).filter(Segment.audio_id == audio_id).all()
     if not db_segments:
         raise HTTPException(
@@ -121,7 +88,6 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
             detail="No transcribed segments found for this audio. Please diarize the audio first."
         )
  
-    # Convert DB segments to schema segments
     segments = [
         DiarizationSegment(
             speaker=segment.speaker,
@@ -131,7 +97,7 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
         ) for segment in db_segments
     ]
  
-    # Format the conversation
+
     conversation_text = format_conversation(segments)
     prompt = create_mistral_prompt(conversation_text)
  
@@ -192,35 +158,37 @@ async def analyze_call(audio_id: str = Header(..., description="Audio ID to anal
   
     average_score = round((sum(scores) / len(scores) ) , 2)
 
-
-
-    
-
-    row_data = {
-        "Date/Time": formatted_est,  
-        "Duration": duration,
-        "Recording Id": recording_id,
-        "Username": username,
-        "Extension": extension,
-        "PhoneNumber": phone_number,
-        "Introduction/Hook": f"{introduction_score}%",
-        "Adherence to script/Product Knowledge": f"{adherence_score}%",
-        "Actively listening/ Responding Appropriately": f"{listening_score}%",
-        "Fumble": f"{fumble_score}%",
-        "Probing": f"{probing_score}%",
-        "Closing": f"{closing_score}%",
-        "Overall Score": f"{average_score}%",
-        "Summary": parsed_analysis.get("summary", ""),
-        "Transcript": transcription,
-        "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
-        "Reason": parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
-    }
-
-    
-
-
+    reason = parsed_analysis.get("call_outcome", {}).get("outcome_category", "Unknown")
  
-    append_dict_to_sheet(row_data,sheet_name="Sheet1")
+   
+    if reason.lower() == "out of scope":
+        logger.info(f"Recording {recording_id} skipped due to reason: {reason}")
+    else:
+        row_data = {
+            "Date/Time": formatted_est,
+            "Duration": duration,
+            "Recording Id": recording_id,
+            "Username": username,
+            "Extension": extension,
+            "PhoneNumber": phone_number,
+            "Introduction/Hook": f"{introduction_score}%",
+            "Adherence to script/Product Knowledge": f"{adherence_score}%",
+            "Actively listening/ Responding Appropriately": f"{listening_score}%",
+            "Fumble": f"{fumble_score}%",
+            "Probing": f"{probing_score}%",
+            "Closing": f"{closing_score}%",
+            "Overall Score": f"{average_score}%",
+            "Summary": parsed_analysis.get("summary", ""),
+            "Transcript": transcription,
+            "Remarks": parsed_analysis.get("call_outcome", {}).get("explanation", "Unknown"),
+            "Reason": reason
+        }
+        try:
+            append_dict_to_sheet(row_data, sheet_name="Sheet1")
+        except Exception as e:
+            logger.error(f"Error appending data to Google Sheet: {str(e)}")
+            
+ 
  
     return CallAnalysisResult(
         audio_id=audio_id,
@@ -236,7 +204,7 @@ def format_conversation(segments: List[DiarizationSegment]) -> str:
    
     for segment in segments:
         text = segment.text if segment.text else ""
-        if text:  # Only include segments with actual text
+        if text:  
             formatted_text += f"{segment.speaker}: {text}\n"
    
     return formatted_text
@@ -256,61 +224,105 @@ def create_mistral_prompt(conversation_text: str) -> str:
     Please analyze this conversation across the following dimensions:
    
     1. Introduction/Hook (Score 1-100):
+ 
+        - Company Introduction: Did the representative clearly mention the company they represent?
+ 
+        - Was it stated early in the call to establish identity?
+ 
         - Assess the effectiveness and engagement level of the conversation's opening
+ 
         - Was the introduction clear, confident, and engaging?
+ 
         - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
     2. Adherence to Script/Product Knowledge (Score 1-100):
+ 
         - Evaluate how well the representative followed the expected conversation structure
+ 
         - Rate the representative's command of product/service details
+ 
         - Assess accuracy of information provided and ability to address questions
+ 
         - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
     3. Actively Listening/Responding Appropriately (Score 1-100):
-        - Evaluate how well the representative understands and responds to context
-        - Assess if the representative acknowledges and builds upon prospect's statements
-        - Evaluate how well they tailor responses to the prospect's needs
-        - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
+        - Evaluate if the representative listened actively and showed understanding of the conversation context.
+ 
+        - Did the representative acknowledge and build on the client's statements?
+ 
+        - Were responses tailored to the client's specific comments and needs?
+ 
+        - Did the representative avoid interrupting the client while speaking?
+ 
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score.
+ 
     4. Fumble (Score 1-100):
-        - Rate the overall verbal fluency of the representative
-        - Identify hesitations, filler words, unclear statements, or communication missteps
-        - Lower score means more fumbling occurred
+ 
+        - Evaluate the representative's speech fluency. Was their speech smooth and free of excessive pauses?
+ 
+        - Check for filler words like “um,” “uh,” or awkward pauses.
+ 
+        - Did the representative maintain confidence throughout the conversation?
+ 
+        - Was the tone clear and professional?
+ 
         - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
     5. Probing (Score 1-100):
-        - Evaluate how effectively questions elicit useful information
-        - Assess the quality and relevance of follow-up questions
-        - Note use of open-ended vs. closed questions and their appropriateness
-        - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
+        - Assess the quality of the representative's questions. Were they insightful and relevant to uncover needs?
+ 
+        - Evaluate whether follow-up questions were logical and connected to prior responses.
+ 
+        - Check if the representative effectively used open-ended questions.
+ 
+        - Did the probing help support or introduce the product/service pitch?
+ 
+        - Was probing used to present persuasive or compelling solutions?
+ 
+        - IMPORTANT: Provide a 1-2 sentence explanation for your score.
+ 
     6. Closing (Score 1-100):
+ 
         - Analyze how effectively the call was concluded
+ 
         - Evaluate clarity on next steps and any commitments secured
+ 
         - Was the call concluded confidently and with clarity?
+ 
         - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
     7. Overall Score (Score 1-100):
+ 
         - Calculate a weighted average score based on all the dimensions above
+ 
         - IMPORTANT: Provide a 1-2 sentence explanation for your score
-   
+ 
     8. Summary:
+ 
         - Provide a concise summary (3-5 sentences) of the overall conversation quality
+ 
         - Highlight key strengths and areas for improvement
+ 
         - Include observations on conversation flow and effectiveness
-   
+ 
     9. Call Outcome Classification:
+ 
        - Classify the call outcome based on the final conversation exchanges and overall conversation context
+ 
        - Carefully analyze the prospect's final response and tone to determine the accurate outcome
-       - Available outcome categories: "Agreed for the meeting", "Disconnected the call", "Not interested", "Out of scope", "Prospect will reach out"
+ 
+       - Available outcome categories: "Prospect agreed for the meeting", "Prospect disconnected the call", "Prospect not interested", "Out of scope", "Prospect will reach out in future if required"
+ 
        
        Classification Guidelines:
        • "Call back requested" should ONLY be used when the prospect explicitly asks to be called back at a specific time or says they want the representative to call them again
-       • "Not interested" - when prospect explicitly states disinterest with phrases like "I'm not interested", "Not for me", "This doesn't work for us"
+       • "Prospect not interested" - when prospect explicitly states disinterest with phrases like "I'm not interested", "Not for me", "This doesn't work for us"
        • "Out of scope" - when prospect indicates they are not with the target organization or not the right person (e.g., "I'm not with that organization", "I don't work there anymore", "Wrong department")
-       • "Prospect will reach out" - when prospect says they will contact the representative themselves, mentions connecting on LinkedIn, or will get back to them on their own
-       • "Agreed for the meeting" - when prospect confirms a meeting, agrees to next steps, or shows clear interest in proceeding
-       • "Disconnected the call" - when call ends abruptly without clear resolution
+       • "Prospect will reach out in future if required" - when prospect says they will contact the representative themselves, mentions connecting on LinkedIn, or will get back to them on their own
+       • "Prospect agreed for the meeting" - when prospect confirms a meeting, agrees to next steps, or shows clear interest in proceeding
+       • "Prospect disconnected the call" - when call ends abruptly without clear resolution
        
        - If disinterest was expressed, note the exact phrases used
        - IMPORTANT: Provide specific phrases that indicated the outcome and ensure the classification matches the actual conversation ending
@@ -340,7 +352,7 @@ def query_ollama_mistral(prompt: str, model: str) -> str:
     Send a prompt to Ollama using the Python library
     """
     try:
-        # Create the message structure for Ollama
+      
         response = ollama.chat(
             model=model,
             messages=[
@@ -359,7 +371,7 @@ def query_ollama_mistral(prompt: str, model: str) -> str:
             }
         )
        
-        # Extract the response content from the Ollama response structure
+    
         if response and "message" in response and "content" in response["message"]:
             return response["message"]["content"]
         else:
@@ -370,16 +382,27 @@ def query_ollama_mistral(prompt: str, model: str) -> str:
 
 def apply_score_threshold(score: Any) -> int:
     """
-    Applies threshold logic specifically for scoring.
+    Applies threshold logic specifically for scoring:
     - If score is None or not a number, return 0
     - If score >= 75: return 100
-    - If score < 75: return 0
+    - If 50 <= score < 75: return 75
+    - If 35 <= score < 50: return 50
+    - If 0 <= score < 35: return 0
     """
     if score is None:
         return 0
     try:
         score = int(score)
-        return 100 if score >= 75 else 0
+        if score >= 75:
+            return 100
+        elif 50 <= score < 75:
+            return 75
+        elif 35 <= score < 50:
+            return 50
+        elif 0 <= score < 35:
+            return 0
+        else:
+            return 0 
     except (ValueError, TypeError):
         return 0
 
@@ -391,8 +414,7 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
     Actively Listening/Responding Appropriately, Fumble, Probing, Closing, Overall Score, Summary
     """
     try:
-        # First try to extract any JSON content from the response
-        # Look for JSON-like structure between curly braces
+
         json_match = re.search(r'\{[\s\S]*\}', response_text)
        
         if json_match:
@@ -400,9 +422,9 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
             try:
                 return json.loads(json_str)
             except json.JSONDecodeError:
-                pass  # If direct JSON parsing fails, fallback to structured extraction
+                pass  
        
-        # Fallback: Extract information in a structured way
+       
         introduction_score = extract_score(response_text, "Introduction/Hook")
         introduction_explanation = extract_explanation(response_text, "Introduction/Hook")
        
@@ -424,30 +446,29 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
         overall_score = extract_score(response_text, "Overall Score")
         overall_explanation = extract_explanation(response_text, "Overall Score")
        
-        # Extract call outcome classification
+
         outcome_category = "Unknown"
         supporting_phrases = []
         outcome_explanation = ""
        
-        # Look for outcome classification in the response
+        
         outcome_section = extract_section(response_text, "Call Outcome") or extract_section(response_text, "Outcome Classification")
         if outcome_section:
-            # Try to find the outcome category
+     
             category_match = re.search(r'category[\s:]+["\'"]?([^"\'"\n]+)["\'"]?', outcome_section, re.IGNORECASE)
             if category_match:
                 outcome_category = category_match.group(1).strip()
            
-            # Try to find supporting phrases
+           
             phrases_match = re.findall(r'["\'"]([^"\'"\n]{5,})["\'"]', outcome_section)
             if phrases_match:
                 supporting_phrases = [phrase.strip() for phrase in phrases_match]
            
-            # Get explanation
             outcome_explanation = re.sub(r'category[\s:]+["\'"]?[^"\'"\n]+["\'"]?', '', outcome_section)
             outcome_explanation = re.sub(r'phrases[\s:]+[\[\{].*?[\]\}]', '', outcome_explanation, flags=re.DOTALL)
             outcome_explanation = outcome_explanation.strip()
        
-        # Summary
+       
         summary = extract_section(response_text, "summary") or \
                  extract_section(response_text, "overall summary") or \
                  "Analysis complete but no summary provided"
@@ -474,7 +495,7 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
             "overall_score": overall_score,
             "overall_explanation": overall_explanation,
            
-            # Add call outcome information if available
+          
             "call_outcome": {
                 "outcome_category": outcome_category,
                 "supporting_phrases": supporting_phrases,
@@ -487,7 +508,7 @@ def parse_mistral_response(response_text: str) -> Dict[str, Any]:
         return analysis
    
     except Exception as e:
-        # If parsing fails, return a simplified analysis
+      
         return {
             "raw_analysis": response_text,
             "parsing_error": str(e),
@@ -498,19 +519,18 @@ def extract_explanation(text: str, category: str) -> str:
     """
     Extract explanation for a specific category
     """
-    # Try to find explanations following the score mention
+ 
     score_match = re.search(rf"{category}.*?(\d+)[\s/]100(.*?)(?=\d+\.|$|\n\s*\n)", text, re.IGNORECASE | re.DOTALL)
     if score_match:
         explanation = score_match.group(2).strip()
-        # Clean up the explanation (remove bullet points, etc.)
         explanation = re.sub(r'^[-:•*]+\s*', '', explanation)
         explanation = re.sub(r'\n[-:•*]+\s*', ' ', explanation)
         return explanation if explanation else f"No explanation provided for {category} score."
    
-    # If not found after score, try to find general explanation for that section
+
     section = extract_section(text, category)
     if section:
-        # Remove any score mentions from the section text
+
         section = re.sub(r'\d+[\s/]100', '', section).strip()
         return section
        

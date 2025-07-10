@@ -1,0 +1,18 @@
+2025-07-03 15:44:05,656 - call_analyzer_scheduler - INFO - Token expired, refreshing...
+2025-07-03 15:44:06,760 - call_analyzer_scheduler - INFO - Token refreshed successfully
+2025-07-03 15:44:06,793 - apscheduler.scheduler - INFO - Adding job tentatively -- it will be properly scheduled when the scheduler starts
+2025-07-03 15:44:06,793 - apscheduler.scheduler - INFO - Added job "CallAnalysisScheduler.run_daily_analysis" to job store "default"
+2025-07-03 15:44:06,794 - apscheduler.scheduler - INFO - Scheduler started
+2025-07-03 15:44:06,795 - call_analyzer_scheduler - INFO - APScheduler started. Daily analysis job scheduled.
+2025-07-03 15:47:06,804 - apscheduler.executors.default - INFO - Running job "CallAnalysisScheduler.run_daily_analysis (trigger: date[2025-07-03 15:47:06 IST], next run at: 2025-07-03 15:47:06 IST)" (scheduled at 2025-07-03 15:47:06.793675+05:30)
+2025-07-03 15:47:06,804 - apscheduler.scheduler - INFO - Removed job fc5cb49f26c649a39d602e29aa683865
+2025-07-03 15:47:06,807 - call_analyzer_scheduler - INFO - Starting daily call analysis
+2025-07-03 15:47:43,849 - call_analyzer_scheduler - INFO - Total recordings (all): 530
+2025-07-03 15:47:43,849 - call_analyzer_scheduler - INFO - Filtered recordings (duration >= 1 min & outbound): 31
+2025-07-03 15:47:43,897 - call_analyzer_scheduler - INFO - Recording 2825455697031 already processed, skipping
+2025-07-03 15:56:57,395 - call_analyzer_scheduler - INFO - Successfully processed recording 2825437318031
+2025-07-03 16:05:15,096 - call_analyzer_scheduler - INFO - Successfully processed recording 2825431893031
+2025-07-03 16:12:12,785 - call_analyzer_scheduler - INFO - Successfully processed recording 2825422986031
+2025-07-03 16:18:07,129 - call_analyzer_scheduler - INFO - Successfully processed recording 2825394619031
+2025-07-03 16:21:46,142 - call_analyzer_scheduler - INFO - Successfully processed recording 2825383843031
+2025-07-03 16:27:05,992 - call_analyzer_scheduler - INFO - Successfully processed recording 2825374432031

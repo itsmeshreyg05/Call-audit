@@ -1,31 +1,18 @@
 import os
 import sys
 import argparse
-import logging
 import json
 import base64
 import requests
 from datetime import datetime, timedelta
 
-# Add the project directory to the path
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Import project modules
+
 from src.database.database import SessionLocal
 from src.models.model import TokenStore
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("token_manager.log"),
-        logging.StreamHandler()
-    ]
-)
-
-logger = logging.getLogger("token_manager")
-
+from src.config.log_config import logger
 class TokenManager:
     def __init__(self):
         self.db = SessionLocal()
@@ -33,10 +20,10 @@ class TokenManager:
     def store_initial_token(self, client_id, client_secret, auth_code, redirect_uri):
         """Store the initial token from authorization code"""
         try:
-            # First, use the auth code to get the tokens
+           
             token_url = "https://platform.ringcentral.com/restapi/oauth/token"
             
-            # Create basic auth header
+         
             auth_str = f"{client_id}:{client_secret}"
             auth_bytes = auth_str.encode('ascii')
             auth_b64 = base64.b64encode(auth_bytes).decode('ascii')
@@ -60,14 +47,13 @@ class TokenManager:
             
             token_data = response.json()
             
-            # Calculate expiry time
+        
             expires_at = datetime.utcnow() + timedelta(seconds=token_data["expires_in"])
-            
-            # Store in database
+
             existing_token = self.db.query(TokenStore).first()
             
             if existing_token:
-                # Update existing token
+                
                 existing_token.client_id = client_id
                 existing_token.client_secret = client_secret
                 existing_token.access_token = token_data["access_token"]
@@ -76,7 +62,7 @@ class TokenManager:
                 existing_token.expires_at = expires_at
                 existing_token.updated_at = datetime.utcnow()
             else:
-                # Create new token entry
+        
                 token_record = TokenStore(
                     client_id=client_id,
                     client_secret=client_secret,
@@ -107,7 +93,7 @@ class TokenManager:
                 logger.info("No token found in database")
                 return None
                 
-            # Check expiration
+   
             now = datetime.utcnow()
             is_expired = token_record.expires_at <= now if token_record.expires_at else True
             
@@ -130,14 +116,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="RingCentral Token Manager")
     subparsers = parser.add_subparsers(dest="command", help="Command to run")
     
-    # Store token command
+
     store_parser = subparsers.add_parser("store", help="Store a new token")
     store_parser.add_argument("--client-id", required=True, help="RingCentral client ID")
     store_parser.add_argument("--client-secret", required=True, help="RingCentral client secret")
     store_parser.add_argument("--auth-code", required=True, help="Authorization code from OAuth flow")
     store_parser.add_argument("--redirect-uri", required=True, help="Redirect URI used in OAuth flow")
-    
-    # Get token info command
+
     info_parser = subparsers.add_parser("info", help="Get information about the stored token")
     
     args = parser.parse_args()

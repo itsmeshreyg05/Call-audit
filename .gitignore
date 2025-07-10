@@ -7,6 +7,11 @@ alembic.ini
 preprocessed/
 uploads/
 google_sheets_helper.py
-
+data/uploads/
+data/processed/
+data/unprocessed/
+uploads/
+processed/
+unprocessed/
 
 

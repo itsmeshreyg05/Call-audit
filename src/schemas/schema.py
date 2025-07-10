@@ -7,7 +7,7 @@ from datetime import datetime
 # Audio schemas
 class AudioUploadResponse(BaseModel):
     audio_id: str
-    file_path:str ## CHANGED IN THIS LINE 
+    file_path:str 
     original_filename: str
     file_type: str
     
@@ -31,13 +31,6 @@ class AudioInDB(AudioBase):
     
     class Config:
         from_attributes = True  
-
-# # Diarization schemas
-# class DiarizationSegment(BaseModel):
-#     speaker: str
-#     start: float
-#     end: float
-#     text: str
 
 class DiarizationSegment(BaseModel):
     speaker: str
@@ -135,5 +128,5 @@ class RecordingDetail(BaseModel):
     class Config:
         from_attributes = True
         json_encoders = {
-            datetime: lambda v: v.isoformat()  # Ensures -04:00 offset is shown
+            datetime: lambda v: v.isoformat() 
         }
